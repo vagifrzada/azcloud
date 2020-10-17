@@ -29,6 +29,8 @@ services:
     container_name: php-fpm
     volumes:
       - ./src:/var/www/html
+    environment:
+      - XDG_CONFIG_HOME=/var/www/html/app
     ports:
       - "9000:9000"
     networks:

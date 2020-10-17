@@ -1,0 +1,8 @@
+_HiStOrY_V2_
+exit
+$user\040=\040new\040User();
+$user->name\040=\040"Vagif\040Rufullazada";
+$user->email\040=\040"vagif@rufullazada.me";
+$user->password\040=\040bcrypt("secret");
+$user->save();
+exit

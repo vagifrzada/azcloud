@@ -114,4 +114,5 @@ return [
 
     'password_timeout' => 10800,
 
+    'redirect_after_logged_out' => 'admin.login',
 ];

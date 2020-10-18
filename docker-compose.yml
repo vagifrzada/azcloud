@@ -30,7 +30,7 @@ services:
     volumes:
       - ./src:/var/www/html
     environment:
-      - XDG_CONFIG_HOME=/var/www/html/app
+      - XDG_CONFIG_HOME=/var/www/html/storage/framework
     ports:
       - "9000:9000"
     networks:

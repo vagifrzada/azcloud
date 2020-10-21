@@ -14,7 +14,7 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp && \
     docker-php-ext-configure intl
 
 # Installing php extensions
-RUN docker-php-ext-install pdo pdo_mysql gd bcmath intl
+RUN docker-php-ext-install pdo pdo_mysql gd bcmath intl zip
 
 # Setting up composer
 RUN curl -sS https://getcomposer.org/installer | php \

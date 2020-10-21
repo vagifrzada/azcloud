@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" style="width: 100%; background: #0a73bb;">
             <a class="logo" href="{{ route('admin.home')  }}">
-                <img class="navbar-brand-logo" src="{{ asset('assets/remark/assets/images/logo.png')  }}" alt="" title="AzCloud Admin">
+                <img class="navbar-brand-logo" src="{{ asset('assets/remark/assets/images/logo.png') }}" alt="" title="AzCloud Admin">
                 <span class="navbar-brand-text"> AzCloud Admin</span>
             </a>
         </div>
@@ -20,26 +20,37 @@
             <div>
                 <ul class="site-menu" data-plugin="menu">
                     <li class="site-menu-category site-menu-item">Menu</li>
-                    <li class="site-menu-item"><a href="{{ route('admin.home')  }}"><i class="site-menu-icon  md-view-dashboard"></i>
-                            <span class="site-menu-title">Dashboard</span></a>
-                    </li>
                     <li class="site-menu-item">
+                        <a href="{{ route('admin.home')  }}"><i class="site-menu-icon  md-view-dashboard"></i>
+                            <span class="site-menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <!-- <li class="site-menu-item">
                         <a href="/page/default/index">
                             <i class="site-menu-icon md-collection-item"></i><span class="site-menu-title">Pages</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="site-menu-item has-sub">
-                        <a href="#">
-                            <i class="site-menu-icon md-accounts"></i><span class="site-menu-title">Users <i class="site-menu-arrow"></i></span>
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-accounts"></i>
+                            <span class="site-menu-title">Users <i class="site-menu-arrow"></i></span>
                         </a>
                         <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
                             <li class="site-menu-item">
-                                <a href="/customer/default/index">
-                                    <i class="site-menu-icon md-accounts"></i> <span class="site-menu-title">Customers </span>
+                                <a href="{{ route('admin.users.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">User list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.users.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create user</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
                 </ul>
             </div>
         </div>

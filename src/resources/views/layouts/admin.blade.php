@@ -16,6 +16,7 @@
         <div class="page-content container-fluid">
             <div class="panel">
                 <div class="panel-body container-fluid">
+                    @include('admin.partials.notify')
                     @yield('content')
                 </div>
             </div>

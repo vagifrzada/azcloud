@@ -3,9 +3,9 @@
 namespace App\DataTables;
 
 use App\Entities\User;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\{Builder, Button, Column};
 
 /**
  * Class UsersDataTable
@@ -35,7 +35,7 @@ class UsersDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->addAction(['width' => '100px'])
-            ->orderBy(1);
+            ->orderBy(0);
     }
 
     protected function getColumns(): array

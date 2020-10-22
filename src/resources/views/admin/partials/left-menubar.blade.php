@@ -25,12 +25,8 @@
                             <span class="site-menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <!-- <li class="site-menu-item">
-                        <a href="/page/default/index">
-                            <i class="site-menu-icon md-collection-item"></i><span class="site-menu-title">Pages</span>
-                        </a>
-                    </li> -->
-                    <li class="site-menu-item has-sub">
+                    {{-- Users --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'users')) open active @endif">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-accounts"></i>
                             <span class="site-menu-title">Users <i class="site-menu-arrow"></i></span>

@@ -16,6 +16,7 @@
 <link href="{{ asset('assets/remark/global/fonts/material-design/material-design.min.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/datatable/datatables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/remark/global/vendor/switchery/switchery.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/css/custom.css?v=1.4')  }}" rel="stylesheet">
 <script src="{{ asset('assets/remark/global/vendor/breakpoints/breakpoints.js') }}"></script>
 <script>Breakpoints();</script>

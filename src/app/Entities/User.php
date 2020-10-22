@@ -2,10 +2,9 @@
 
 namespace App\Entities;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -15,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string name
  * @property string email
  * @property string password
+ * @property int status
  * @property string created_at
  * @property string updated_at
  *
@@ -24,10 +24,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'status'];
     protected $hidden = ['password', 'remember_token'];
-
-    protected $casts = [];
 
     public function getId(): int
     {
@@ -44,8 +42,33 @@ class User extends Authenticatable
         return $this->email;
     }
 
+    public function isActive(): bool
+    {
+        return $this->status === 1;
+    }
+
     public function getCreatedAt(): string
     {
         return $this->created_at;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = bcrypt($password);
+    }
+
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 }

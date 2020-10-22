@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Throwable;
 use App\Entities\User;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUserRequest;
+use App\Managers\User\{UserService, UserParameterBag};
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -14,14 +17,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class UsersController extends Controller
 {
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
+    private $userService;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     public function index(UsersDataTable $usersDataTable)
@@ -31,25 +31,49 @@ class UsersController extends Controller
 
     public function create()
     {
-        dd('Create user form');
+        return view('admin.users.create');
     }
 
-    public function store()
+    public function store(CreateUserRequest $userRequest)
     {
-        dd('Store user');
+        try {
+            $user = $this->userService->create(new UserParameterBag(
+                $userRequest->get('name'),
+                $userRequest->get('email'),
+                $userRequest->get('password'),
+                $userRequest->get('status')
+            ));
+            return redirect()->route('admin.users.index')->with('success', "[{$user->getName()}] was created successfully !");
+        } catch (Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function edit(User $user)
     {
+        return view('admin.users.edit', compact('user'));
+    }
 
+    public function update(User $user, UpdateUserRequest $userRequest)
+    {
+       try {
+           $this->userService->update($user, new UserParameterBag(
+               $userRequest->get('name'),
+               $userRequest->get('email'),
+               $userRequest->get('password'),
+               $userRequest->get('status')
+           ));
+           return redirect()->back()->with('success', "[{$user->getName()}] was updated successfully !");
+       } catch (Throwable $e) {
+           return redirect()->back()->with('error', $e->getMessage());
+       }
     }
 
     public function delete($id)
     {
         try {
-            $user = $this->userRepository->get($id);
-            $this->userRepository->remove($user);
-            return redirect()->back()->with('success', 'User: [' . $user->getName() . '] deleted successfully.');
+            $this->userService->delete($id);
+            return redirect()->back()->with('success', 'User deleted successfully.');
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

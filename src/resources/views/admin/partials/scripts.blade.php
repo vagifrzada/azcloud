@@ -9,6 +9,7 @@
 <script src="{{ asset('assets/remark/global/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
 <script src="{{ asset('assets/remark/global/vendor/datatable/datatables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="{{ asset('assets/remark/global/vendor/switchery/switchery.min.js') }}"></script>
 <script src="{{ asset('assets/remark/global/js/Component.js')  }}"></script>
 <script src="{{ asset('assets/remark/global/js/Plugin.js')  }}"></script>
 <script src="{{ asset('assets/remark/global/js/Base.js')  }}"></script>
@@ -20,6 +21,7 @@
 <script src="{{ asset('assets/remark/assets/js/Section/PageAside.js')  }}"></script>
 <script src="{{ asset('assets/remark/assets/js/menu.js') }}"></script>
 <script src="{{ asset('assets/remark/assets/js/Site.js') }}"></script>
+<script src="{{ asset('assets/remark/global/js/Plugin/switchery.js') }}"></script>
 <script src="{{ asset('assets/remark/js/custom.js') }}"></script>
 
 <script>

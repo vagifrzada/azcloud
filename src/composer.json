@@ -9,6 +9,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
+        "matthiasnoback/convenient-immutability": "^0.3.0",
         "yajra/laravel-datatables-buttons": "^4.10",
         "yajra/laravel-datatables-html": "^4.32",
         "yajra/laravel-datatables-oracle": "^9.11"

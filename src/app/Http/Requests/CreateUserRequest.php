@@ -15,7 +15,7 @@ class CreateUserRequest extends FormRequest
         return !auth()->guest();
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:100',

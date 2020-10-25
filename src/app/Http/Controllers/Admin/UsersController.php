@@ -6,10 +6,9 @@ use Throwable;
 use App\Entities\User;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\CreateUserRequest;
 use App\Managers\User\{UserService, UserParameterBag};
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
 
 /**
  * Class UsersController

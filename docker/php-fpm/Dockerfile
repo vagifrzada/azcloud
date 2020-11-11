@@ -1,0 +1,27 @@
+FROM php:7.4-fpm
+
+LABEL maintainer="vagif@rufullazada.me"
+
+# Defining user var.
+ARG user=appuser
+
+# Cleaning and updating packages
+RUN apt-get autoremove && apt-get autoclean && apt-get update
+
+# Installing libraries
+RUN apt-get install -y --no-install-recommends \
+    libpq-dev zlib1g-dev libicu-dev libzip-dev procps zip unzip
+
+# Configuring php extensions
+RUN docker-php-ext-configure intl
+
+# Installing php extensions
+RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath intl
+
+# Creating user for container.
+RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
+
+# Running container as user
+USER $user
+
+WORKDIR /app

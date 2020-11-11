@@ -1,0 +1,30 @@
+FROM php:7.4-cli
+
+LABEL maintainer="vagif@rufullazada.me"
+
+# Defining user var.
+ARG user=appuser
+
+# Cleaning and updating packages
+RUN apt-get autoremove && apt-get autoclean && apt-get update
+
+# Installing some libraries and php extensions.
+RUN apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git \
+    && docker-php-ext-install pdo pdo_mysql mysqli zip
+
+# Installing composer.
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet
+
+# Creating user for container.
+RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
+
+# Making directory for user.
+RUN mkdir -p /home/$user && chown -R $user:$user /home/$user && chmod -R 755 /home/$user
+
+# Running container as user
+USER $user
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_NO_INTERACTION=1
+
+WORKDIR /app

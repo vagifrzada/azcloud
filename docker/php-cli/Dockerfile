@@ -1,9 +1,15 @@
-FROM php:8.0-cli
+FROM php:7.4-cli
 
 LABEL maintainer="Vagif Rufullazada"
 
-RUN apt-get update && apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git \
-    && docker-php-ext-install pdo pdo_mysql mysqli zip
+RUN apt-get update && apt-get install -y jpegoptim libpq-dev zlib1g-dev libicu-dev libzip-dev procps \
+libfreetype6-dev libjpeg62-turbo-dev libpng-dev zip git && rm -rf /var/lib/apt/lists/*
+
+# Configuring php extensions.
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+# Installing php extensions.
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip gd
 
 # Installing composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet

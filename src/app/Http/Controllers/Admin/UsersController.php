@@ -6,9 +6,11 @@ use Throwable;
 use App\Entities\User;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-use App\Managers\User\{UserService, UserParameterBag};
+use Illuminate\Http\RedirectResponse;
+use App\Core\CommandBus\CommandBusInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
+use App\Commands\User\{CreateUserCommand, UpdateUserCommand, DeleteUserCommand};
 
 /**
  * Class UsersController
@@ -16,11 +18,11 @@ use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
  */
 class UsersController extends Controller
 {
-    private $userService;
+    private $bus;
 
-    public function __construct(UserService $userService)
+    public function __construct(CommandBusInterface $bus)
     {
-        $this->userService = $userService;
+        $this->bus = $bus;
     }
 
     public function index(UsersDataTable $usersDataTable)
@@ -33,16 +35,11 @@ class UsersController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(CreateUserRequest $userRequest)
+    public function store(CreateUserRequest $userRequest): RedirectResponse
     {
         try {
-            $user = $this->userService->create(new UserParameterBag(
-                $userRequest->get('name'),
-                $userRequest->get('email'),
-                $userRequest->get('password'),
-                $userRequest->get('status')
-            ));
-            return redirect()->route('admin.users.index')->with('success', "[{$user->getName()}] was created successfully !");
+            $this->bus->dispatch(new CreateUserCommand(), $userRequest->toArray());
+            return redirect()->route('admin.users.index')->with('success', "User created successfully !");
         } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -53,25 +50,20 @@ class UsersController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(User $user, UpdateUserRequest $userRequest)
+    public function update(User $user, UpdateUserRequest $userRequest): RedirectResponse
     {
        try {
-           $this->userService->update($user, new UserParameterBag(
-               $userRequest->get('name'),
-               $userRequest->get('email'),
-               $userRequest->get('password'),
-               $userRequest->get('status')
-           ));
-           return redirect()->back()->with('success', "[{$user->getName()}] was updated successfully !");
+           $this->bus->dispatch(new UpdateUserCommand($user), $userRequest->toArray());
+           return redirect()->back()->with('success', 'User was updated successfully !');
        } catch (Throwable $e) {
            return redirect()->back()->with('error', $e->getMessage());
        }
     }
 
-    public function delete($id)
+    public function delete($id): RedirectResponse
     {
         try {
-            $this->userService->delete($id);
+            $this->bus->dispatch(new DeleteUserCommand($id));
             return redirect()->back()->with('success', 'User deleted successfully.');
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', $e->getMessage());

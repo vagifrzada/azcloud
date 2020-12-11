@@ -287,3 +287,7 @@
         margin: 50px 30px;
     }
 }
+
+p.help-block-error {
+    color: red;
+}

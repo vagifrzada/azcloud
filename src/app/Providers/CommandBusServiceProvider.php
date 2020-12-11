@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\CommandBus\Locator;
 use League\Tactician\CommandBus;
-use App\CommandBus\CommandBusInterface;
 use Illuminate\Support\ServiceProvider;
-use App\CommandBus\Adapter\TacticianCommandBus;
+use Illuminate\Contracts\Container\Container;
+use App\Core\CommandBus\Adapter\TacticianCommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
-use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
+use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
+use App\Core\CommandBus\{CommandBusInterface, Locator, CommandToHandlerMap};
 
 /**
  * Class CommandBusServiceProvider
@@ -19,11 +19,15 @@ class CommandBusServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton(CommandBusInterface::class, function () {
+        $this->app->singleton(Locator::class, function () {
+            return new Locator(CommandToHandlerMap::get());
+        });
+
+        $this->app->singleton(CommandBusInterface::class, function (Container $app) {
             return new TacticianCommandBus(new CommandBus([
                 new CommandHandlerMiddleware(
                     new ClassNameExtractor(),
-                    new Locator(),
+                    $app->get(Locator::class),
                     new HandleInflector()
                 )
             ]));

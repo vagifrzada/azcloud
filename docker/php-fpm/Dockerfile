@@ -1,27 +1,24 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
-LABEL maintainer="vagif@rufullazada.me"
-
-# Defining user var.
-ARG user=appuser
+LABEL maintainer="Vagif Rufullazada"
 
 # Cleaning and updating packages
 RUN apt-get autoremove && apt-get autoclean && apt-get update
 
 # Installing libraries
-RUN apt-get install -y --no-install-recommends \
-    libpq-dev zlib1g-dev libicu-dev libzip-dev procps zip unzip
+RUN apt-get install -y graphicsmagick jpegoptim \
+    libpq-dev zlib1g-dev libicu-dev libzip-dev procps \
+    libfreetype6-dev libjpeg62-turbo-dev libpng-dev && rm -rf /var/lib/apt/lists/*
 
 # Configuring php extensions
 RUN docker-php-ext-configure intl
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Installing php extensions
-RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath intl
+RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath intl -j $(nproc) gd
 
 # Creating user for container.
-RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
-
-# Running container as user
-USER $user
+RUN groupadd -g 1000 appuser && useradd -r -u 1000 -g appuser appuser
+USER appuser
 
 WORKDIR /app

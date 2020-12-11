@@ -1,30 +1,26 @@
-FROM php:7.4-cli
+FROM php:8.0-cli
 
-LABEL maintainer="vagif@rufullazada.me"
+LABEL maintainer="Vagif Rufullazada"
 
-# Defining user var.
-ARG user=appuser
-
-# Cleaning and updating packages
-RUN apt-get autoremove && apt-get autoclean && apt-get update
-
-# Installing some libraries and php extensions.
-RUN apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git \
+RUN apt-get update && apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git \
     && docker-php-ext-install pdo pdo_mysql mysqli zip
 
 # Installing composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet
 
 # Creating user for container.
-RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
+RUN groupadd -g 1000 appuser && useradd -r -u 1000 -g appuser appuser
 
-# Making directory for user.
-RUN mkdir -p /home/$user && chown -R $user:$user /home/$user && chmod -R 755 /home/$user
+# Creating user && composer-cache directories.
+RUN mkdir -p /home/appuser/.composer/cache/repo/https---asset-packagist.org \
+    && mkdir /home/appuser/.composer/cache/files
+
+# Giving proper permissions to user.
+RUN chown -R appuser:appuser /home/appuser && chmod -R 775 /home/appuser
 
 # Running container as user
-USER $user
+USER appuser
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_NO_INTERACTION=1
 
 WORKDIR /app

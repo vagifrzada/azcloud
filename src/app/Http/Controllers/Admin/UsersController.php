@@ -12,10 +12,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
 use App\Commands\User\{CreateUserCommand, UpdateUserCommand, DeleteUserCommand};
 
-/**
- * Class UsersController
- * @package App\Http\Controllers\Admin
- */
 class UsersController extends Controller
 {
     private $bus;

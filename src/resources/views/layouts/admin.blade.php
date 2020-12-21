@@ -13,13 +13,15 @@
     @include('admin.partials.left-menubar')
 
     <div class="page">
-        <div class="page-content container-fluid">
-            <div class="panel">
-                <div class="panel-body container-fluid">
-                    @include('admin.partials.notify')
-                    @yield('content')
-                </div>
+        <div class="page-header">
+            <div class="page-header-actions">
+                @yield('header_actions')
             </div>
+        </div>
+
+        <div class="page-content">
+            @include('admin.partials.notify')
+            @yield('content')
         </div>
     </div>
 

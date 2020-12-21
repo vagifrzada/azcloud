@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header_actions')
-    <a class="btn btn-success btn-round" href="{{ route('admin.users.create') }}">Create user</a>
+    <a class="btn btn-success btn-round" href="{{ route('admin.posts.create') }}">Create post</a>
 @endsection
 
 @section('content')

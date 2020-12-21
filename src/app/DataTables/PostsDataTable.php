@@ -2,25 +2,25 @@
 
 namespace App\DataTables;
 
-use App\Entities\User;
+use App\Entities\Post\Post;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class UsersDataTable extends DataTable
+class PostsDataTable extends DataTable
 {
     public function dataTable($query): DataTableAbstract
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('created_at', function (User $user) {
-                return $user->getCreatedAt();
+            ->editColumn('created_at', function (Post $post) {
+                return $post->getCreatedAt();
             })
-            ->addColumn('action', 'admin.users.actions');
+            ->addColumn('action', 'admin.posts.actions');
     }
 
-    public function query(User $model): QueryBuilder
+    public function query(Post $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -28,7 +28,7 @@ class UsersDataTable extends DataTable
     public function html(): Builder
     {
         return $this->builder()
-            ->setTableId('users-table')
+            ->setTableId('posts-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->addAction(['width' => '100px'])
@@ -39,14 +39,14 @@ class UsersDataTable extends DataTable
     {
         return [
             'id',
-            'name',
-            'email',
+            'slug',
+            'title',
             'created_at',
         ];
     }
 
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Posts_' . date('YmdHis');
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Entities\Post;
 
 use Carbon\Carbon;
+use App\Entities\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 /**
@@ -58,5 +60,10 @@ class Post extends Model implements TranslatableContract
     public function getUpdatedAt(): Carbon
     {
         return $this->updated_at;
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

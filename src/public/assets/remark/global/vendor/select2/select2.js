@@ -1,4 +1,4 @@
-/*!
+/*!Tags
  * Select2 4.0.6-rc.0
  * https://select2.github.io
  *

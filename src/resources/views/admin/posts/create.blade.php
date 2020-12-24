@@ -117,6 +117,7 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>

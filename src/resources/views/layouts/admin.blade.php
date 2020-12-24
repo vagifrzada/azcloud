@@ -4,7 +4,7 @@
     @include('admin.partials.head')
     @stack('styles')
 </head>
-<body class="dashboard site-menubar-keep site-menubar-unfold">
+<body class="dashboard">
     <script>
         if (localStorage.getItem("navFolded") !== null)
             document.querySelector("body").classList.add("site-menubar-fold");

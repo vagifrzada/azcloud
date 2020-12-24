@@ -6,7 +6,7 @@
 <title>AzCloud Admin Panel</title>
 <link href="{{ asset('assets/remark/global/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/css/bootstrap-extend.min.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/remark/assets/css/site.min.css?v=1.12') }}" rel="stylesheet">
+<link href="{{ asset('assets/remark/assets/css/site.css?v=1.12') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/animsition/animsition.css')  }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/switchery/switchery.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/ckeditor5/sample/styles.css') }}" rel="stylesheet">
@@ -17,6 +17,7 @@
 <link href="{{ asset('assets/remark/global/fonts/brand-icons/brand-icons.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/fonts/material-design/material-design.min.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/datatable/datatables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/switchery/switchery.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/css/custom.css?v=1.4')  }}" rel="stylesheet">

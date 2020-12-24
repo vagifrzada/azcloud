@@ -8,7 +8,6 @@ $(document).ready(function(){
 
     $('.fold-show').on('click', function () {
         const navIsFolded = localStorage.getItem("navFolded");
-
         if (navIsFolded == null || navIsFolded === "") {
             localStorage.setItem("navFolded", "true");
             return;
@@ -16,8 +15,6 @@ $(document).ready(function(){
 
         localStorage.removeItem("navFolded");
     });
-
-
 });
 
 // Ckeditor5 configuration.
@@ -27,7 +24,7 @@ const toolbar = [
     'bold', 'italic', 'link',
 ];
 
-locales.forEach((key, number) => {
+locales.forEach((key) => {
     ClassicEditor
         .create(document.querySelector(`#content-${key}`), {
             toolbar: toolbar,

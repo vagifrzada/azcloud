@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\PostsDataTable;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -15,5 +16,10 @@ class PostsController extends Controller
     public function create()
     {
         return view('admin.posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }

@@ -178,6 +178,7 @@ return [
         // Custom Service Providers
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\CommandBusServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 

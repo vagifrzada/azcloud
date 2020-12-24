@@ -7,11 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-/**
- * Trait AuthenticatesUser
- *
- * @package App\Services
- */
 trait AuthenticatesUser
 {
     public function showLoginForm()

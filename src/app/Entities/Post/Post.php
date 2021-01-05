@@ -4,8 +4,10 @@ namespace App\Entities\Post;
 
 use Carbon\Carbon;
 use App\Entities\Tag;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
@@ -15,11 +17,15 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @property bool status
  * @property Carbon created_at
  * @property Carbon updated_at
+ *
+ * @method static findOrFail(int $id)
  */
-class Post extends Model implements TranslatableContract
+class Post extends Model implements TranslatableContract, HasMedia
 {
-    use Translatable;
+    use Translatable, InteractsWithMedia;
 
+    public $table = 'posts';
+    public $translationModel = Translation::class;
     public $translatedAttributes = ['title', 'slug', 'content'];
     protected $fillable = ['author_id', 'status'];
 

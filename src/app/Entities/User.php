@@ -10,13 +10,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * Class User
  * @package App\Entities
  *
- * @property int id
- * @property string name
- * @property string email
- * @property string password
- * @property int status
- * @property string created_at
- * @property string updated_at
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property int $status
+ * @property string $created_at
+ * @property string $updated_at
  *
  * @method static findOrFail(int $id)
  */

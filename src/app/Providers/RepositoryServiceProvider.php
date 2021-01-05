@@ -2,14 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 
-/**
- * Class RepositoryServiceProvider
- * @package App\Providers
- */
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
@@ -23,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         return [
             UserRepositoryInterface::class => UserRepository::class,
+            PostRepositoryInterface::class => PostRepository::class,
         ];
     }
 }

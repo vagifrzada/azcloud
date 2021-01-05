@@ -5,7 +5,7 @@ namespace App\Core\CommandBus;
 use ReflectionClass;
 use ReflectionProperty;
 
-class Command
+abstract class Command
 {
     public function handlePayload(array $payload): self
     {

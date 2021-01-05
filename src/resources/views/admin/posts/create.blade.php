@@ -34,27 +34,27 @@
 
                                     <div class="form-group form-material title required">
                                         <label class="form-control-label" for="title-{{ $locale }}">Title</label>
-                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ old('title') }}">
-                                        @if ($errors->has('title'))
-                                            <p class="help-block help-block-error">{{ $errors->first('title') }}</p>
+                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ old('title.' . $locale) }}">
+                                        @if ($errors->has('title.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('title.' . $locale) }}</p>
                                         @endif
                                     </div>
 
                                     <div class="form-group form-material slug required">
                                         <label class="form-control-label" for="slug-{{ $locale }}">Slug</label>
-                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ old('slug') }}">
-                                        @if ($errors->has('slug'))
-                                            <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
+                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ old('slug.' . $locale) }}">
+                                        @if ($errors->has('slug.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('slug.' . $locale) }}</p>
                                         @endif
                                     </div>
 
                                     <div class="form-group form-material content">
                                         <label class="form-control-label" for="content-{{ $locale }}">Content</label>
                                         <textarea name="content[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">
-                                            {!! old('content') !!}
+                                            {!! old('content.' . $locale) !!}
                                         </textarea>
-                                        @if ($errors->has('content'))
-                                            <p class="help-block help-block-error">{{ $errors->first('content') }}</p>
+                                        @if ($errors->has('content.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -86,6 +86,9 @@
                     <div class="form-group image">
                         <label for="image">Main image</label>
                         <input id="image" type="file" name="image" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('image'))
+                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
+                        @endif
                     </div>
 
                     <div class="form-group form-material tags">
@@ -98,6 +101,7 @@
 
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
+                        <input type="hidden" name="status"  value="0">
                         <input id="status" type="checkbox" checked data-plugin="switchery" name="status" value="{{ old('status', 1)  }}">
                         @if ($errors->has('status'))
                             <p class="help-block help-block-error">{{ $errors->first('status')  }}</p>

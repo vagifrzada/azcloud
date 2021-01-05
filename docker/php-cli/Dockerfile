@@ -9,7 +9,7 @@ libfreetype6-dev libjpeg62-turbo-dev libpng-dev zip git && rm -rf /var/lib/apt/l
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Installing php extensions.
-RUN docker-php-ext-install pdo pdo_mysql mysqli zip gd
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip gd exif
 
 # Installing composer.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet

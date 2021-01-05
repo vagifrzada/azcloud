@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Translation extends Model
 {
+    public $table = 'post_translations';
     protected $fillable = ['title', 'slug', 'content'];
 
     public function usesTimestamps(): bool

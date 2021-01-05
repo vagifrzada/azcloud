@@ -8,8 +8,7 @@ use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Core\CommandBus\CommandBusInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Requests\{CreateUserRequest, UpdateUserRequest};
+use App\Http\Requests\User\{CreateUserRequest, UpdateUserRequest};
 use App\Commands\User\{CreateUserCommand, UpdateUserCommand, DeleteUserCommand};
 
 class UsersController extends Controller
@@ -61,7 +60,7 @@ class UsersController extends Controller
         try {
             $this->bus->dispatch(new DeleteUserCommand($id));
             return redirect()->back()->with('success', 'User deleted successfully.');
-        } catch (ModelNotFoundException $e) {
+        } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

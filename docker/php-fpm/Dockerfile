@@ -19,7 +19,7 @@ RUN docker-php-ext-configure intl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Installing php extensions
-RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath intl -j $(nproc) gd
+RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath intl -j $(nproc) gd exif
 
 # Copy configuration files
 COPY ./php.ini /usr/local/etc/php/conf.d/uploads.ini

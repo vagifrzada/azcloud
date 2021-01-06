@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TagsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -16,6 +17,9 @@ Route::middleware(['auth'])->group(function () {
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);
     Route::get('posts/{id}/delete', [PostsController::class, 'delete'])->name('posts.delete');
+
+    // Tags
+    Route::get('tags/list', [TagsController::class, 'list'])->name('tags.list')->middleware('xhr-request');
 });
 
 // Login routes

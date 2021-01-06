@@ -30,7 +30,7 @@ class CreatePostHandler extends AbstractPostHandler
             $post->tags()->sync($this->prepareTags($command->tags)->toArray());
 
             // Uploading main cover.
-            $post->addMediaFromRequest('image')->toMediaCollection('cover');
+            $post->addMedia($command->image)->toMediaCollection('cover');
 
             // Uploading gallery.
             foreach ($command->images as $image)

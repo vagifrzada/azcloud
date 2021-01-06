@@ -93,7 +93,16 @@
 
                     <div class="form-group form-material tags">
                         <label class="form-control-label" for="tags">Tags</label>
-                        <select name="tags[]" id="tags" multiple="multiple" class="form-control" data-selectable="true"></select>
+                        <select id="tags"
+                                name="tags[]"
+                                multiple="multiple"
+                                class="form-control"
+                                data-selectable="true"
+                                data-xhr-route="{{ route('admin.tags.list') }}"
+                                data-tags="true"
+                                data-inputlength="3"
+                                data-placeholder="Select tags ..."
+                        ></select>
                         @if ($errors->has('tags'))
                             <p class="help-block help-block-error">{{ $errors->first('tags') }}</p>
                         @endif

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Repositories\PostRepository;
+use App\Repositories\TagRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
@@ -22,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         return [
             UserRepositoryInterface::class => UserRepository::class,
             PostRepositoryInterface::class => PostRepository::class,
+            TagRepositoryInterface::class => TagRepository::class,
         ];
     }
 }

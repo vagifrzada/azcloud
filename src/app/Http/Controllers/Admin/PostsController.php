@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Throwable;
+use App\Entities\Post\Post;
 use App\DataTables\PostsDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Commands\Post\CreatePostCommand;
+use App\Commands\Post\UpdatePostCommand;
 use App\Core\CommandBus\CommandBusInterface;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Requests\Post\CreatePostRequest;
 
 class PostsController extends Controller
@@ -35,7 +38,26 @@ class PostsController extends Controller
             $this->bus->dispatch(new CreatePostCommand(), $request->toArray());
             return redirect()->route('admin.posts.index')->with('success', "Post created successfully !");
         } catch (Throwable $e) {
-            dd($e);
+            return redirect()->route('admin.posts.index')->with('error', $e->getMessage());
+        }
+    }
+
+    public function edit(Post $post)
+    {
+        $gallery = [];
+        foreach ($post->getGallery() as $media)
+            $gallery[$media->uuid] = $media->getUrl();
+        $post->load('tags');
+        return view('admin.posts.edit', compact('post', 'gallery'));
+    }
+
+    public function update(Post $post, UpdatePostRequest $request): RedirectResponse
+    {
+        try {
+            $this->bus->dispatch(new UpdatePostCommand($post), $request->toArray());
+            return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully !');
+        } catch (Throwable $e) {
+            return redirect()->route('admin.posts.index')->with('error', $e->getMessage());
         }
     }
 }

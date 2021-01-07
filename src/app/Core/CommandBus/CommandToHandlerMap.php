@@ -2,8 +2,12 @@
 
 namespace App\Core\CommandBus;
 
-use App\Commands\Post\{CreatePostCommand};
-use App\Handlers\Post\{CreatePostHandler};
+use App\Commands\Post\{
+    CreatePostCommand,
+    UpdatePostCommand};
+use App\Handlers\Post\{
+    CreatePostHandler,
+    UpdatePostHandler};
 use App\Commands\User\{CreateUserCommand, UpdateUserCommand, DeleteUserCommand};
 use App\Handlers\User\{CreateUserHandler, UpdateUserHandler, DeleteUserHandler};
 
@@ -19,6 +23,7 @@ class CommandToHandlerMap
 
             // Posts
             CreatePostCommand::class => CreatePostHandler::class,
+            UpdatePostCommand::class => UpdatePostHandler::class,
         ];
     }
 }

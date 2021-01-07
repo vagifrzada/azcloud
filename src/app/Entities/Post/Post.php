@@ -10,6 +10,7 @@ use Astrotomic\Translatable\Translatable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
@@ -68,6 +69,16 @@ class Post extends Model implements TranslatableContract, HasMedia
     public function getUpdatedAt(): Carbon
     {
         return $this->updated_at;
+    }
+
+    public function getCover(): ?Media
+    {
+        return $this->getFirstMedia('cover');
+    }
+
+    public function getGallery(): MediaCollection
+    {
+        return $this->getMedia('gallery');
     }
 
     public function registerMediaCollections(): void

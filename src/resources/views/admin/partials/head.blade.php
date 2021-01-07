@@ -10,7 +10,7 @@
 <link href="{{ asset('assets/remark/global/vendor/animsition/animsition.css')  }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/switchery/switchery.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/ckeditor5/sample/styles.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/remark/global/vendor/select2/select2.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/remark/global/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/slidepanel/slidePanel.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/flag-icon-css/flag-icon.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/fonts/web-icons/web-icons.min.css') }}" rel="stylesheet">

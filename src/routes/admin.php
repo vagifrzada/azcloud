@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\MediaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
@@ -20,6 +21,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Tags
     Route::get('tags/list', [TagsController::class, 'list'])->name('tags.list')->middleware('xhr-request');
+
+    // Media
+    Route::post('media/delete', [MediaController::class, 'delete'])->name('media.delete');
 });
 
 // Login routes

@@ -15,7 +15,6 @@ locales.forEach((key) => {
         });
 })
 
-
 $('select[data-selectable]').each(function (key, item) {
     const selector = $('#' + item.id);
 
@@ -32,12 +31,11 @@ $('select[data-selectable]').each(function (key, item) {
         config.minimumInputLength = parseInt(selector.data('inputlength'));
 
     if (preparedForMultiple) {
-        config.multiple = selector.attr('multiple');
-        config.allowClear = true;
+        config.multiple = true;
     }
 
     if (preparedForTags)
-        config.tags = selector.data('tags');
+        config.tags = true;
 
     if (preparedForXhr) {
         config.ajax = {
@@ -57,7 +55,6 @@ $('select[data-selectable]').each(function (key, item) {
             }
         }
     }
-
     // Initialization.
     selector.select2(config);
 });

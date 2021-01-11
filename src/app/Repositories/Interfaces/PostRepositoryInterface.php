@@ -7,6 +7,7 @@ use App\Entities\Post\Post;
 interface PostRepositoryInterface
 {
     public function get(int $id): Post;
+    public function getBySlug(string $slug, string $locale): Post;
     public function remove(Post $post): bool;
     public function save(Post $post): Post;
 }

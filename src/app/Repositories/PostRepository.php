@@ -13,6 +13,11 @@ class PostRepository implements PostRepositoryInterface
         return Post::findOrFail($id);
     }
 
+    public function getBySlug(string $slug, string $locale): Post
+    {
+        return Post::whereTranslation('slug', e($slug), $locale)->firstOrFail();
+    }
+
     public function remove(Post $post): bool
     {
         return $post->delete();

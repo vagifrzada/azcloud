@@ -11,5 +11,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('supportedLocales', LaravelLocalization::getSupportedLocales());
+        View::share('currentLocale', $this->app->getLocale());
     }
 }

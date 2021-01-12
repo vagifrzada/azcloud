@@ -149,18 +149,15 @@ class Post extends Model implements TranslatableContract, HasMedia
     {
         $this->addMediaConversion('cover')
             ->nonQueued()
-            ->width(900)
-            ->height(580);
+            ->width(858)
+            ->height(415)
+            ->performOnCollections('cover');
 
         $this->addMediaConversion('thumb-108')
             ->nonQueued()
             ->width(108)
-            ->height(108);
-
-        $this->addMediaConversion('thumb-427')
-            ->nonQueued()
-            ->width(427)
-            ->height(427);
+            ->height(108)
+            ->performOnCollections('gallery');
     }
 
     public function tags(): BelongsToMany

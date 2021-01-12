@@ -16,6 +16,7 @@ class PostsController extends Controller
 
     public function index()
     {
+        // 13 blog posts needed
         return view('site.posts.index');
     }
 

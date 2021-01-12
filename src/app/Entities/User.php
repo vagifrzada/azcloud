@@ -3,7 +3,6 @@
 namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -19,10 +18,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $updated_at
  *
  * @method static findOrFail(int $id)
+ * @method static create(array $data)
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
 
     protected $fillable = ['name', 'email', 'password', 'status'];
     protected $hidden = ['password', 'remember_token'];

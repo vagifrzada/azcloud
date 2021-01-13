@@ -3,9 +3,11 @@
 namespace App\Repositories\Interfaces;
 
 use App\Entities\Post\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 interface PostRepositoryInterface
 {
+    public function all(int $limit): Collection;
     public function get(int $id): Post;
     public function getBySlug(string $slug, string $locale): Post;
     public function remove(Post $post): bool;

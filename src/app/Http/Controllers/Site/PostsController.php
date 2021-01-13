@@ -16,8 +16,9 @@ class PostsController extends Controller
 
     public function index()
     {
-        // 13 blog posts needed
-        return view('site.posts.index');
+        return view('site.posts.index', [
+            'posts' => $this->postRepository->all(13),
+        ]);
     }
 
     public function show(string $slug)

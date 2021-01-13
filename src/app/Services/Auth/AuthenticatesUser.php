@@ -19,17 +19,19 @@ trait AuthenticatesUser
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request))
             return $this->sendLoginResponse($request);
 
-        $this->sendFailedLoginResponse();
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+        ]);
     }
 
-    protected function validateLogin(Request $request)
+    protected function validateLogin(Request $request): void
     {
         $request->validate([
             $this->username() => 'required|string',
@@ -49,7 +51,7 @@ trait AuthenticatesUser
         return $request->only($this->username(), 'password');
     }
 
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(Request $request): RedirectResponse
     {
         $request->session()->regenerate();
 
@@ -57,26 +59,9 @@ trait AuthenticatesUser
             ?: redirect()->intended();
     }
 
-    /**
-     * The user has been authenticated.
-     *
-     * @param Request $request
-     * @param  mixed  $user
-     * @return mixed
-     */
     protected function authenticated(Request $request, $user)
     {
         return redirect($this->redirectTo);
-    }
-
-    /**
-     * @throws ValidationException
-     */
-    protected function sendFailedLoginResponse(): void
-    {
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
     }
 
     public function username(): string
@@ -84,7 +69,7 @@ trait AuthenticatesUser
         return 'email';
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         $this->guard()->logout();
 
@@ -95,7 +80,7 @@ trait AuthenticatesUser
         return $this->loggedOut();
     }
 
-    protected function loggedOut()
+    protected function loggedOut(): RedirectResponse
     {
         return redirect()->route(config('auth.redirect_after_logged_out'));
     }

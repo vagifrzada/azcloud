@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\TagsController;
 use App\Http\Controllers\Site\PostsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -14,4 +15,7 @@ Route::prefix(LaravelLocalization::setLocale())
     // Blog
     Route::get('blog', [PostsController::class, 'index'])->name('blog');
     Route::get('blog/{slug}', [PostsController::class, 'show'])->name('blog.show');
+
+    // Tag
+    Route::get('blog/tag/{tag}', [TagsController::class, 'show'])->name('blog.tags.show');
 });

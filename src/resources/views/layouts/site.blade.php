@@ -41,6 +41,9 @@
     <script type="text/javascript" src="{{ asset('assets/site/js/main.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/site/js/blog.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/site/js/service.js') }}"></script>
+    <script>
+        $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    </script>
     @stack('scripts')
 </body>
 </html>

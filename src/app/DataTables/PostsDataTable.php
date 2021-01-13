@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Entities\Post\Post;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\DataTableAbstract;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
@@ -22,7 +23,13 @@ class PostsDataTable extends DataTable
 
     public function query(Post $model): QueryBuilder
     {
-        return $model->newQuery();
+        if (($searhTerm = $this->request->input('search.value')) === null)
+            return $model->newQuery();
+        $searhTerm = e(trim($searhTerm));
+
+        return Post::whereTranslation('slug', "%{$searhTerm}%", null, 'orWhereHas', 'LIKE')
+            ->orWhereTranslationLike('title', "%{$searhTerm}%")
+            ->orWhere('id', $searhTerm);
     }
 
     public function html(): Builder
@@ -39,14 +46,9 @@ class PostsDataTable extends DataTable
     {
         return [
             'id',
-            'slug',
-            'title',
+            ['data' => 'slug', 'name' => 'slug', 'title' => 'Slug', 'searchable' => false, 'orderable' => false],
+            ['data' => 'title', 'name' => 'title', 'title' => 'Title', 'searchable' => false, 'orderable' => false],
             'created_at',
         ];
-    }
-
-    protected function filename(): string
-    {
-        return 'Posts_' . date('YmdHis');
     }
 }

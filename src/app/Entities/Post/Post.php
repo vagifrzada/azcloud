@@ -4,6 +4,7 @@ namespace App\Entities\Post;
 
 use Carbon\Carbon;
 use App\Entities\Tag;
+use Illuminate\Database\Eloquent\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
@@ -26,8 +27,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
  * @property Carbon created_at
  * @property Carbon updated_at
  *
+ * @property Tag[] tags
+ *
  * @method static findOrFail(int $id)
- * @method static whereTranslation(string $column, mixed $value, ?string $locale = null)
+ * @method static whereTranslation(string $column, mixed $value, ?string $locale = null, string $method, string $operator)
  */
 class Post extends Model implements TranslatableContract, HasMedia
 {
@@ -135,6 +138,11 @@ class Post extends Model implements TranslatableContract, HasMedia
         return $this->getMedia('gallery');
     }
 
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('cover')
@@ -147,16 +155,10 @@ class Post extends Model implements TranslatableContract, HasMedia
      */
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('cover')
+        $this->addMediaConversion('gallery-thumb')
             ->nonQueued()
-            ->width(858)
-            ->height(415)
-            ->performOnCollections('cover');
-
-        $this->addMediaConversion('thumb-108')
-            ->nonQueued()
-            ->width(108)
-            ->height(108)
+            ->width(500)
+            ->height(300)
             ->performOnCollections('gallery');
     }
 

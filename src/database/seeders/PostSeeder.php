@@ -24,7 +24,7 @@ class PostSeeder extends Seeder
             foreach ($locales as $locale => $information) {
                 $post->translateOrNew($locale)->title = $faker->realText(50) . $locale;
                 $post->translateOrNew($locale)->slug = $faker->slug() . $locale;
-                $post->translateOrNew($locale)->content = $faker->slug() . $locale;
+                $post->translateOrNew($locale)->content = $faker->realText(1000) . $locale;
             }
 
             $post->addMedia($cover)->preservingOriginal()->toMediaCollection('cover');

@@ -29,25 +29,7 @@
                         <!-- Blog intro-->
 
                         <div class="editor-body">
-                            <p>"AZCLOUD" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib. “AzInTelecom” MMC Nəqliyyat, <a href="#">Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN)</a> nəzdində fəaliyyət göstərir.Sahəsi 700 m2 –dən çox olan və tələblərinizə tam cavab verəcək sayda server dayaqlarına malik data mərkəzində verilənlərin yüksək sürətlə ötürülməsini həyata keçiririk.</p>
-                            <p>"AZCLOUD" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib. “AzInTelecom” MMC Nəqliyyat, <a href="#">Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN)</a> nəzdində fəaliyyət göstərir.Sahəsi 700 m2 –dən çox olan və tələblərinizə tam cavab verəcək sayda server dayaqlarına malik data mərkəzində verilənlərin yüksək sürətlə ötürülməsini həyata keçiririk.</p>
-                            <p>"AZCLOUD" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib. “AzInTelecom” MMC Nəqliyyat, <a href="#">Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN)</a> nəzdində fəaliyyət göstərir.Sahəsi 700 m2 –dən çox olan və tələblərinizə tam cavab verəcək sayda server dayaqlarına malik data mərkəzində verilənlərin yüksək sürətlə ötürülməsini həyata keçiririk.</p>
-                            <blockquote class="blockquote">
-                                <div class="quote">
-                                    <p>«İdarə edilən xidmət provayderi (MSP) bizim xidmətlərimizdən istifadə edərək son istifadəçi üçün şəbəkə və ya İT infrastrukturu yaratmaqda kömək etməklə yanaşı onların idarə edilməsini təmin edir»</p>
-                                </div>
-                                <div class="quote-author flex">
-                                    <div class="thumb">
-                                        <img src="images/users/image0.jpg" alt="Quote author">
-                                    </div>
-                                    <div class="info">
-                                        <p class="name">Əhməd Rəcəbli</p>
-                                        <p class="he-is">Piere Cardin company, CEO</p>
-                                    </div>
-                                </div>
-                            </blockquote>
-                            <p>"AZCLOUD" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib. “AzInTelecom” MMC Nəqliyyat, <a href="#">Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN)</a> nəzdində fəaliyyət göstərir.Sahəsi 700 m2 –dən çox olan və tələblərinizə tam cavab verəcək sayda server dayaqlarına malik data mərkəzində verilənlərin yüksək sürətlə ötürülməsini həyata keçiririk.</p>
-                            <p>"AZCLOUD" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib. “AzInTelecom” MMC Nəqliyyat, <a href="#">Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN)</a> nəzdində fəaliyyət göstərir.Sahəsi 700 m2 –dən çox olan və tələblərinizə tam cavab verəcək sayda server dayaqlarına malik data mərkəzində verilənlərin yüksək sürətlə ötürülməsini həyata keçiririk.</p>
+                            {!! $post->getContent() !!}
                         </div>
                         <!-- Editor body-->
 
@@ -102,7 +84,7 @@
                                     <div class="swiper-wrapper">
                                         @foreach($gallery as $item)
                                             <div class="swiper-slide">
-                                                <div class="swiper-lazy" data-background="{{ $item->getUrl('thumb-108') }}"></div>
+                                                <div class="swiper-lazy" data-background="{{ $item->getUrl('gallery-thumb') }}"></div>
                                             </div>
                                         @endforeach
                                     </div>
@@ -113,23 +95,16 @@
                         @endif
                         <!-- Blog gallery-->
 
-                        <div class="tags">
-                            <ul>
-                                <li>Tags</li>
-                                <li>
-                                    <a href="#">Servers</a>
-                                </li>
-                                <li>
-                                    <a href="#">Datacenters</a>
-                                </li>
-                                <li>
-                                    <a href="#">Video konfrans</a>
-                                </li>
-                                <li>
-                                    <a href="#">IP telefoniya</a>
-                                </li>
-                            </ul>
-                        </div>
+                        @if(filled($tags = $post->getTags()))
+                            <div class="tags">
+                                <ul>
+                                    <li>@lang('posts.tags')</li>
+                                    @foreach($tags as $tag)
+                                        <li><a href="{{ route('site.blog.tags.show', ['tag' => $tag]) }}">{{ $tag }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <!-- Tags-->
 
                         <div class="blog-actions">

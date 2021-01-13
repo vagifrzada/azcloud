@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use RuntimeException;
 use App\Entities\Post\Post;
+use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface
@@ -11,6 +12,11 @@ class PostRepository implements PostRepositoryInterface
     public function get(int $id): Post
     {
         return Post::findOrFail($id);
+    }
+
+    public function all(int $limit): Collection
+    {
+        return Post::query()->limit($limit)->get();
     }
 
     public function getBySlug(string $slug, string $locale): Post

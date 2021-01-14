@@ -15,15 +15,13 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title'     => 'required|array|min:3',
-            'title.*'   => 'required|string|distinct|min:3',
+            'title.*'   => 'required|string|min:3',
             'slug'      => 'required|array|min:3',
-            'slug.*'    => 'required|string|distinct|min:3',
+            'slug.*'    => 'required|string|min:3',
             'content'   => 'required|array|min:3',
-            'content.*' => 'required|string|distinct|min:3',
+            'content.*' => 'required|string|min:3',
             'image'     => 'image',
             'images.*'  => 'image',
-            'tags'      => 'array',
-            'tags.*'    => 'string|distinct|min:3',
             'status'    => 'required|boolean',
         ];
     }

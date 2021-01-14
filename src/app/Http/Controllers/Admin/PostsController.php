@@ -7,11 +7,9 @@ use App\Entities\Post\Post;
 use App\DataTables\PostsDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Commands\Post\CreatePostCommand;
-use App\Commands\Post\UpdatePostCommand;
 use App\Core\CommandBus\CommandBusInterface;
-use App\Http\Requests\Post\UpdatePostRequest;
-use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Requests\Post\{CreatePostRequest, UpdatePostRequest};
+use App\Commands\Post\{CreatePostCommand, UpdatePostCommand, DeletePostCommand};
 
 class PostsController extends Controller
 {
@@ -53,11 +51,13 @@ class PostsController extends Controller
 
     public function update(Post $post, UpdatePostRequest $request): RedirectResponse
     {
-        try {
-            $this->bus->dispatch(new UpdatePostCommand($post), $request->toArray());
-            return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully !');
-        } catch (Throwable $e) {
-            return redirect()->route('admin.posts.index')->with('error', $e->getMessage());
-        }
+        $this->bus->dispatch(new UpdatePostCommand($post), $request->toArray());
+        return redirect()->back()->with('success', 'Post updated successfully !');
+    }
+
+    public function delete(int $id): RedirectResponse
+    {
+        $this->bus->dispatch(new DeletePostCommand($id));
+        return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully !');
     }
 }

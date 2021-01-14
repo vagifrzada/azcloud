@@ -3,6 +3,7 @@
 namespace App\Handlers\Post;
 
 use App\Entities\Tag;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
@@ -19,7 +20,9 @@ abstract class AbstractPostHandler
     {
         return collect($tags)
             ->map(function (string $tag) {
-                return Tag::firstOrCreate(['name' => $tag])->getId();
+                return is_numeric($tag)
+                    ? intval($tag)
+                    : Tag::firstOrCreate(['name' => $tag, 'slug' => Str::slug($tag)])->getId();
             });
     }
 }

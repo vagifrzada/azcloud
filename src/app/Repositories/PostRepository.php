@@ -14,9 +14,14 @@ class PostRepository implements PostRepositoryInterface
         return Post::findOrFail($id);
     }
 
-    public function all(int $limit): Collection
+    public function getLatest(array $filters = []): ?Post
     {
-        return Post::query()->limit($limit)->get();
+        return Post::applyFilters($filters)->latest()->limit(1)->first();
+    }
+
+    public function all(int $limit, array $filters = []): Collection
+    {
+        return Post::applyFilters($filters)->latest()->limit($limit)->get();
     }
 
     public function getBySlug(string $slug, string $locale): Post
@@ -26,7 +31,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function remove(Post $post): bool
     {
-        return $post->delete();
+        return (bool) $post->delete();
     }
 
     public function save(Post $post): Post

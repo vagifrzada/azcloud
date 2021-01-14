@@ -4,11 +4,11 @@ namespace App\Entities\Post;
 
 use Carbon\Carbon;
 use App\Entities\Tag;
-use Illuminate\Database\Eloquent\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Collection;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,18 +27,23 @@ use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
  * @property Carbon created_at
  * @property Carbon updated_at
  *
- * @property Tag[] tags
+ * @property Collection tags
  *
  * @method static findOrFail(int $id)
- * @method static whereTranslation(string $column, mixed $value, ?string $locale = null, string $method, string $operator)
+ * @method static applyFilters(array $filters = [])
+ * @method static whereTranslation(string $string, string $e, string $locale)
  */
 class Post extends Model implements TranslatableContract, HasMedia
 {
-    use Translatable, InteractsWithMedia;
+    use Translatable, Filters, InteractsWithMedia;
+
+    public const MEDIA_COVER = 'cover';
+    public const MEDIA_GALLERY = 'gallery';
 
     public $table = 'posts';
     public $translationModel = Translation::class;
     public $translatedAttributes = ['title', 'slug', 'content'];
+    public $with = ['media', 'translations'];
     protected $fillable = ['author_id', 'status'];
 
     public function getId(): int

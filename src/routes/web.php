@@ -14,8 +14,9 @@ Route::prefix(LaravelLocalization::setLocale())
 
     // Blog
     Route::get('blog', [PostsController::class, 'index'])->name('blog');
+    Route::get('blog/list', [PostsController::class, 'list'])->name('blog.list.xhr')->middleware('xhr-request');
     Route::get('blog/{slug}', [PostsController::class, 'show'])->name('blog.show');
 
     // Tag
-    Route::get('blog/tag/{tag}', [TagsController::class, 'show'])->name('blog.tags.show');
+    Route::get('blog/tag/{slug}', [TagsController::class, 'show'])->name('blog.tags.show');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Handlers\Post;
 
+use App\Entities\Post\Post;
 use Throwable;
 use Illuminate\Support\Facades\DB;
 use App\Commands\Post\UpdatePostCommand;
@@ -25,16 +26,17 @@ class UpdatePostHandler extends AbstractPostHandler
             $this->postRepository->save($post);
 
             // Syncing tags.
-            $post->tags()->sync($this->prepareTags($command->tags)->toArray());
+            if ($command->tags !== null)
+                $post->tags()->sync($this->prepareTags($command->tags)->toArray());
 
             // Uploading main cover.
             if ($command->image !== null)
-                $post->addMedia($command->image)->toMediaCollection('cover');
+                $post->addMedia($command->image)->toMediaCollection(Post::MEDIA_COVER);
 
             // Uploading gallery.
             if ($command->images !== null)
                 foreach ($command->images as $image)
-                    $post->addMedia($image)->toMediaCollection('gallery');
+                    $post->addMedia($image)->toMediaCollection(Post::MEDIA_GALLERY);
 
             DB::commit();
         } catch (Throwable $e) {

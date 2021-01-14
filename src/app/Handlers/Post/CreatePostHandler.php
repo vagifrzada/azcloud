@@ -27,14 +27,17 @@ class CreatePostHandler extends AbstractPostHandler
             $this->postRepository->save($post);
 
             // Syncing tags.
-            $post->tags()->sync($this->prepareTags($command->tags)->toArray());
+            if ($command->tags !== null)
+                $post->tags()->sync($this->prepareTags($command->tags)->toArray());
 
             // Uploading main cover.
-            $post->addMedia($command->image)->toMediaCollection('cover');
+            if ($command->image !== null)
+                $post->addMedia($command->image)->toMediaCollection(Post::MEDIA_COVER);
 
             // Uploading gallery.
-            foreach ($command->images as $image)
-                $post->addMedia($image)->toMediaCollection('gallery');
+            if ($command->images !== null)
+                foreach ($command->images as $image)
+                    $post->addMedia($image)->toMediaCollection(Post::MEDIA_GALLERY);
 
             DB::commit();
         } catch (Throwable $e) {

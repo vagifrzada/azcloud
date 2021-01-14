@@ -39,7 +39,7 @@
                                 <!-- Col-->
 
                                 @foreach($posts as $post)
-                                <div class="col-lg-4 col-sm-6" data-aos="fade-up" data-aos-duration="800">
+                                <div class="col-lg-4 col-sm-6 post-item" data-aos="fade-up" data-aos-duration="800" data-created="{{ $post->getCreatedAt() }}">
                                     <div class="blog-post">
                                         <div class="image">
                                             <a href="blog-inner.html">
@@ -64,7 +64,7 @@
                     <!-- Load container-->
 
                     <div class="load-more">
-                        <a class="btn btn-block" href="#">@lang('posts.load-more')</a>
+                        <a class="btn btn-block" href="{{ route('site.blog.list.xhr')  }}">@lang('posts.load-more')</a>
                     </div>
                 </div>
             </div>
@@ -75,3 +75,21 @@
     </section>
     <!-- Blog page-->
 @endsection
+
+@push('scripts')
+    <script>
+        $('.load-more a').on('click', function (e) {
+            e.preventDefault();
+            const link = $(this);
+            const container = $('.load-container');
+            const data = {timestamp: $('.post-item:last').data('created')};
+            $.get(link.attr('href'), data, function (resp) {
+                if (!resp.status) {
+                    link.fadeOut();
+                    return false;
+                }
+                container.append(resp.data);
+            });
+        });
+    </script>
+@endpush

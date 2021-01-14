@@ -143,14 +143,14 @@
     <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
 
     <script>
-        let imageUrl = '{{ $post->getCover()->getUrl() }}';
+        let imageUrl = '{{ optional($post->getCover())->getUrl() }}';
         $('#image').fileinput({
             uploadAsync: false,
             initialPreview: [imageUrl],
             initialPreviewAsData: true,
             initialPreviewConfig: [
                 {
-                    key: '{{ $post->getCover()->uuid }}',
+                    key: '{{ optional($post->getCover())->uuid }}',
                     caption: imageUrl,
                     downloadUrl: imageUrl,
                     width: '120px',

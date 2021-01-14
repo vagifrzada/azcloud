@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
 {
-    public function show(string $tag)
+    public function show(string $slug)
     {
-        dd($tag);
+        dd($slug);
     }
 }

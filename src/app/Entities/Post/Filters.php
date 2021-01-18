@@ -19,7 +19,7 @@ trait Filters
         return $query;
     }
 
-    public function scopeAfterTimestamp(Builder $query, string $timestamp): Builder
+    public function scopeBeforeTimestamp(Builder $query, string $timestamp): Builder
     {
         return $query->where('created_at', '<', $timestamp);
     }

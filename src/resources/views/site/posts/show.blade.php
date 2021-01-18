@@ -113,23 +113,23 @@
                         <div class="blog-actions">
                             <ul class="sticky">
                                 <li>
-                                    <a href="#" target="_blank">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('site.blog.show', ['slug' => $post->getSlug()]) }}" target="_blank">
                                         <i class="icon-facebook"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" target="_blank">
+                                    <a href="https://twitter.com/intent/tweet?url={{ route('site.blog.show', ['slug' => $post->getSlug()]) }}&text={{ $post->getTitle() }}" target="_blank">
                                         <i class="icon-twitter"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" target="_blank">
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ route('site.blog.show', ['slug' => $post->getSlug()]) }}" target="_blank">
                                         <i class="icon-linkedin"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="action-copy" href="#" data-copied="link copied">copy link</a>
-                                    <input type="text" value="link to copy" readonly>
+                                    <a class="action-copy" href="" data-copied="@lang('posts.link-copied')">@lang('posts.copy-link')</a>
+                                    <input type="text" value="{{ route('site.blog.show', ['slug' => $post->getSlug()]) }}" readonly>
                                 </li>
                             </ul>
                         </div>
@@ -144,7 +144,8 @@
         </div>
         <!-- Container fluid-->
 
-        <div class="related-blog-posts">
+        @if (filled($olderPosts))
+            <div class="related-blog-posts">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
@@ -154,75 +155,38 @@
 
                         <div class="load-container">
                             <div class="row">
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="blog-post">
-                                        <div class="image">
-                                            <a href="blog-inner.html">
-                                                <img src="images/blog/image1.jpg" alt="Blog title">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <span class="date">01.05.2020</span>
-                                            <a class="title" href="blog-inner.html">Satış dilerlərimizə ictimai, özəl və dövlət sektoru</a>
-
-                                            <div class="read-more">
-                                                <a href="blog-inner.html">Ətraflı oxu</a>
+                                @foreach($olderPosts as $olderPost)
+                                    <div class="col-lg-4 col-sm-6 post-item" data-created="{{ $olderPost->getCreatedAt() }}">
+                                        <div class="blog-post">
+                                            <div class="image">
+                                                <a href="{{ route('site.blog.show', ['slug' => $olderPost->getSlug()]) }}">
+                                                    <img src="{{ $olderPost->getCover()->getUrl() }}" alt="{{ $olderPost->getTitle() }}">
+                                                </a>
+                                            </div>
+                                            <div class="info">
+                                                <span class="date">{{ $olderPost->getCreatedAt()->format('d.m.Y') }}</span>
+                                                <a class="title" href="{{ route('site.blog.show', ['slug' => $olderPost->getSlug()]) }}">{{ $olderPost->getTitle() }}</a>
+                                                <div class="read-more">
+                                                    <a href="{{ route('site.blog.show', ['slug' => $olderPost->getSlug()]) }}">@lang('posts.read-more')</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Col-->
-
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="blog-post">
-                                        <div class="image">
-                                            <a href="blog-inner.html">
-                                                <img src="images/blog/image2.jpg" alt="Blog title">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <span class="date">01.05.2020</span>
-                                            <a class="title" href="blog-inner.html">Satış dilerlərimizə ictimai, özəl və dövlət sektorundan olan müştərilərə etibarlı</a>
-
-                                            <div class="read-more">
-                                                <a href="blog-inner.html">Ətraflı oxu</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Col-->
-
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="blog-post">
-                                        <div class="image">
-                                            <a href="blog-inner.html">
-                                                <img src="images/blog/image3.jpg" alt="Blog title">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <span class="date">01.05.2020</span>
-                                            <a class="title" href="blog-inner.html">SQL Server və poçtun idarə edilməsi üçün Exchange Server proqram</a>
-
-                                            <div class="read-more">
-                                                <a href="blog-inner.html">Ətraflı oxu</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <!-- Col-->
                             </div>
                         </div>
                         <!-- Load container-->
 
-
                         <div class="load-more">
-                            <a class="btn btn-block" href="#">Daha çox yüklə</a>
+                            <a class="btn btn-block" href="{{ route('site.blog.list.xhr')  }}" data-template="triple">@lang('posts.load-more')</a>
                         </div>
                     </div>
                     <!-- Col-->
                 </div>
             </div>
         </div>
+        @endif
         <!-- Related blog posts-->
 
         @include('site.partials.have-question')

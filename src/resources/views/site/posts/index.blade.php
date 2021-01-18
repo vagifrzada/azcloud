@@ -64,7 +64,7 @@
                     <!-- Load container-->
 
                     <div class="load-more">
-                        <a class="btn btn-block" href="{{ route('site.blog.list.xhr')  }}">@lang('posts.load-more')</a>
+                        <a class="btn btn-block" href="{{ route('site.blog.list.xhr') }}" data-template="index">@lang('posts.load-more')</a>
                     </div>
                 </div>
             </div>
@@ -75,21 +75,3 @@
     </section>
     <!-- Blog page-->
 @endsection
-
-@push('scripts')
-    <script>
-        $('.load-more a').on('click', function (e) {
-            e.preventDefault();
-            const link = $(this);
-            const container = $('.load-container');
-            const data = {timestamp: $('.post-item:last').data('created')};
-            $.get(link.attr('href'), data, function (resp) {
-                if (!resp.status) {
-                    link.fadeOut();
-                    return false;
-                }
-                container.append(resp.data);
-            });
-        });
-    </script>
-@endpush

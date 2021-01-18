@@ -16,4 +16,9 @@ class TagRepository implements TagRepositoryInterface
             ->orderBy('name')
             ->get();
     }
+
+    public function getBySlug(string $slug): Tag
+    {
+        return Tag::where('slug', $slug)->firstOrFail();
+    }
 }

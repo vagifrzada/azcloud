@@ -26,20 +26,28 @@ class PostsController extends Controller
     public function show(string $slug)
     {
         $post = $this->postRepository->getBySlug($slug, $this->getLocale());
-        $latestRandomPost = $this->postRepository->getLatest(['exclude' => $post->getId(), 'random' => true]);
-        return view('site.posts.show', compact('post', 'latestRandomPost'));
+        return view('site.posts.show', [
+            'post' => $post,
+            'latestRandomPost' => $this->postRepository->getLatest(['exclude' => $post->getId(), 'random' => true]),
+            'olderPosts' => $this->postRepository->all(3, ['before-timestamp' => $post->getCreatedAt()]),
+        ]);
     }
 
     public function list(Request $request): JsonResponse
     {
-        if (!filled($timestamp = $request->get('timestamp')))
-            return response()->json(['status' => false, 'data' => '']);
+        ['timestamp' => $timestamp, 'template' => $template] = $request->validate([
+            'timestamp' => 'required|date_format:Y-m-d H:i:s', 'template' => 'required|in:index,triple',
+        ]);
 
-        $posts = $this->postRepository->all(13, ['after-timestamp' => $timestamp]);
+        $limit = $template === 'index' ? 13 : 3;
+        if (!view()->exists($template = ('site.posts.partials.' . $template)))
+            return response()->json(['success' => false, 'data' => '', 'status' => 404]);
+
+        $posts = $this->postRepository->all($limit, ['before-timestamp' => $timestamp]);
         $isStillFilled = filled($posts);
         return response()->json([
-            'status' => $isStillFilled,
-            'data'   => $isStillFilled ? view('site.posts.partials.posts', compact('posts'))->render() : '',
+            'success' => $isStillFilled,
+            'data'    => $isStillFilled ? view($template, compact('posts'))->render() : '',
         ]);
     }
 }

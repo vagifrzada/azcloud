@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Entities\Post\Post;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int id
  * @property string slug
  * @property string name
+ * @property Collection posts
  *
  * @method static Tag firstOrCreate(array $condition)
  */
@@ -35,6 +37,6 @@ class Tag extends Model
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class)->limit(50)->latest();
     }
 }

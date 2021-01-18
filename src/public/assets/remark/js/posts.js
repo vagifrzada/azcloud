@@ -2,7 +2,7 @@
 const toolbar = [
     'heading', '|', 'fontfamily', 'fontsize', 'fontColor', '|',
     'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|',
-    'bold', 'italic', 'link'
+    'bold', 'italic', 'link', 'blockQuote'
 ];
 ///assets/remark/global/vendor/ckeditor5/plugins/addExpertQuote/plugin.js
 locales.forEach((key) => {

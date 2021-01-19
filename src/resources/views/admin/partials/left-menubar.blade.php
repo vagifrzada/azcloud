@@ -91,6 +91,28 @@
                         </ul>
                     </li>
 
+                    {{-- Settings --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'settings')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-settings"></i>
+                            <span class="site-menu-title">Settings <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.settings.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Settings list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.settings.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create setting</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

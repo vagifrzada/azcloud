@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -29,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Media
     Route::post('media/delete', [MediaController::class, 'delete'])->name('media.delete');
+
+    // Settings
+    Route::resource('settings', SettingsController::class)->except(['destroy', 'show']);
 });
 
 // Login routes

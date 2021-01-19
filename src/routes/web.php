@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\TagsController;
 use App\Http\Controllers\Site\PostsController;
+use App\Http\Controllers\Site\ContactController;
 use App\Http\Controllers\Site\ServicesController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -12,6 +13,7 @@ Route::prefix(LaravelLocalization::setLocale())
     ->name('site.')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('contact', [ContactController::class, 'index'])->name('contact');
 
     // Blog
     Route::get('blog', [PostsController::class, 'index'])->name('blog');

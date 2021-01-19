@@ -54,12 +54,15 @@ services:
     ports:
       - 127.0.0.1:6379:6379
 
-  npm:
-    image: node:12.16.3
-    container_name: npm
-    entrypoint: [ "npm" ]
-    volumes:
-      - ./src:/app
+  redis-commander:
+    image: rediscommander/redis-commander
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=redis
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -72,6 +75,12 @@ services:
       - UPLOAD_LIMIT=1G
     depends_on:
       - db
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025
 
 volumes:
   mysql_data:

@@ -6,9 +6,8 @@
 
 @section('content')
 
-    <form id="post-create" method="POST" action="{{ route('admin.posts.update', ['post' => $post->getId()]) }}" enctype="multipart/form-data">
+    <form id="service-create" method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
       <div class="row">
         <div class="col-lg-8">
             <div class="panel">
@@ -22,21 +21,17 @@
                                 </a>
                             </li>
                         @endforeach
-                        <li class="nav-item">
-                            <a class="nav-link" href="#gallery" data-toggle="tab">Gallery</a>
-                        </li>
                     </ul>
 
                     <div class="tab-content mt-4">
                         @foreach ($supportedLocales as $locale => $info)
                         <div class="tab-pane {{ $locale == config('app.locale') ? 'active' : null }}" id="{{ $locale }}">
-                            @php $translation = $post->translate($locale); @endphp
                             <div class="row">
                                 <div class="col-lg-12">
 
                                     <div class="form-group form-material title required">
                                         <label class="form-control-label" for="title-{{ $locale }}">Title</label>
-                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ $translation->title  }}">
+                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ old('title.' . $locale) }}">
                                         @if ($errors->has('title.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('title.' . $locale) }}</p>
                                         @endif
@@ -44,16 +39,24 @@
 
                                     <div class="form-group form-material slug required">
                                         <label class="form-control-label" for="slug-{{ $locale }}">Slug</label>
-                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ $translation->slug }}">
+                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ old('slug.' . $locale) }}">
                                         @if ($errors->has('slug.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('slug.' . $locale) }}</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group form-material subtitle required">
+                                        <label class="form-control-label" for="subtitle-{{ $locale }}">SubTitle</label>
+                                        <input type="text" id="subtitle-{{ $locale }}" class="form-control" name="subtitle[{{ $locale }}]" aria-required="true" value="{{ old('subtitle.' . $locale) }}">
+                                        @if ($errors->has('subtitle.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('subtitle.' . $locale) }}</p>
                                         @endif
                                     </div>
 
                                     <div class="form-group form-material content">
                                         <label class="form-control-label" for="content-{{ $locale }}">Content</label>
                                         <textarea name="content[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">
-                                            {!! $translation->content !!}
+                                            {!! old('content.' . $locale) !!}
                                         </textarea>
                                         @if ($errors->has('content.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
@@ -62,16 +65,8 @@
                                 </div>
                             </div>
                         </div>
-
                         @endforeach
 
-                        <div class="tab-pane" id="gallery">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <input id="images" type="file" name="images[]" class="form-control" multiple data-preview-file-type="text">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -92,32 +87,18 @@
                         @endif
                     </div>
 
-                    <div class="form-group form-material tags">
-                        <label class="form-control-label" for="tags">Tags</label>
-                        <select id="tags"
-                                name="tags[]"
-                                multiple="multiple"
-                                class="form-control"
-                                data-selectable="true"
-                                data-xhr-route="{{ route('admin.tags.list') }}"
-                                data-tags="true"
-                                data-inputlength="3"
-                                data-placeholder="Select tags ..."
-                        >
-                            @foreach($post->tags as $tag)
-                                <option selected value="{{ $tag->getName() }}">{{ $tag->getName() }}</option>
-                            @endforeach
-
-                        </select>
-                        @if ($errors->has('tags'))
-                            <p class="help-block help-block-error">{{ $errors->first('tags') }}</p>
+                    <div class="form-group form-material price">
+                        <label class="form-control-label" for="price">Price</label>
+                        <input type="number" step="0.01" min="1" class="form-control" value="{{ old('price') }}" name="price">
+                        @if ($errors->has('price'))
+                            <p class="help-block help-block-error">{{ $errors->first('price') }}</p>
                         @endif
                     </div>
 
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
                         <input type="hidden" name="status"  value="0">
-                        <input id="status" type="checkbox" data-plugin="switchery" name="status" value="1" @if($post->isActive()) checked @endif>
+                        <input id="status" type="checkbox" checked data-plugin="switchery" name="status" value="{{ old('status', 1)  }}">
                         @if ($errors->has('status'))
                             <p class="help-block help-block-error">{{ $errors->first('status')  }}</p>
                         @endif
@@ -125,7 +106,7 @@
                     <br><br>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-round">Update !</button>
+                        <button type="submit" class="btn btn-success btn-round">Create !</button>
                     </div>
                 </div>
             </div>
@@ -143,19 +124,7 @@
     <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
 
     <script>
-        let imageUrl = '{{ optional($post->getCover())->getUrl() }}';
-        $('#image').fileinput({
-            uploadAsync: false,
-            initialPreview: [imageUrl],
-            initialPreviewAsData: true,
-            initialPreviewConfig: [
-                {
-                    caption: imageUrl,
-                    downloadUrl: imageUrl,
-                    width: '120px',
-                }
-            ],
-            overwriteInitial: true,
+        $('input[type=file]').fileinput({
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
@@ -167,42 +136,6 @@
             showBrowse: false,
             browseOnZoneClick: true,
             actionDelete: '',
-            dropZoneTitle: 'Click or drag image here for uploading.',
-            dropZoneClickTitle: '',
-            showCaption: false,
-        });
-
-        let gallery = @json($gallery);
-
-        let initialPreviews = [];
-        let initialPreviewsConfig = [];
-        for (let mediaIndex in gallery) {
-            if (!gallery.hasOwnProperty(mediaIndex)) continue;
-            initialPreviews.push(gallery[mediaIndex]);
-            initialPreviewsConfig.push({
-                key: mediaIndex,
-                caption: gallery[mediaIndex],
-                downloadUrl: gallery[mediaIndex],
-                width: '120px',
-            })
-        }
-
-        $('#images').fileinput({
-            initialPreview: initialPreviews,
-            initialPreviewAsData: true,
-            initialPreviewConfig: initialPreviewsConfig,
-            overwriteInitial: false,
-            theme: 'fa',
-            showUpload: false,
-            allowedFileType: ['image'],
-            allowedFileExtensions: ['jpg','jpeg','png', 'gif'],
-            previewFileType: 'image',
-            dropZoneEnabled: true,
-            showRemove: false,
-            autoOrientImage: false,
-            showBrowse: false,
-            browseOnZoneClick: true,
-            deleteUrl: '{{ route('admin.media.delete') }}',
             dropZoneTitle: 'Click or drag image here for uploading.',
             dropZoneClickTitle: '',
             showCaption: false,

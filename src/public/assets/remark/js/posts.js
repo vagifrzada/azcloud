@@ -4,7 +4,7 @@ const toolbar = [
     'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|',
     'bold', 'italic', 'link', 'blockQuote'
 ];
-///assets/remark/global/vendor/ckeditor5/plugins/addExpertQuote/plugin.js
+
 locales.forEach((key) => {
     ClassicEditor
         .create(document.querySelector(`#content-${key}`), {

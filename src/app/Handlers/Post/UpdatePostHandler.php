@@ -2,13 +2,17 @@
 
 namespace App\Handlers\Post;
 
+use Exception;
 use App\Entities\Post\Post;
-use Throwable;
 use Illuminate\Support\Facades\DB;
 use App\Commands\Post\UpdatePostCommand;
 
 class UpdatePostHandler extends AbstractPostHandler
 {
+    /**
+     * @param UpdatePostCommand $command
+     * @throws Exception
+     */
     public function handle(UpdatePostCommand $command): void
     {
         DB::beginTransaction();
@@ -39,9 +43,10 @@ class UpdatePostHandler extends AbstractPostHandler
                     $post->addMedia($image)->toMediaCollection(Post::MEDIA_GALLERY);
 
             DB::commit();
-        } catch (Throwable $e) {
+        } catch (Exception $e) {
             DB::rollback();
             logger()->error('Error occurred while updating post.', compact('e'));
+            throw $e;
         }
     }
 }

@@ -18,8 +18,6 @@ class CreatePostRequest extends FormRequest
             'title.*'   => 'required|string|min:3',
             'slug'      => 'required|array|min:3',
             'slug.*'    => 'required|string|min:3',
-            'content'   => 'required|array|min:3',
-            'content.*' => 'required|string|min:3',
             'image'     => 'required|image',
             'images.*'  => 'image',
             'status'    => 'required|boolean',

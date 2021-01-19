@@ -51,8 +51,12 @@ class PostsController extends Controller
 
     public function update(Post $post, UpdatePostRequest $request): RedirectResponse
     {
-        $this->bus->dispatch(new UpdatePostCommand($post), $request->toArray());
-        return redirect()->back()->with('success', 'Post updated successfully !');
+        try {
+            $this->bus->dispatch(new UpdatePostCommand($post), $request->toArray());
+            return redirect()->back()->with('success', 'Post updated successfully !');
+        } catch (Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function delete(int $id): RedirectResponse

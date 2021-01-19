@@ -2,13 +2,17 @@
 
 namespace App\Handlers\Post;
 
-use Throwable;
+use Exception;
 use App\Entities\Post\Post;
 use Illuminate\Support\Facades\DB;
 use App\Commands\Post\CreatePostCommand;
 
 class CreatePostHandler extends AbstractPostHandler
 {
+    /**
+     * @param CreatePostCommand $command
+     * @throws Exception
+     */
     public function handle(CreatePostCommand $command): void
     {
         DB::beginTransaction();
@@ -40,9 +44,10 @@ class CreatePostHandler extends AbstractPostHandler
                     $post->addMedia($image)->toMediaCollection(Post::MEDIA_GALLERY);
 
             DB::commit();
-        } catch (Throwable $e) {
+        } catch (Exception $e) {
             DB::rollback();
             logger()->error('Error occurred while storing post.', compact('e'));
+            throw $e;
         }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Service;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePostRequest extends FormRequest
+class CreateServiceRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,8 +18,8 @@ class UpdatePostRequest extends FormRequest
             'title.*'   => 'required|string|min:3',
             'slug'      => 'required|array|min:3',
             'slug.*'    => 'required|string|min:3',
-            'image'     => 'image',
-            'images.*'  => 'image',
+            'price'     => 'required',
+            'image'     => 'required|image',
             'status'    => 'required|boolean',
         ];
     }

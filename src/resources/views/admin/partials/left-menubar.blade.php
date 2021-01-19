@@ -69,6 +69,28 @@
                         </ul>
                     </li>
 
+                    {{-- Services  --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'services')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-cloud"></i>
+                            <span class="site-menu-title">Services <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.services.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Service list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.services.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create service</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

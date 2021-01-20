@@ -92,6 +92,22 @@
                     </li>
 
                     {{-- Settings --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'newsletter')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-settings"></i>
+                            <span class="site-menu-title">Newsletter <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.newsletter.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Newsletter list</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{-- Settings --}}
                     <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'settings')) open active @endif">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-settings"></i>

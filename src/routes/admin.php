@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagsController;
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Settings
     Route::resource('settings', SettingsController::class)->except(['destroy', 'show']);
+
+    // Newsletter
+    Route::get('newsletter', [NewsletterController::class, 'index'])->name('newsletter.index');
+    Route::get('newsletter/{id}/delete', [NewsletterController::class, 'delete'])->name('newsletter.delete');
 });
 
 // Login routes

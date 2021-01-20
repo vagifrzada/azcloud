@@ -14,6 +14,8 @@ Route::prefix(LaravelLocalization::setLocale())
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('contact', [ContactController::class, 'contact'])->name('contact.send');
+    Route::post('newsletter', [ContactController::class, 'newsletter'])->name('newsletter');
 
     // Blog
     Route::get('blog', [PostsController::class, 'index'])->name('blog');

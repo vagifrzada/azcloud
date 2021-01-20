@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-xl-8 offset-xl-2">
                 <div class="inner flex">
-                    <p>Остались какие-либо вопросы? Мы рады помочь ответить на них!</p>
-                    <a class="btn btn-white" href="contact.html">Müraciət et</a>
+                    <p>@lang('main.apply_label')</p>
+                    <a class="btn btn-white" href="{{ route('site.contact') }}">@lang('main.apply')</a>
                 </div>
             </div>
         </div>

@@ -64,18 +64,6 @@ services:
     depends_on:
       - redis
 
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - 8020:80
-    environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=db
-      - UPLOAD_LIMIT=1G
-    depends_on:
-      - db
-
   mailhog:
     image: mailhog/mailhog:latest
     ports:

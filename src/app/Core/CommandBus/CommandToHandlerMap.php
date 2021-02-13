@@ -2,6 +2,12 @@
 
 namespace App\Core\CommandBus;
 
+use App\Commands\Page\CreatePageCommand;
+use App\Commands\Page\DeletePageCommand;
+use App\Commands\Page\UpdatePageCommand;
+use App\Handlers\Page\CreatePageHandler;
+use App\Handlers\Page\DeletePageHandler;
+use App\Handlers\Page\UpdatePageHandler;
 use App\Commands\Service\{CreateServiceCommand, DeleteServiceCommand, UpdateServiceCommand};
 use App\Handlers\Service\{CreateServiceHandler, DeleteServiceHandler, UpdateServiceHandler};
 use App\Commands\Post\{CreatePostCommand, UpdatePostCommand, DeletePostCommand};
@@ -28,6 +34,11 @@ class CommandToHandlerMap
             CreateServiceCommand::class => CreateServiceHandler::class,
             UpdateServiceCommand::class => UpdateServiceHandler::class,
             DeleteServiceCommand::class => DeleteServiceHandler::class,
+
+            // Pages
+            CreatePageCommand::class => CreatePageHandler::class,
+            UpdatePageCommand::class => UpdatePageHandler::class,
+            DeletePageCommand::class => DeletePageHandler::class,
         ];
     }
 }

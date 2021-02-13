@@ -42,7 +42,7 @@
                                 <div class="col-lg-4 col-sm-6 post-item" data-aos="fade-up" data-aos-duration="800" data-created="{{ $post->getCreatedAt() }}">
                                     <div class="blog-post">
                                         <div class="image">
-                                            <a href="blog-inner.html">
+                                            <a href="{{ route('site.blog.show', ['slug' => $post->getSlug()]) }}">
                                                 <img src="{{ $post->getCover()->getUrl() }}" alt="{{ $post->getTitle() }}">
                                             </a>
                                         </div>
@@ -59,7 +59,6 @@
                                 @endforeach
                             </div>
                         </div>
-
                     </div>
                     <!-- Load container-->
 

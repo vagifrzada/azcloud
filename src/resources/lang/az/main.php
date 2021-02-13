@@ -7,6 +7,8 @@ return [
     'phone_number' => 'Telefon nömrəsi',
     'support' => 'Texniki dəstək',
     'email' => 'E-poçt',
+    'see-more' => 'Ətraflı bax',
+    'partners' => 'Parnertlar',
     'address' => 'ünvanımız',
     'follow_us' => 'Bizi sosial şəbəkələrdə izləyin',
     // Contact

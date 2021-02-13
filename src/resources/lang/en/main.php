@@ -6,6 +6,8 @@ return [
     'city_phone_number' => 'City phone number',
     'phone_number' => 'Phone number',
     'support' => 'Technical support',
+    'see-more' => 'See details',
+    'partners' => 'Partners',
     'email' => 'E-mail',
     'address' => 'our address',
     'follow_us' => 'Follow us on social networks',

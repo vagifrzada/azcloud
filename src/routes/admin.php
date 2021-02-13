@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DataCentersController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagsController;
@@ -18,13 +21,25 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UsersController::class)->except(['destroy', 'show']);
     Route::get('users/{id}/delete', [UsersController::class, 'delete'])->name('users.delete');
 
+    // Pages
+    Route::resource('pages', PagesController::class)->except(['destroy', 'show']);
+    Route::get('pages/{id}/delete', [PagesController::class, 'delete'])->name('pages.delete');
+
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);
     Route::get('posts/{id}/delete', [PostsController::class, 'delete'])->name('posts.delete');
 
+    // Partners
+    Route::resource('partners', PartnersController::class)->except(['destroy', 'show']);
+    Route::get('partners/{id}/delete', [PartnersController::class, 'delete'])->name('partners.delete');
+
     // Services
     Route::resource('services', ServicesController::class)->except(['destroy', 'show']);
     Route::get('services/{id}/delete', [ServicesController::class, 'delete'])->name('services.delete');
+
+    // Data centers
+    Route::resource('data-centers', DataCentersController::class)->except(['destroy', 'show']);
+    Route::get('data-centers/{id}/delete', [DataCentersController::class, 'delete'])->name('data-centers.delete');
 
     // Tags
     Route::get('tags/list', [TagsController::class, 'list'])->name('tags.list')->middleware('xhr-request');

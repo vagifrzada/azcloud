@@ -111,7 +111,7 @@
                             <div class="col-xl-6 col-lg-7" data-aos="fade-right" data-aos-duration="800">
                                 <h2 class="section-title">@lang('main.write_us')</h2>
 
-                                <form action="{{ route('site.newsletter') }}" method="POST">
+                                <form action="{{ route('site.contact.send') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="fullname">@lang('main.fullname')</label>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\AboutController;
 use App\Http\Controllers\Site\TagsController;
 use App\Http\Controllers\Site\PostsController;
 use App\Http\Controllers\Site\ContactController;
@@ -13,9 +14,12 @@ Route::prefix(LaravelLocalization::setLocale())
     ->name('site.')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('about', [AboutController::class, 'index'])->name('about');
+
     Route::get('contact', [ContactController::class, 'index'])->name('contact');
     Route::post('contact', [ContactController::class, 'contact'])->name('contact.send');
-    Route::post('newsletter', [ContactController::class, 'newsletter'])->name('newsletter');
+    Route::post('newsletter', [ContactController::class, 'newsletter'])
+        ->name('newsletter')->middleware('throttle:3,10');
 
     // Blog
     Route::get('blog', [PostsController::class, 'index'])->name('blog');

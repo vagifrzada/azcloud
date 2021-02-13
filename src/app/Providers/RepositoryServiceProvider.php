@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Interfaces\PageRepositoryInterface;
+use App\Repositories\PageRepository;
 use App\Repositories\TagRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
             PostRepositoryInterface::class => PostRepository::class,
             TagRepositoryInterface::class => TagRepository::class,
             ServiceRepositoryInterface::class => ServiceRepository::class,
+            PageRepositoryInterface::class => PageRepository::class,
         ];
     }
 }

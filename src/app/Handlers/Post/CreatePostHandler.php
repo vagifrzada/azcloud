@@ -20,7 +20,7 @@ class CreatePostHandler extends AbstractPostHandler
         try {
             $post = new Post();
             $post->setAuthorId(auth()->id());
-            $post->setStatus((bool)$command->status);
+            $post->setStatus((bool) $command->status);
 
             // Setting translations.
             foreach ($post->translatedAttributes as $attribute)

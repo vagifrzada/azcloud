@@ -25,6 +25,29 @@
                             <span class="site-menu-title">Dashboard</span>
                         </a>
                     </li>
+
+                    {{-- Pages --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'pages')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-book"></i>
+                            <span class="site-menu-title">Pages <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.pages.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Page list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.pages.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create page</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     {{-- Users --}}
                     <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'users')) open active @endif">
                         <a href="javascript:void(0)">
@@ -86,6 +109,50 @@
                                 <a href="{{ route('admin.services.create') }}">
                                     <i class="site-menu-icon md-plus"></i>
                                     <span class="site-menu-title">Create service</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{-- Services  --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'data-centers')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-cloud-box"></i>
+                            <span class="site-menu-title">Data centers <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.data-centers.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Data center list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.data-centers.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create data center</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{-- Partners  --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'partners')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-star"></i>
+                            <span class="site-menu-title">Partners <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.partners.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Partners list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.partners.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create partner</span>
                                 </a>
                             </li>
                         </ul>

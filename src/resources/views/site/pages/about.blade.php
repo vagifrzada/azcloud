@@ -300,39 +300,39 @@
 
         @widget('partners')
 
-        <!-- Partners-->
-
         @if (filled($sertificates = PagePlugin::getByIdentity(['identity' => 'about-us-certificates'])))
-        <div class="certificates ptb-14" data-aos="fade-in" data-aos-duration="800">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2">
-                        <div class="section-header">
-                            <h2 class="section-title">{{ $sertificates->getTitle() }}</h2>
-                        </div>
+            <div class="certificates ptb-14" data-aos="fade-in" data-aos-duration="800">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-8 offset-xl-2">
+                            <div class="section-header">
+                                <h2 class="section-title">{{ $sertificates->getTitle() }}</h2>
+                            </div>
 
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <div class="certificate">
-                                    <div class="image">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset('assets/site/images/certificates/image0.jpg') }}" alt="Certificate">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <h3 class="name">TIER III STANDARTI</h3>
-                                        <div class="desc">
-                                            <p>ABŞ-ın Uptime Institute-u tərəfindən işlənib-hazırlanmış Tier III kateqoriyasının əsas xüsusiyyətlərinə mühəndis altsistemlərinin paralel fəaliyyəti, ehtiyat soyutma sistemi, ehtiyat enerji təminatı sistemi, ehtiyat telekommunikasiya infrastrukturu daxildir.</p>
+                            <div class="row">
+                                @foreach($certificates as $certificate)
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="certificate">
+                                        <div class="image">
+                                            <a href="{{ optional($certificate->getPdf())->getUrl()  }}" target="_blank">
+                                                <img src="{{ optional($certificate->getCover())->getUrl() }}" alt="Certificate">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <h3 class="name">{{ $certificate->getTitle() }}</h3>
+                                            <div class="desc">
+                                               {!! $certificate->getContent() !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
+                        <!-- Col-->
                     </div>
-                    <!-- Col-->
                 </div>
             </div>
-        </div>
         @endif
         <!-- Certificates-->
 

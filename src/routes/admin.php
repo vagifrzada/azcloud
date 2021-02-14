@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CertificatesController;
 use App\Http\Controllers\Admin\DataCentersController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PagesController;
@@ -32,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
     // Partners
     Route::resource('partners', PartnersController::class)->except(['destroy', 'show']);
     Route::get('partners/{id}/delete', [PartnersController::class, 'delete'])->name('partners.delete');
+
+    Route::resource('certificates', CertificatesController::class)->except(['destroy', 'show']);
+    Route::get('certificates/{id}/delete', [CertificatesController::class, 'delete'])->name('certificates.delete');
 
     // Services
     Route::resource('services', ServicesController::class)->except(['destroy', 'show']);

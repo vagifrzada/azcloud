@@ -158,10 +158,32 @@
                         </ul>
                     </li>
 
+                    {{-- Certificates  --}}
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'certificates')) open active @endif">
+                        <a href="javascript:void(0)">
+                            <i class="site-menu-icon md-folder-star"></i>
+                            <span class="site-menu-title">Certificates <i class="site-menu-arrow"></i></span>
+                        </a>
+                        <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.certificates.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Certificate list</span>
+                                </a>
+                            </li>
+                            <li class="site-menu-item">
+                                <a href="{{ route('admin.certificates.create') }}">
+                                    <i class="site-menu-icon md-plus"></i>
+                                    <span class="site-menu-title">Create certificate</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     {{-- Settings --}}
                     <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'newsletter')) open active @endif">
                         <a href="javascript:void(0)">
-                            <i class="site-menu-icon md-settings"></i>
+                            <i class="site-menu-icon md-accounts-list"></i>
                             <span class="site-menu-title">Newsletter <i class="site-menu-arrow"></i></span>
                         </a>
                         <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>

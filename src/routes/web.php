@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Site\PartnershipController;
+use App\Http\Controllers\Site\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\AboutController;
@@ -15,6 +17,9 @@ Route::prefix(LaravelLocalization::setLocale())
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('about', [AboutController::class, 'index'])->name('about');
+    Route::get('partnership', [PartnershipController::class, 'index'])->name('partnership');
+
+    Route::get('search', [SearchController::class, 'search'])->name('search');
 
     Route::get('contact', [ContactController::class, 'index'])->name('contact');
     Route::post('contact', [ContactController::class, 'contact'])->name('contact.send');

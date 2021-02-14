@@ -25,6 +25,7 @@ class PagesDataTable extends DataTable
 
         return Page::whereTranslation('title', "%{$searhTerm}%", null, 'orWhereHas', 'LIKE')
             ->orWhereTranslationLike('description', "%{$searhTerm}%")
+            ->orWhereTranslationLike('content', "%{$searhTerm}%")
             ->orWhere('identity', $searhTerm);
     }
 

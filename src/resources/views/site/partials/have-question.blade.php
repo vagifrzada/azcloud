@@ -31,11 +31,13 @@
                     </div>
                     <!-- Col-->
 
+                    @if (filled($seo = \App\Plugins\Page\PagePlugin::getByIdentity(['identity' => 'seo-text-footer'])))
                     <div class="col-lg-6">
                         <div class="text">
-                            <p>SEO text. İnfrastrukturunuza uyğunlaşan və biznes artımını idarə etməyə imkan verən resurs elastikliyi. İnfrastrukturunuza uyğunlaşan və biznes artımını idarə etməyə imkan verən resurs elastikliyi</p>
+                            {!! $seo->getContent() !!}
                         </div>
                     </div>
+                    @endif
                     <!-- Col-->
                 </div>
             </div>

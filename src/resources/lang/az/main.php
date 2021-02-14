@@ -9,6 +9,12 @@ return [
     'email' => 'E-poçt',
     'see-more' => 'Ətraflı bax',
     'partners' => 'Parnertlar',
+    'plans' => 'Planlar və qiymətlər',
+    'advantages' => 'Üstünlüklər',
+    'search-result' => 'Axtarış nəticələri',
+    'search_not_found' => 'Bu sorğu üçün nəticə tapılmadı.',
+    'search-result-found' => 'nəticə tapıldı !',
+    'search' => 'Axtarış',
     'address' => 'ünvanımız',
     'follow_us' => 'Bizi sosial şəbəkələrdə izləyin',
     // Contact
@@ -22,4 +28,7 @@ return [
     'subscribe' => 'Abunə ol',
     'apply' => 'Müraciət et',
     'apply_label' => 'Sualınız var? Sizə kömək etməkdən məmnunuq!',
+
+    'type_post' => 'Bloq',
+    'type_service' => 'Servis',
 ];

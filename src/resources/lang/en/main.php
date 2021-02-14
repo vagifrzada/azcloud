@@ -8,6 +8,12 @@ return [
     'support' => 'Technical support',
     'see-more' => 'See details',
     'partners' => 'Partners',
+    'plans' => 'Plans and prices',
+    'advantages' => 'Advantages',
+    'search-result' => 'Search results',
+    'search-result-found' => 'results found !',
+    'search' => 'Search',
+    'search_not_found' => 'No result found for this request.',
     'email' => 'E-mail',
     'address' => 'our address',
     'follow_us' => 'Follow us on social networks',
@@ -22,4 +28,7 @@ return [
     'subscribe' => 'Subscribe',
     'apply' => 'Apply',
     'apply_label' => 'Any questions left? We are happy to help answer them!',
+
+    'type_post' => 'Blog',
+    'type_service' => 'Service',
 ];

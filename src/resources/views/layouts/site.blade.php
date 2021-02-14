@@ -25,7 +25,9 @@
     @include('site.partials.search-block')
 
     <main class="content">
-        <div class="wave-texture top-left"></div>
+        @if (!Route::is('site.search'))
+            <div class="wave-texture top-left"></div>
+        @endif
         @yield('content')
     </main>
 

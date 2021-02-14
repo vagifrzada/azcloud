@@ -30,3 +30,15 @@ if (! function_exists('localizedUrl')) {
         return app(LocalizedUrlGenerator::class)->generate($lang);
     }
 }
+
+if (! function_exists('escapeLike')) {
+
+    function escapeLike(string $value, string $char = '\\'): string
+    {
+        return str_replace(
+            [$char, '%', '_'],
+            [$char.$char, $char.'%', $char.'_'],
+            $value
+        );
+    }
+}

@@ -25,6 +25,9 @@ class CreatePostCommand extends Command
     /** @var UploadedFile $image */
     public $image;
 
+    /** @var array */
+    public $meta;
+
     /** @var UploadedFile[] $images */
     public $images;
 }

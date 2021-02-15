@@ -22,6 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UsersController::class)->except(['destroy', 'show']);
     Route::get('users/{id}/delete', [UsersController::class, 'delete'])->name('users.delete');
 
+    // Slider
+    Route::resource('slider', \App\Http\Controllers\Admin\SliderController::class)->except(['destroy', 'show']);
+    Route::get('slider/{id}/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');
+
     // Pages
     Route::resource('pages', PagesController::class)->except(['destroy', 'show']);
     Route::get('pages/{id}/delete', [PagesController::class, 'delete'])->name('pages.delete');

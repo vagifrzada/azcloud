@@ -1,5 +1,9 @@
 @extends('layouts.site')
 
+@section('meta_title', $meta['title'])
+@section('meta_keywords', $meta['keywords'])
+@section('meta_description', $meta['description'])
+
 @push('styles')
     <style>
         .info-message {display:none; padding-bottom: 7px;}

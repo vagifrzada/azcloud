@@ -19,7 +19,7 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        $request->validate(['q' => 'required|min:3']);
+        $request->validate(['q' => 'required|min:3', 'page' => 'numeric']);
         $page = (int) $request->get('page', 1);
         $offset = ($page - 1) * self::SEARCH_LIMIT;
         $result = $this->searchService->handle($request->get('q'), self::SEARCH_LIMIT, $offset);

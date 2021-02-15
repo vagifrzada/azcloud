@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>AZCLOUD rəsmi veb-səhifəsi</title>
+    <title>AzCloud | @yield('meta_title')</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="2020 AZCLOUD. Müəllif hüquqları qorunur">
+    <meta name="keywords" content="@yield('meta_keywords')">
+    <meta name="description" content="@yield('meta_description')">
     {{-- Fonts --}}
     <link rel="preload" as="font" href="{{ asset('assets/site/fonts/Montserrat-Regular.woff')  }}" type="font/woff" crossorigin="anonymous">
     <link rel="preload" as="font" href="{{ asset('assets/site/fonts/Montserrat-Regular.woff2') }}" type="font/woff2" crossorigin="anonymous">

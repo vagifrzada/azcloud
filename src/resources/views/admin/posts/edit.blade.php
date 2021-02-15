@@ -59,6 +59,21 @@
                                             <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
                                         @endif
                                     </div>
+
+                                    <div class="form-group form-material meta">
+                                        <fieldset>
+                                            <legend>Meta tags</legend>
+                                            <br>
+                                            <label class="form-control-label" for="meta-title-{{ $locale }}">Meta title</label>
+                                            <input type="text" name="meta[{{ $locale }}][title]" id="meta-title-{{ $locale }}" class="form-control" value="{{ $translation->getMeta('title') }}">
+                                            <br>
+                                            <label class="form-control-label" for="meta-keywords-{{ $locale }}">Meta keywords</label>
+                                            <input type="text" name="meta[{{ $locale  }}][keywords]" id="meta-keywords-{{ $locale }}" class="form-control" value="{{ $translation->getMeta('keywords') }}">
+                                            <br>
+                                            <label class="form-control-label" for="meta-description-{{ $locale }}">Meta description</label>
+                                            <textarea name="meta[{{ $locale }}][description]" id="meta-description-{{ $locale }}" class="form-control">{{ $translation->getMeta('description') }}</textarea>
+                                        </fieldset>
+                                    </div>
                                 </div>
                             </div>
                         </div>

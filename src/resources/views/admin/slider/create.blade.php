@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <form id="post-create" method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
+    <form id="slider-create" method="POST" action="{{ route('admin.slider.store') }}" enctype="multipart/form-data">
         @csrf
       <div class="row">
         <div class="col-lg-8">
@@ -40,57 +40,28 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material slug required">
-                                        <label class="form-control-label" for="slug-{{ $locale }}">Slug</label>
-                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ old('slug.' . $locale) }}">
-                                        @if ($errors->has('slug.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('slug.' . $locale) }}</p>
+                                    <div class="form-group form-material description">
+                                        <label class="form-control-label" for="description-{{ $locale }}">Description</label>
+                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! old('description.' . $locale) !!}</textarea>
+                                        @if ($errors->has('description.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('description.' . $locale) }}</p>
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material content">
-                                        <label class="form-control-label" for="content-{{ $locale }}">Content</label>
-                                        <textarea name="content[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">
-                                            {!! old('content.' . $locale) !!}
-                                        </textarea>
-                                        @if ($errors->has('content.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
-                                        @endif
-                                    </div>
-
-                                    <hr>
-                                    <br>
-
-                                    <div class="form-group form-material meta">
-                                        <fieldset>
-                                            <legend>Meta tags</legend>
-                                            <br>
-                                            <label class="form-control-label" for="meta-title-{{ $locale }}">Meta title</label>
-                                            <input type="text" name="meta[{{ $locale }}][title]" id="meta-title-{{ $locale }}" class="form-control">
-                                            <br>
-                                            <label class="form-control-label" for="meta-keywords-{{ $locale }}">Meta keywords</label>
-                                            <input type="text" name="meta[{{ $locale  }}][keywords]" id="meta-keywords-{{ $locale }}" class="form-control">
-                                            <br>
-                                            <label class="form-control-label" for="meta-description-{{ $locale }}">Meta description</label>
-                                            <textarea name="meta[{{ $locale }}][description]" id="meta-description-{{ $locale }}" class="form-control"></textarea>
-                                        </fieldset>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         @endforeach
 
                         <div class="tab-pane" id="gallery">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input id="images" type="file" name="images[]" class="form-control" multiple data-preview-file-type="text">
+                                    <input id="image" type="file" name="image" class="form-control" multiple data-preview-file-type="text">
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
+                 </div>
             </div>
         </div>
 
@@ -100,29 +71,27 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
-
-                    <div class="form-group image">
-                        <label for="image">Main image</label>
-                        <input id="image" type="file" name="image" class="form-control" data-preview-file-type="text">
-                        @if ($errors->has('image'))
-                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
+                    <div class="form-group form-material order required">
+                        <label class="form-control-label" for="order">Order</label>
+                        <input type="number" class="form-control" name="order" placeholder="Enter order of slider" value="0">
+                        @if ($errors->has('order'))
+                            <p class="help-block help-block-error">{{ $errors->first('order')  }}</p>
                         @endif
                     </div>
 
-                    <div class="form-group form-material tags">
-                        <label class="form-control-label" for="tags">Tags</label>
-                        <select id="tags"
-                                name="tags[]"
-                                multiple="multiple"
-                                class="form-control"
-                                data-selectable="true"
-                                data-xhr-route="{{ route('admin.tags.list') }}"
-                                data-tags="true"
-                                data-inputlength="3"
-                                data-placeholder="Select tags ..."
-                        ></select>
-                        @if ($errors->has('tags'))
-                            <p class="help-block help-block-error">{{ $errors->first('tags') }}</p>
+                    <div class="form-group form-material buy_link required">
+                        <label class="form-control-label" for="buy_link">Buy link</label>
+                        <input type="text" id="buy_link" class="form-control" name="buy_link" placeholder="Enter buy_link of slider">
+                        @if ($errors->has('buy_link'))
+                            <p class="help-block help-block-error">{{ $errors->first('buy_link')  }}</p>
+                        @endif
+                    </div>
+
+                    <div class="form-group form-material prices_link required">
+                        <label class="form-control-label" for="prices_link">Prices link</label>
+                        <input type="text" class="form-control" id="prices_link" name="prices_link" placeholder="Enter prices_link of slider">
+                        @if ($errors->has('prices_link'))
+                            <p class="help-block help-block-error">{{ $errors->first('prices_link')  }}</p>
                         @endif
                     </div>
 
@@ -148,7 +117,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
+    <script src="{{ asset('assets/remark/js/pages.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>
@@ -159,7 +128,7 @@
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
-            allowedFileExtensions: ['jpg','jpeg','png', 'gif'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
             previewFileType: 'image',
             dropZoneEnabled: true,
             showRemove: false,

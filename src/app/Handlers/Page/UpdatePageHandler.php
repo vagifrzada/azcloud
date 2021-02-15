@@ -30,9 +30,12 @@ class UpdatePageHandler
             $page->setStatus((bool) $command->status);
 
             // Setting translations.
-            foreach ($page->translatedAttributes as $attribute)
-                foreach ($command->{$attribute} as $locale => $value)
-                    $page->translate($locale)->{$attribute} = $value;
+            foreach ($page->translatedAttributes as $attribute) {
+                foreach ($command->{$attribute} as $locale => $value) {
+                    $translation = ($attribute === 'meta') ? json_encode($value) : $value;
+                    $page->translate($locale)->{$attribute} = $translation;
+                }
+            }
 
             $this->pageRepository->save($page);
 

@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
+@section('meta_title', __('main.search'))
+
 @section('content')
     <section class="page">
         <div class="container-fluid">

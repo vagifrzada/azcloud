@@ -1,78 +1,33 @@
 @extends('layouts.site')
 
+@section('meta_title', $meta['title'])
+@section('meta_keywords', $meta['keywords'])
+@section('meta_description', $meta['description'])
+
 @section('content')
     <section class="intro-slider">
         <div class="wave-texture bottom-right"></div>
-
         <div class="swiper-container" data-aos="fade-in" data-aos-duration="800">
             <div class="swiper-wrapper">
-                <div class="swiper-slide no-swipe">
-                    <div class="service-preview flex">
-                        <div class="left">
-                            <h1 class="title">Bulud infrastrukturu</h1>
-                            <h2 class="subtitle">İnfrastrukturanuza uyğunlaşan və biznes artımı idarə eyməyə imkan verən elsatikliyi</h2>
-                            <div class="actions">
-                                <a class="btn btn-primary" href="#">Əldə et</a>
-                                <a class="btn btn-outline" href="#">Qiymətlər</a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <img src="{{ asset('assets/site/images/intro-slider/image0.png') }}" alt="Service image">
-                        </div>
-                    </div>
-                </div>
-                <!-- Swiper slide-->
 
+                @foreach($sliders as $slider)
                 <div class="swiper-slide no-swipe">
                     <div class="service-preview flex">
                         <div class="left">
-                            <h1 class="title">Lorem, ipsum dolor.</h1>
-                            <h2 class="subtitle">İnfrastrukturanuza uyğunlaşan və biznes artımı idarə eyməyə imkan verən elsatikliyi</h2>
+                            <h1 class="title">{{ $slider->title }}</h1>
+                            <h2 class="subtitle">{!! $slider->description !!}</h2>
                             <div class="actions">
-                                <a class="btn btn-primary" href="#">Əldə et</a>
-                                <a class="btn btn-outline" href="#">Qiymətlər</a>
+                                <a class="btn btn-primary" target="_blank" href="{{ $slider->buy_link ?? '#' }}">@lang('main.buy')</a>
+                                <a class="btn btn-outline" target="_blank" href="{{ $slider->prices_link ?? '#' }}">@lang('main.price_list')</a>
                             </div>
                         </div>
                         <div class="right">
-                            <img src="{{ asset('assets/site/images/intro-slider/image0.png') }}" alt="Service image">
+                            <img src="{{ optional($slider->getCover())->getUrl() }}" alt="Service image">
                         </div>
                     </div>
                 </div>
-                <!-- Swiper slide-->
+                @endforeach
 
-                <div class="swiper-slide no-swipe">
-                    <div class="service-preview flex">
-                        <div class="left">
-                            <h1 class="title">Bulud infrastrukturu</h1>
-                            <h2 class="subtitle">İnfrastrukturanuza uyğunlaşan və biznes artımı idarə eyməyə imkan verən elsatikliyi</h2>
-                            <div class="actions">
-                                <a class="btn btn-primary" href="#">Əldə et</a>
-                                <a class="btn btn-outline" href="#">Qiymətlər</a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <img src="{{ asset('assets/site/images/intro-slider/image0.png')  }}" alt="Service image">
-                        </div>
-                    </div>
-                </div>
-                <!-- Swiper slide-->
-
-                <div class="swiper-slide no-swipe">
-                    <div class="service-preview flex">
-                        <div class="left">
-                            <h1 class="title">Bulud infrastrukturu</h1>
-                            <h2 class="subtitle">İnfrastrukturanuza uyğunlaşan və biznes artımı idarə eyməyə imkan verən elsatikliyi</h2>
-                            <div class="actions">
-                                <a class="btn btn-primary" href="#">Əldə et</a>
-                                <a class="btn btn-outline" href="#">Qiymətlər</a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <img src="{{ asset('assets/site/images/intro-slider/image0.png')  }}" alt="Service image">
-                        </div>
-                    </div>
-                </div>
-                <!-- Swiper slide-->
             </div>
             <!-- Swiper wrapper-->
 
@@ -80,7 +35,7 @@
                 <div class="fraction">
                     <span class="current">1</span>
                     <span class="divider">/</span>
-                    <span class="total">4</span>
+                    <span class="total">{{ count($sliders) }}</span>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -88,7 +43,7 @@
         <!-- Swiper container-->
 
         <button class="to-services hidden-1200">
-            <img src="{{ asset('assets/site/images/icons/icon-angle-down.svg') }}" alt="Icon arrow down">Xidmətlərimiz
+            <img src="{{ asset('assets/site/images/icons/icon-angle-down.svg') }}" alt="Icon arrow down">@lang('main.our_services')
         </button>
     </section>
     <!-- Intro slider-->

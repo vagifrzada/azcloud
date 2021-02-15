@@ -9,20 +9,19 @@
         <div class="row">
             <div class="col-xl-8 offset-xl-2">
                 <div class="search-form">
-                    <form action="#" method="GET">
+                    <form action="{{ route('site.search') }}" method="GET">
                         <div class="form-group">
-                            <label for="search-field">Search</label>
-                            <input class="form-control" type="text" id="search-field" placeholder="Search" autocomplete="off">
+                            <label for="search-field">@lang('main.search')</label>
+                            <input class="form-control" type="text" required id="search-field" name="q" placeholder="@lang('main.search')" autocomplete="off">
                         </div>
                         <button class="submit-search" type="submit">
                             <img src="{{ asset('assets/site/images/icons/icon-search-white.svg') }}" alt="Icon search">
                         </button>
                         <div class="search-examples hidden-991">
                             <span>Ex.</span>
-                            <a href="https://localhost:8080?q=servers">Servers</a>
-                            <a href="https://localhost:8080?q=datacenters">Datacenters</a>
-                            <a href="https://localhost:8080?q=video-konfrans">Video konfrans</a>
-                            <a href="https://localhost:8080?q=ip-telefoniya">IP telefoniya</a>
+                            <a href="/search?q=Servers">Servers</a>
+                            <a href="/search?q=Datacenters">Datacenters</a>
+                            <a href="/search?q=Video konfrans">Video konfrans</a>
                         </div>
                     </form>
                 </div>

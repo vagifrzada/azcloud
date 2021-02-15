@@ -16,6 +16,9 @@ return [
     'search_not_found' => 'No result found for this request.',
     'email' => 'E-mail',
     'address' => 'our address',
+    'buy' => 'Buy',
+    'price_list' => 'Prices',
+    'our_services' => 'Our services',
     'follow_us' => 'Follow us on social networks',
     // Contact
     'write_us' => 'Write to us',

@@ -28,6 +28,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
  * @property Carbon updated_at
  *
  * @property Collection tags
+ * @property string meta
  *
  * @method static findOrFail(int $id)
  * @method static applyFilters(array $filters = [])
@@ -42,7 +43,7 @@ class Post extends Model implements TranslatableContract, HasMedia
 
     public $table = 'posts';
     public $translationModel = Translation::class;
-    public $translatedAttributes = ['title', 'slug', 'content'];
+    public $translatedAttributes = ['title', 'slug', 'content', 'meta'];
     public $with = ['media', 'translations'];
     protected $fillable = ['author_id', 'status'];
 
@@ -165,6 +166,11 @@ class Post extends Model implements TranslatableContract, HasMedia
             ->width(500)
             ->height(300)
             ->performOnCollections('gallery');
+    }
+
+    public function getMeta(): array
+    {
+        return ($this->meta !== null) ? json_decode($this->meta, true) : [];
     }
 
     public function tags(): BelongsToMany

@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
+@section('meta_title', __('posts.blog'))
+
 @php
     /** @var \Illuminate\Database\Eloquent\Collection $posts */
     $firstPost = $posts->shift();

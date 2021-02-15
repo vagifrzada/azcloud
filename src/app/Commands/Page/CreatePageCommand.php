@@ -24,4 +24,7 @@ class CreatePageCommand extends Command
 
     /** @var UploadedFile[] $images */
     public $images;
+
+    /** @var array $meta */
+    public $meta;
 }

@@ -22,9 +22,12 @@ class UpdatePostHandler extends AbstractPostHandler
             $post->setStatus((bool)$command->status);
 
             // Setting translations.
-            foreach ($post->translatedAttributes as $attribute)
-                foreach ($command->{$attribute} as $locale => $value)
-                    $post->translate($locale)->{$attribute} = $value;
+            foreach ($post->translatedAttributes as $attribute) {
+                foreach ($command->{$attribute} as $locale => $value) {
+                    $translation = ($attribute === 'meta') ? json_encode($value) : $value;
+                    $post->translate($locale)->{$attribute} = $translation;
+                }
+            }
 
             // Storing post.
             $this->postRepository->save($post);

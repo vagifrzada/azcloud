@@ -23,6 +23,9 @@ class UpdatePageCommand extends Command
     /** @var UploadedFile[] $images */
     public $images;
 
+    /** @var array $meta */
+    public $meta;
+
     /** @var Page $page */
     private $page;
 

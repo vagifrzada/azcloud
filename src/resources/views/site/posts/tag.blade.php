@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
+@section('meta_title', sprintf('%s: #%s', __('posts.tag'), $tag->getName()))
+
 @section('content')
     <section class="page blog-page">
         <div class="container-fluid">

@@ -30,9 +30,12 @@ class CreatePageHandler
             $page->setIdentity($command->identity);
             $page->setStatus((bool) $command->status);
 
-            foreach ($page->translatedAttributes as $attribute)
-                foreach ($command->{$attribute} as $locale => $value)
-                    $page->translateOrNew($locale)->{$attribute} = $value;
+            foreach ($page->translatedAttributes as $attribute) {
+                foreach ($command->{$attribute} as $locale => $value) {
+                    $translation = ($attribute === 'meta') ? json_encode($value) : $value;
+                    $page->translateOrNew($locale)->{$attribute} = $translation;
+                }
+            }
 
             $this->pageRepository->save($page);
 

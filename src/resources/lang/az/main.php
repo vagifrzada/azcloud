@@ -16,6 +16,9 @@ return [
     'search-result-found' => 'nəticə tapıldı !',
     'search' => 'Axtarış',
     'address' => 'ünvanımız',
+    'buy' => 'Əldə et',
+    'our_services' => 'Xidmətlərimiz',
+    'price_list' => 'Qiymətlər',
     'follow_us' => 'Bizi sosial şəbəkələrdə izləyin',
     // Contact
     'write_us' => 'Bizə yazın',

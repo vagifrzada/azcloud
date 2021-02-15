@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Repositories\Interfaces\PageRepositoryInterface;
 use Throwable;
 use App\Entities\Newsletter;
 use App\Mail\ContactFormMail;
@@ -12,9 +13,22 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    /**
+     * @var PageRepositoryInterface
+     */
+    private $pageRepository;
+
+    public function __construct(PageRepositoryInterface $pageRepository)
+    {
+        $this->pageRepository = $pageRepository;
+    }
+
     public function index()
     {
-        return view('site.pages.contact');
+        $page = $this->pageRepository->getByIdentity('contact');
+        return view('site.pages.contact', [
+            'meta' => ($page !== null) ? $page->getMeta() : ['title' => null, 'keywords' => null, 'description' => null],
+        ]);
     }
 
     public function contact(Request $request): JsonResponse

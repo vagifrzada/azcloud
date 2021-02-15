@@ -26,8 +26,14 @@ class PostsController extends Controller
     public function show(string $slug)
     {
         $post = $this->postRepository->getBySlug($slug, $this->getLocale());
+        $meta = $post->getMeta();
         return view('site.posts.show', [
             'post' => $post,
+            'meta' => [
+                'title' => $meta['title'] ?? $post->getTitle(),
+                'keywords' => $meta['keywords'] ?? $post->getSlug(),
+                'description' => $meta['description'] ?? $post->getTitle(),
+            ],
             'latestRandomPost' => $this->postRepository->getLatest(['exclude' => $post->getId(), 'random' => true]),
             'olderPosts' => $this->postRepository->all(3, ['before-timestamp' => $post->getCreatedAt()]),
         ]);

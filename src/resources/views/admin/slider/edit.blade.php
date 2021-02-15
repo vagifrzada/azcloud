@@ -6,8 +6,9 @@
 
 @section('content')
 
-    <form id="page-create" method="POST" action="{{ route('admin.pages.store') }}" enctype="multipart/form-data">
+    <form id="slider-create" method="POST" action="{{ route('admin.slider.update', ['slider' => $slider->id]) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
       <div class="row">
         <div class="col-lg-8">
             <div class="panel">
@@ -28,13 +29,14 @@
 
                     <div class="tab-content mt-4">
                         @foreach ($supportedLocales as $locale => $info)
+                            <?php $translation = $slider->translate($locale); ?>
                         <div class="tab-pane {{ $locale == config('app.locale') ? 'active' : null }}" id="{{ $locale }}">
                             <div class="row">
                                 <div class="col-lg-12">
 
                                     <div class="form-group form-material title required">
                                         <label class="form-control-label" for="title-{{ $locale }}">Title</label>
-                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ old('title.' . $locale) }}">
+                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ $translation->title }}">
                                         @if ($errors->has('title.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('title.' . $locale) }}</p>
                                         @endif
@@ -42,55 +44,26 @@
 
                                     <div class="form-group form-material description">
                                         <label class="form-control-label" for="description-{{ $locale }}">Description</label>
-                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! old('description.' . $locale) !!}</textarea>
+                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! $translation->description !!}</textarea>
                                         @if ($errors->has('description.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('description.' . $locale) }}</p>
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material content">
-                                        <label class="form-control-label" for="content-{{ $locale }}">Content</label>
-                                        <textarea name="content[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">
-                                            {!! old('content.' . $locale) !!}
-                                        </textarea>
-                                        @if ($errors->has('content.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
-                                        @endif
-                                    </div>
-
-                                    <hr>
-                                    <br>
-
-                                    <div class="form-group form-material meta">
-                                    <fieldset>
-                                        <legend>Meta tags</legend>
-                                        <br>
-                                        <label class="form-control-label" for="meta-title-{{ $locale }}">Meta title</label>
-                                        <input type="text" name="meta[{{ $locale }}][title]" id="meta-title-{{ $locale }}" class="form-control">
-                                        <br>
-                                        <label class="form-control-label" for="meta-keywords-{{ $locale }}">Meta keywords</label>
-                                        <input type="text" name="meta[{{ $locale  }}][keywords]" id="meta-keywords-{{ $locale }}" class="form-control">
-                                        <br>
-                                        <label class="form-control-label" for="meta-description-{{ $locale }}">Meta description</label>
-                                        <textarea name="meta[{{ $locale }}][description]" id="meta-description-{{ $locale }}" class="form-control"></textarea>
-                                    </fieldset>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         @endforeach
 
                         <div class="tab-pane" id="gallery">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input id="images" type="file" name="images[]" class="form-control" multiple data-preview-file-type="text">
+                                    <input id="image" type="file" name="image" class="form-control" multiple data-preview-file-type="text">
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
+                 </div>
             </div>
         </div>
 
@@ -100,19 +73,34 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-material identity required">
-                        <label class="form-control-label" for="identity">Identity</label>
-                        <input type="text" class="form-control" name="identity" placeholder="Enter identity of page">
-                        @if ($errors->has('identity'))
-                            <p class="help-block help-block-error">{{ $errors->first('identity')  }}</p>
+                    <div class="form-group form-material order required">
+                        <label class="form-control-label" for="order">Order</label>
+                        <input type="number" class="form-control" name="order" placeholder="Enter order of slider" value="{{ $slider->order }}">
+                        @if ($errors->has('order'))
+                            <p class="help-block help-block-error">{{ $errors->first('order')  }}</p>
                         @endif
                     </div>
 
+                    <div class="form-group form-material buy_link required">
+                        <label class="form-control-label" for="buy_link">Buy link</label>
+                        <input type="text" id="buy_link" class="form-control" name="buy_link"  value="{{ $slider->buy_link }}" placeholder="Enter buy_link of slider">
+                        @if ($errors->has('buy_link'))
+                            <p class="help-block help-block-error">{{ $errors->first('buy_link')  }}</p>
+                        @endif
+                    </div>
+
+                    <div class="form-group form-material prices_link required">
+                        <label class="form-control-label" for="prices_link">Prices link</label>
+                        <input type="text" class="form-control" id="prices_link" name="prices_link" value="{{ $slider->prices_link }}" placeholder="Enter prices_link of slider">
+                        @if ($errors->has('prices_link'))
+                            <p class="help-block help-block-error">{{ $errors->first('prices_link')  }}</p>
+                        @endif
+                    </div>
 
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
                         <input type="hidden" name="status"  value="0">
-                        <input id="status" type="checkbox" checked data-plugin="switchery" name="status" value="{{ old('status', 1)  }}">
+                        <input id="status" type="checkbox" @if ($slider->status) checked  @endif data-plugin="switchery" name="status" value="1">
                         @if ($errors->has('status'))
                             <p class="help-block help-block-error">{{ $errors->first('status')  }}</p>
                         @endif
@@ -120,7 +108,7 @@
                     <br><br>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-round">Create !</button>
+                        <button type="submit" class="btn btn-success btn-round">Update !</button>
                     </div>
                 </div>
             </div>
@@ -138,11 +126,23 @@
     <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
 
     <script>
-        $('input[type=file]').fileinput({
+        let imageUrl = '{{ optional($slider->getCover())->getUrl() }}';
+        $('#image').fileinput({
+            uploadAsync: false,
+            initialPreview: [imageUrl],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [
+                {
+                    caption: imageUrl,
+                    downloadUrl: imageUrl,
+                    width: '120px',
+                }
+            ],
+            overwriteInitial: true,
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
-            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif'],
             previewFileType: 'image',
             dropZoneEnabled: true,
             showRemove: false,

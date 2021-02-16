@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'all' => 'Bütün yazılar',
     'blog' => 'Bloq',
     'read-more' => 'Ətraflı oxu',
     'load-more' => 'Daha çox yüklə',

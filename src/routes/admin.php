@@ -27,8 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('slider/{id}/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');
 
     // Pages
-    Route::resource('pages', PagesController::class)->except(['destroy', 'show']);
-    Route::get('pages/{id}/delete', [PagesController::class, 'delete'])->name('pages.delete');
+    Route::resource('pages', PagesController::class)->except(['show']);
+    Route::post('pages/updateNestable', [PagesController::class, 'updateNestable'])->name('pages.update-nestable')->middleware('xhr-request');
 
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);

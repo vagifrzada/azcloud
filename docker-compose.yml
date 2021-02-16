@@ -70,6 +70,18 @@ services:
       - 1025:1025
       - 8025:8025
 
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8020:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - UPLOAD_LIMIT=1G
+    depends_on:
+      - db
+
 volumes:
   mysql_data:
   composer_data:

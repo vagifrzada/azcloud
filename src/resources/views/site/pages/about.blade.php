@@ -53,74 +53,17 @@
                         <div class="row">
                             <div class="col-md-6 offset-md-6">
                                 <h2 class="section-title">{{ $ourValues->getTitle()  }}</h2>
-
                                 <div class="values-list">
-
-                                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-1'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon users">
+                                    @foreach ($ourValues->children as $child)
+                                        <div class="values-list-item">
+                                            <div class="icon">
+                                                <img src="{{ optional($child->getFirstMedia('gallery'))->getUrl() }}" alt="Icon users">
+                                            </div>
+                                            <div class="label">
+                                                <span>{{ $child->getTitle() }}</span>
+                                            </div>
                                         </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-2'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon lamp">
-                                        </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-3'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon cube">
-                                        </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-4'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon shield">
-                                        </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                   @endif
-
-                                   @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-5'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon flash">
-                                        </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'about-values-item-6'])))
-                                    <div class="values-list-item">
-                                        <div class="icon">
-                                            <img src="{{ optional($item->getFirstMedia('gallery'))->getUrl() }}" alt="Icon lock">
-                                        </div>
-                                        <div class="label">
-                                            <span>{{ $item->getTitle() }}</span>
-                                        </div>
-                                    </div>
-                                    @endif
+                                    @endforeach
                                 </div>
                                 <!-- Values list-->
                             </div>
@@ -247,7 +190,7 @@
         @endif
         <!-- Universal block-->
 
-        <div class="about-data-centers ptb-11" data-aos="fade-in" data-aos-duration="800">
+        <div class="about-data-centers ptb-11" data-aos="fade-in" data-aos-duration="800" id="data-centers">
             @if (filled($dataCenter = PagePlugin::getByIdentity(['identity' => 'data-centers'])))
                 <div class="container-fluid">
                 <div class="row">

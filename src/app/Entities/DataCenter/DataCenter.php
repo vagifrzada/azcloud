@@ -8,6 +8,7 @@ use Astrotomic\Translatable\Translatable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property int id
@@ -76,6 +77,16 @@ class DataCenter extends Model  implements TranslatableContract, HasMedia
         $this->content = $content;
 
         return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getCover(): ?Media
+    {
+        return $this->getFirstMedia('gallery');
     }
 
     public function getGallery(): MediaCollection

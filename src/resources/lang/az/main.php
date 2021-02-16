@@ -15,9 +15,11 @@ return [
     'search_not_found' => 'Bu sorğu üçün nəticə tapılmadı.',
     'search-result-found' => 'nəticə tapıldı !',
     'search' => 'Axtarış',
+    'data_centers' => 'Data Mərkəzlər',
     'address' => 'ünvanımız',
     'buy' => 'Əldə et',
     'our_services' => 'Xidmətlərimiz',
+    'latest_post' => 'Axırıncı bloq yazısı',
     'price_list' => 'Qiymətlər',
     'follow_us' => 'Bizi sosial şəbəkələrdə izləyin',
     // Contact

@@ -29,13 +29,13 @@
         @endif
         <!-- Partnership intro-->
 
+        @if (filled($item = PagePlugin::getByIdentity(['identity' => 'partnership-advantages'])))
         <div class="partnership-advantages ptb-11" data-aos="fade-in" data-aos-duration="800" id="advantages">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <div class="section-header flex">
-                            <h2 class="section-title">@lang('main.advantages')</h2>
-
+                            <h2 class="section-title">{{ $item->getTitle() }}</h2>
                             <div class="controls flex">
                                 <div class="swiper-button-prev masked hidden-991">
                                     <i class="icon-arrow-left"></i>
@@ -51,49 +51,23 @@
 
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'advantages'])))
+                    @foreach($item->children as $child)
                     <div class="swiper-slide">
                         <div class="advantage-item">
-                            <p class="title">{{ $item->getTitle() }}:</p>
-                            {!! $item->getContent() !!}
+                            <p class="title">{{ $child->getTitle() }}:</p>
+                            {!! $child->getContent() !!}
                         </div>
                     </div>
-                    @endif
-
-                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'product-portfolio'])))
-                    <div class="swiper-slide">
-                        <div class="advantage-item">
-                            <p class="title">{{ $item->getTitle() }}:</p>
-                            {!! $item->getContent() !!}
-                        </div>
-                    </div>
-                    @endif
-
-                    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'targets'])))
-                    <div class="swiper-slide">
-                        <div class="advantage-item">
-                            <p class="title">{{ $item->getTitle()  }}:</p>
-                            {!! $item->getContent() !!}
-                        </div>
-                    </div>
-                    @endif
-                   @if (filled($item = PagePlugin::getByIdentity(['identity' => 'product-portfolio-attributes'])))
-                    <div class="swiper-slide">
-                        <div class="advantage-item">
-                            <p class="title">{{ $item->getTitle() }}:</p>
-                            {!! $item->getContent() !!}
-                        </div>
-                    </div>
-                    @endif
+                    @endforeach
                 </div>
             </div>
             <!-- Advantages slider-->
         </div>
+        @endif
         <!-- Partnership advantages-->
 
+        @if (filled($item = PagePlugin::getByIdentity(['identity' => 'system-integrator'])))
         <div class="partnership-types" id="prices">
-
-            @if (filled($item = PagePlugin::getByIdentity(['identity' => 'system-integrator'])))
             <div class="container-fluid ptb-11" data-aos="fade-up" data-aos-duration="800">
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
@@ -144,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            @endif
+
             <!-- Container-fluid-->
             @if (filled($item = PagePlugin::getByIdentity(['identity' => 'service-provider'])))
             <div class="container-fluid ptb-11" data-aos="fade-up" data-aos-duration="800">
@@ -252,6 +226,7 @@
             @endif
             <!-- Container-fluid-->
         </div>
+        @endif
         <!-- Partnership types-->
 
        @widget('partners')

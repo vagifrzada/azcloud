@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'all' => 'All articles',
     'blog' => 'Blog',
     'read-more' => 'Read more',
     'load-more' => 'Load more',

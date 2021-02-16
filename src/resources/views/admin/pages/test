@@ -1,0 +1,65 @@
+ <div class="dd">
+                                @if (filled($pages))
+                                    <ol class="dd-list" id="nestable3">
+                                        @foreach ($pages as $page)
+                                            <li class="dd-item dd3-item" data-id="{{ $page['id'] }}">
+                                                <div class="dd-handle dd3-handle"></div>
+                                                <div class="dd3-content">
+                                                    {{ $page['title'] }} ({{ $page['identity'] }})
+                                                    <button class="btn btn-danger btn-round btn-xs float-right delete-record">
+                                                        <i class="md-delete"></i>
+                                                    </button>
+                                                    <a href="{{ route('admin.pages.edit', $page['id']) }}" class="btn btn-info btn-round btn-xs float-right">
+                                                        <i class="md-edit"></i>
+                                                    </a>
+                                                </div>
+
+                                                @if (filled($page['children']))
+                                                    @foreach($page['children'] as $children)
+                                                        <ol class="dd-list">
+                                                            <li class="dd-item dd3-item" data-id="{{ $children['id'] }}">
+                                                                <div class="dd-handle dd3-handle"></div>
+                                                                <div class="dd3-content">
+                                                                    {{ $children['title'] }} ({{ $children['identity'] }})
+                                                                    <button class="btn btn-danger btn-xs float-right btn-round delete-record">
+                                                                        <i class="md-delete"></i>
+                                                                    </button>
+                                                                    <a href="{{ route('admin.pages.edit', $children['id']) }}" class="btn btn-info btn-xs btn-round float-right">
+                                                                        <i class="md-edit"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                                @if (filled($children['children']))
+                                                                    @foreach($children['children'] as $childrenChild)
+                                                                        <ol class="dd-list">
+                                                                            <li class="dd-item dd3-item" data-id="{{ $childrenChild['id'] }}">
+                                                                                <div class="dd-handle dd3-handle"></div>
+                                                                                <div class="dd3-content">
+                                                                                    {{ $childrenChild['title'] }} ({{ $childrenChild['identity'] }})
+                                                                                    <button class="btn btn-danger btn-xs float-right btn-round delete-record">
+                                                                                        <i class="md-delete"></i>
+                                                                                    </button>
+                                                                                    <a href="{{ route('admin.pages.edit', $childrenChild['id']) }}" class="btn btn-info btn-round btn-xs float-right">
+                                                                                        <i class="md-edit"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ol>
+                                                                    @endforeach
+                                                                @endif
+                                                            </li>
+                                                        </ol>
+                                                    @endforeach
+                                                @endif
+
+                                            </li>
+                                        @endforeach
+                                    </ol>
+
+                                    <form action="" id="deleteRecord" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+
+                                @endif
+                            </div>

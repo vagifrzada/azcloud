@@ -159,7 +159,7 @@
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
-            allowedFileExtensions: ['jpg','jpeg','png', 'gif'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
             previewFileType: 'image',
             dropZoneEnabled: true,
             showRemove: false,

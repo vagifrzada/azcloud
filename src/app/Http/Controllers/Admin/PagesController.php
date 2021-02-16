@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Throwable;
+use Illuminate\Http\Request;
 use App\Entities\Page\Page;
-use App\DataTables\PagesDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Commands\Page\DeletePageCommand;
@@ -23,9 +23,11 @@ class PagesController extends Controller
         $this->bus = $bus;
     }
 
-    public function index(PagesDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('admin.pages.index');
+        return view('admin.pages.index', [
+            'pages' => Page::oldest('order')->where('parent_id', 0)->with('children')->get(),
+        ]);
     }
 
     public function create()
@@ -61,9 +63,27 @@ class PagesController extends Controller
         }
     }
 
-    public function delete(int $id): RedirectResponse
+    public function updateNestable(Request $request): void
+    {
+        $order = 0;
+        $this->reOrderPage($request->get('list', []), $order);
+    }
+
+    public function destroy(int $id): RedirectResponse
     {
         $this->bus->dispatch(new DeletePageCommand($id));
         return redirect()->route('admin.pages.index')->with('success', 'Page deleted successfully !');
+    }
+
+    private function reOrderPage(array $list, int &$order = 0, int $parent = 0)
+    {
+        foreach ($list as $item) {
+            $order++;
+
+            if (isset($item['children']) && !empty($item['children']))
+                $this->reOrderPage($item['children'], $order, $item['id']);
+
+            Page::findOrFail($item['id'])->update(['order' => $order, 'parent_id' => $parent]);
+        }
     }
 }

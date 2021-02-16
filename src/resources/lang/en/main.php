@@ -19,6 +19,8 @@ return [
     'buy' => 'Buy',
     'price_list' => 'Prices',
     'our_services' => 'Our services',
+    'latest_post' => 'Latest blog post',
+    'data_centers' => 'Data Centers',
     'follow_us' => 'Follow us on social networks',
     // Contact
     'write_us' => 'Write to us',

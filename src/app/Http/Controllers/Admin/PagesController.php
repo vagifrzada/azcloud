@@ -80,10 +80,10 @@ class PagesController extends Controller
         foreach ($list as $item) {
             $order++;
 
-            if (isset($item['children']) && !empty($item['children']))
-                $this->reOrderPage($item['children'], $order, $item['id']);
+            Page::findOrFail($item['id'])->update(['parent_id' => $parent, 'order' => $order]);
 
-            Page::findOrFail($item['id'])->update(['order' => $order, 'parent_id' => $parent]);
+            if (isset($item['children']) && filled($item['children']))
+                $this->reOrderPage($item['children'], $order, $item['id']);
         }
     }
 }

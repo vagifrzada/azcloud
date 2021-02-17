@@ -1,6 +1,9 @@
 @extends('layouts.site')
 
-@php use App\Plugins\Page\PagePlugin; @endphp
+@php
+    use App\Plugins\Page\PagePlugin;
+    $partnerTypes = ['silver', 'gold', 'platinum'];
+@endphp
 
 @section('meta_title', $meta['title'])
 @section('meta_keywords', $meta['keywords'])
@@ -82,39 +85,17 @@
                             </div>
 
                             <div class="pricing-cards flex">
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'system-integration-silver-partner'])))
-                                    <div class="price-card silver">
-                                        <h3 class="name">{{ $item->getTitle() }}</h3>
+                                @foreach ($item->children as $child)
+                                    <div class="price-card {{ $partnerTypes[$loop->index] ?? '' }}">
+                                        <h3 class="name">{{ $child->getTitle() }}</h3>
                                         <div class="fee masked">
-                                            <span>{{ $item->getDescription() }}</span>
+                                            <span>{{ $child->getDescription() }}</span>
                                         </div>
-                                        <p class="price">{!! strip_tags($item->getContent()) !!}</p>
+                                        <p class="price">{!! strip_tags($child->getContent()) !!}</p>
                                     </div>
-                                @endif
-
-                               @if (filled($item = PagePlugin::getByIdentity(['identity' => 'system-integration-gold-partner'])))
-                                <div class="price-card gold">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                                @endif
-
-                               @if (filled($item = PagePlugin::getByIdentity(['identity' => 'system-integration-platinum-partner'])))
-                                <div class="price-card platinum">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                                @endif
+                                @endforeach
                             </div>
                         </div>
-
-                        <!-- Partnership type-->
                     </div>
                 </div>
             </div>
@@ -135,35 +116,15 @@
                             </div>
 
                             <div class="pricing-cards flex">
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'service-provider-silver-partner'])))
-                                    <div class="price-card silver">
-                                        <h3 class="name">{{ $item->getTitle() }}</h3>
+                                @foreach ($item->children as $child)
+                                    <div class="price-card {{ $partnerTypes[$loop->index] ?? '' }}">
+                                        <h3 class="name">{{ $child->getTitle() }}</h3>
                                         <div class="fee masked">
-                                            <span>{{ $item->getDescription() }}</span>
+                                            <span>{{ $child->getDescription() }}</span>
                                         </div>
-                                        <p class="price">{!! strip_tags($item->getContent()) !!}</p>
+                                        <p class="price">{!! strip_tags($child->getContent()) !!}</p>
                                     </div>
-                                @endif
-
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'service-provider-gold-partner'])))
-                                <div class="price-card gold">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                                @endif
-
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'service-provider-platinum-partner'])))
-                                <div class="price-card platinum">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                                @endif
+                                @endforeach
                             </div>
                         </div>
                         <!-- Partnership type-->
@@ -188,35 +149,15 @@
                             </div>
 
                             <div class="pricing-cards flex">
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'partnership-type-silver-partner'])))
-                                    <div class="price-card silver">
-                                        <h3 class="name">{{ $item->getTitle() }}</h3>
+                                @foreach ($item->children as $child)
+                                    <div class="price-card {{ $partnerTypes[$loop->index] ?? '' }}">
+                                        <h3 class="name">{{ $child->getTitle() }}</h3>
                                         <div class="fee masked">
-                                            <span>{{ $item->getDescription() }}</span>
+                                            <span>{{ $child->getDescription() }}</span>
                                         </div>
-                                        <p class="price">{!! strip_tags($item->getContent()) !!}</p>
+                                        <p class="price">{!! strip_tags($child->getContent()) !!}</p>
                                     </div>
-                                @endif
-
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'partnership-type-gold-partner'])))
-                                <div class="price-card gold">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                               @endif
-
-                                @if (filled($item = PagePlugin::getByIdentity(['identity' => 'partnership-type-platinum-partner'])))
-                                <div class="price-card platinum">
-                                    <h3 class="name">{{ $item->getTitle() }}</h3>
-                                    <div class="fee masked">
-                                        <span>{{ $item->getDescription() }}</span>
-                                    </div>
-                                    <p class="price">{!! strip_tags($item->getContent()) !!}</p>
-                                </div>
-                                @endif
+                                @endforeach
                             </div>
                         </div>
                         <!-- Partnership type-->

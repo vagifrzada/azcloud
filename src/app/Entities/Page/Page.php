@@ -131,6 +131,6 @@ class Page extends Model implements TranslatableContract, HasMedia
 
     public function children(): HasMany
     {
-        return $this->hasMany(Page::class, 'parent_id');
+        return $this->hasMany(Page::class, 'parent_id')->oldest('order');
     }
 }

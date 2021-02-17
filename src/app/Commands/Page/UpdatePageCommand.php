@@ -11,6 +11,9 @@ class UpdatePageCommand extends Command
     /** @var array $title */
     public $title;
 
+    /** @var int $parent_id */
+    public $parent_id;
+
     /** @var array $description */
     public $description;
 

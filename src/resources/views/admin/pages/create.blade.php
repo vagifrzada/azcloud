@@ -100,6 +100,19 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group form-material parent_id required">
+                        <label class="form-control-label" for="parent_id">Parent page</label>
+                        <select name="parent_id" id="parent_id" class="form-control">
+                            <option value="0">Default</option>
+                            @foreach($pages as $page)
+                                <option value="{{ $page->getId() }}">{{ $page->getTitle() }}</option>
+                                @if (filled($children = $page->children))
+                                    @include('admin.pages._children', ['children' => $children, 'dash' => 2])
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group form-material identity required">
                         <label class="form-control-label" for="identity">Identity</label>
                         <input type="text" class="form-control" name="identity" placeholder="Enter identity of page">
@@ -107,7 +120,6 @@
                             <p class="help-block help-block-error">{{ $errors->first('identity')  }}</p>
                         @endif
                     </div>
-
 
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>

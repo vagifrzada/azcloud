@@ -36,14 +36,14 @@
                             {!! $post->getContent() !!}
                         </div>
                         <br>
-                        <!-- Editor body-->
 
+                        <!-- Service item
                         <a class="service-item" href="service-inner.html">
                             <span class="title">Bulud infrastrukturu</span>
                             <span class="subtitle">resurs elastikliyi</span>
                             <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
                         </a>
-                        <!-- Service item-->
+                        Service item-->
 
                         @if (filled($latestRandomPost))
                             <div class="blog-article flex">

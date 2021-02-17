@@ -27,8 +27,10 @@ class CreatePageHandler
 
         try {
             $page = new Page();
-            $page->setIdentity($command->identity);
-            $page->setStatus((bool) $command->status);
+
+            $page->setIdentity($command->identity)
+                ->setParent($command->parent_id)
+                ->setStatus((bool) $command->status);
 
             foreach ($page->translatedAttributes as $attribute) {
                 foreach ($command->{$attribute} as $locale => $value) {

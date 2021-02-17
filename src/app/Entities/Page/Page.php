@@ -14,6 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property int id
+ * @property int parent_id
  * @property string identity
  * @property bool status
  * @property string locale
@@ -21,6 +22,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string description
  * @property string content
  * @property string meta
+ * @property int order
  *
  * @method static findOrFail(int $id)
  */
@@ -42,16 +44,27 @@ class Page extends Model implements TranslatableContract, HasMedia
         return $this->id;
     }
 
-    public function getIdentity(): string
+    public function getIdentity(): ?string
     {
         return $this->identity;
     }
 
-    public function setIdentity(string $identity): self
+    public function setIdentity(?string $identity): self
     {
         $this->identity = $identity;
 
         return $this;
+    }
+
+    public function setParent(int $parent): self
+    {
+        $this->parent_id = $parent;
+        return $this;
+    }
+
+    public function getParent(): int
+    {
+        return $this->parent_id;
     }
 
     public function isActive(): bool

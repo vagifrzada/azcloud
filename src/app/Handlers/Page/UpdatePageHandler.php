@@ -27,7 +27,7 @@ class UpdatePageHandler
 
         try {
             $page = $command->getPage();
-            $page->setStatus((bool) $command->status);
+            $page->setParent($command->parent_id)->setStatus((bool) $command->status);
 
             // Setting translations.
             foreach ($page->translatedAttributes as $attribute) {

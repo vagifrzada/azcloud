@@ -7,6 +7,9 @@ use Illuminate\Http\UploadedFile;
 
 class CreatePageCommand extends Command
 {
+    /** @var int $parent_id */
+    public $parent_id;
+
     /** @var array $title */
     public $title;
 

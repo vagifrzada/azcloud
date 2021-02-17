@@ -32,7 +32,9 @@ class PagesController extends Controller
 
     public function create()
     {
-        return view('admin.pages.create');
+        return view('admin.pages.create', [
+            'pages' => Page::oldest('order')->where('parent_id', 0)->with('children')->get(),
+        ]);
     }
 
     public function store(CreatePageRequest $request): RedirectResponse
@@ -50,7 +52,11 @@ class PagesController extends Controller
         $gallery = [];
         foreach ($page->getGallery() as $media)
             $gallery[$media->uuid] = $media->getUrl();
-        return view('admin.pages.edit', compact('page', 'gallery'));
+        return view('admin.pages.edit', [
+            'page' => $page,
+            'gallery' => $gallery,
+            'pages' => Page::oldest('order')->where('parent_id', 0)->with('children')->get(),
+        ]);
     }
 
     public function update(Page $page, UpdatePageRequest $request): RedirectResponse

@@ -101,6 +101,18 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group form-material parent_id required">
+                        <label class="form-control-label" for="parent_id">Parent page</label>
+                        <select name="parent_id" id="parent_id" class="form-control">
+                            <option value="0">Default</option>
+                            @foreach($pages as $pageItem)
+                                <option @if ($page->getParent() == $pageItem->getId()) selected @endif value="{{ $pageItem->getId() }}">{{ $pageItem->getTitle() }}</option>
+                                @if (filled($children = $pageItem->children))
+                                    @include('admin.pages._children', ['children' => $children, 'dash' => 2, 'page' => $page])
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group image">
                         <label for="identity">Identity</label>

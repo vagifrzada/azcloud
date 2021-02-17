@@ -16,8 +16,8 @@ class CreatePageRequest extends FormRequest
         return [
             'title'     => 'required|array|min:3',
             'title.*'   => 'required|string|min:3',
-            'identity'  => 'required|string|min:3',
             'status'    => 'required|boolean',
+            'parent_id' => 'required|numeric',
         ];
     }
 }

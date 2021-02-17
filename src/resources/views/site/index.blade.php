@@ -19,8 +19,8 @@
                             <h1 class="title">{{ $slider->title }}</h1>
                             <h2 class="subtitle">{!! $slider->description !!}</h2>
                             <div class="actions">
-                                <a class="btn btn-primary" target="_blank" href="{{ $slider->buy_link ?? '#' }}">@lang('main.buy')</a>
-                                <a class="btn btn-outline" target="_blank" href="{{ $slider->prices_link ?? '#' }}">@lang('main.price_list')</a>
+                                <a class="btn btn-primary" @if($slider->buy_link) target="_blank" @endif href="{{ $slider->buy_link ?? '#' }}">@lang('main.buy')</a>
+                                <a class="btn btn-outline" @if($slider->prices_link) target="_blank" @endif href="{{ $slider->prices_link ?? '#' }}">@lang('main.price_list')</a>
                             </div>
                         </div>
                         <div class="right">
@@ -239,7 +239,7 @@
 
                                 @foreach($item->getGallery() as $image)
                                 <div class="swiper-slide">
-                                    <a class="company-thumb" href="javascript:void(0);" target="_blank">
+                                    <a class="company-thumb" href="javascript::void(0)">
                                         <img src="{{ $image->getUrl() }}" alt="Client logo">
                                     </a>
                                 </div>
@@ -299,16 +299,18 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
 
-                <div class="swiper-slide">
-                    <div class="advantage-block">
-                        <div class="icon">
-                            <img src="{{ asset('assets/site/images/icons/icon-shield.svg') }}" alt="Icon shield">
+                @foreach($item->children as $child)
+                    <div class="swiper-slide">
+                        <div class="advantage-block">
+                            <div class="icon">
+                                <img src="{{ optional($child->getCover())->getUrl() }}" alt="{{ $child->getTitle() }}">
+                            </div>
+                            <h3 class="title text-uppercase">{{ $child->getTitle() }}</h3>
+                            <p class="subtitle">{!! strip_tags($child->getContent()) !!}</p>
+                            <a class="read-more" href="{{ $child->getDescription() }}">@lang('main.see-more')</a>
                         </div>
-                        <h3 class="title text-uppercase">asdasd</h3>
-                        <p class="subtitle">asdasd</p>
-                        <a class="read-more" href="about.html">Daha ətraflı</a>
                     </div>
-                </div>
+                @endforeach
                 <!-- Slide-->
 
             </div>
@@ -318,6 +320,7 @@
     @endif
     <!-- Advantages-->
 
+    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'homepage-exposure-server'])))
     <div class="full-width-section ptb-16" data-aos="fade-in" data-aos-duration="800">
         <div class="bg-video">
             <video class="lazy" autoplay muted loop playsinline>
@@ -328,43 +331,47 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
-                    <h3 class="section-title">Exposure Server</h3>
-                    <p class="subtitle">Cloud Core Exposure Server…</p>
-                    <a class="btn btn-white" href="contact.html#contact-form">Contact us</a>
+                    <h3 class="section-title">{{ $item->getTitle() }}</h3>
+                    <p class="subtitle">{{ $item->getDescription() }}</p>
+                    <a class="btn btn-white" href="{{ route('site.contact') }}#contact-form">@lang('main.contact')</a>
                 </div>
             </div>
         </div>
     </div>
+    @endif
     <!-- Full width bg-->
 
-    <section class="feedback-section pt-14">
+    @if (filled($item = PagePlugin::getByIdentity(['identity' => 'homepage-testimonials'])))
+        <section class="feedback-section pt-14">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
                     <div class="section-header">
-                        <h2 class="section-title">Bizim haqqımızda nə fikirləşirlər</h2>
+                        <h2 class="section-title">{{ $item->getTitle() }}</h2>
                     </div>
 
                     <div class="feedback-top">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
 
-                                <div class="swiper-slide">
-                                    <div class="feedback">
-                                        <div class="quote">
-                                            <p>«İdarə edilən xidmət provayderi (MSP) bizim xidmətlərimizdən istifadə edərək son istifadəçi üçün şəbəkə və ya İT infrastrukturu yaratmaqda kömək etməklə yanaşı onların idarə edilməsini təmin edir»</p>
-                                        </div>
-                                        <div class="quote-author flex">
-                                            <div class="thumb">
-                                                <img src="{{ asset('assets/site/images/users/image0.jpg') }}" alt="Quote author">
+                                @foreach($item->children as $child)
+                                    <div class="swiper-slide">
+                                        <div class="feedback">
+                                            <div class="quote">
+                                                {!! $child->getContent() !!}
                                             </div>
-                                            <div class="info">
-                                                <p class="name">Əhməd Rəcəbli</p>
-                                                <p class="he-is">Piere Cardin company, CEO</p>
+                                            <div class="quote-author flex">
+                                                <div class="thumb">
+                                                    <img src="{{ optional($child->getCover())->getUrl() }}" alt="Quote author">
+                                                </div>
+                                                <div class="info">
+                                                    <p class="name">{{ $child->getTitle() }}</p>
+                                                    <p class="he-is">{{ $child->getDescription() }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
 
                             </div>
                             <div class="swiper-pagination"></div>
@@ -382,11 +389,13 @@
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
 
+                                @foreach($item->children as $child)
                                 <div class="swiper-slide">
                                     <div class="thumb">
-                                        <img src="{{ asset('assets/site/images/users/image0.jpg') }}" alt="Quote author">
+                                        <img src="{{ optional($child->getCover())->getUrl() }}" alt="Quote author">
                                     </div>
                                 </div>
+                                @endforeach
 
                             </div>
                         </div>
@@ -396,6 +405,7 @@
         </div>
         <!-- Feedback thumbs-->
     </section>
+    @endif
     <!-- Feedback-->
 
     @if (filled($dataCenters))

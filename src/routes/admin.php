@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\DataCentersController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\PartnersController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -13,7 +15,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PostsController;
-use App\Http\Controllers\Admin\ServicesController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -23,12 +24,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('users/{id}/delete', [UsersController::class, 'delete'])->name('users.delete');
 
     // Slider
-    Route::resource('slider', \App\Http\Controllers\Admin\SliderController::class)->except(['destroy', 'show']);
-    Route::get('slider/{id}/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');
+    Route::resource('slider', SliderController::class)->except(['destroy', 'show']);
+    Route::get('slider/{id}/delete', [SliderController::class, 'delete'])->name('slider.delete');
 
     // Pages
     Route::resource('pages', PagesController::class)->except(['show']);
     Route::post('pages/updateNestable', [PagesController::class, 'updateNestable'])->name('pages.update-nestable')->middleware('xhr-request');
+
+    Route::resource('product-category', ProductCategoryController::class)->except(['show']);
+    Route::get('product-category/{id}/delete', [ProductCategoryController::class, 'delete'])->name('product-category.delete');
 
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);
@@ -40,10 +44,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('certificates', CertificatesController::class)->except(['destroy', 'show']);
     Route::get('certificates/{id}/delete', [CertificatesController::class, 'delete'])->name('certificates.delete');
-
-    // Services
-    Route::resource('services', ServicesController::class)->except(['destroy', 'show']);
-    Route::get('services/{id}/delete', [ServicesController::class, 'delete'])->name('services.delete');
 
     // Data centers
     Route::resource('data-centers', DataCentersController::class)->except(['destroy', 'show']);

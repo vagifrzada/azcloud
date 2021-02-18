@@ -1,12 +1,8 @@
 @extends('layouts.admin')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
-@endpush
-
 @section('content')
 
-    <form id="service-create" method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data">
+    <form id="category-create" method="POST" action="{{ route('admin.product-category.store') }}">
         @csrf
       <div class="row">
         <div class="col-lg-8">
@@ -37,34 +33,18 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material slug required">
-                                        <label class="form-control-label" for="slug-{{ $locale }}">Slug</label>
-                                        <input type="text" id="slug-{{ $locale }}" class="form-control" name="slug[{{ $locale }}]" aria-required="true" value="{{ old('slug.' . $locale) }}">
-                                        @if ($errors->has('slug.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('slug.' . $locale) }}</p>
+                                    <div class="form-group form-material description">
+                                        <label class="form-control-label" for="description-{{ $locale }}">Description</label>
+                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! old('description.' . $locale) !!}</textarea>
+                                        @if ($errors->has('description.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('description.' . $locale) }}</p>
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material subtitle required">
-                                        <label class="form-control-label" for="subtitle-{{ $locale }}">SubTitle</label>
-                                        <input type="text" id="subtitle-{{ $locale }}" class="form-control" name="subtitle[{{ $locale }}]" aria-required="true" value="{{ old('subtitle.' . $locale) }}">
-                                        @if ($errors->has('subtitle.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('subtitle.' . $locale) }}</p>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group form-material content">
-                                        <label class="form-control-label" for="content-{{ $locale }}">Content</label>
-                                        <textarea name="content[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">
-                                            {!! old('content.' . $locale) !!}
-                                        </textarea>
-                                        @if ($errors->has('content.' . $locale))
-                                            <p class="help-block help-block-error">{{ $errors->first('content.' . $locale) }}</p>
-                                        @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         @endforeach
 
                     </div>
@@ -78,20 +58,11 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
-
-                    <div class="form-group image">
-                        <label for="image">Main image</label>
-                        <input id="image" type="file" name="image" class="form-control" data-preview-file-type="text">
-                        @if ($errors->has('image'))
-                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
-                        @endif
-                    </div>
-
-                    <div class="form-group form-material price">
-                        <label class="form-control-label" for="price">Price</label>
-                        <input type="number" step="0.01" min="1" class="form-control" value="{{ old('price') }}" name="price">
-                        @if ($errors->has('price'))
-                            <p class="help-block help-block-error">{{ $errors->first('price') }}</p>
+                    <div class="form-group form-material slug required">
+                        <label class="form-control-label" for="slug">Slug</label>
+                        <input type="text" id="slug" class="form-control" name="slug" aria-required="true" value="{{ old('slug') }}">
+                        @if ($errors->has('slug'))
+                            <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
                         @endif
                     </div>
 
@@ -117,7 +88,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
+    <script src="{{ asset('assets/remark/js/pages.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
     <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>
@@ -128,7 +99,7 @@
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
-            allowedFileExtensions: ['jpg','jpeg','png', 'gif'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
             previewFileType: 'image',
             dropZoneEnabled: true,
             showRemove: false,

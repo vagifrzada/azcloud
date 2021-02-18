@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('header_actions')
-    <a class="btn btn-success btn-round" href="{{ route('admin.services.create') }}">Create service</a>
+    <a class="btn btn-success btn-round" href="{{ route('admin.product-category.create') }}">Create category</a>
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="panel">
                 <div class="panel-body">
-                    {{ $dataTable->table() }}
+                    {!! $dataTable->table() !!}
                 </div>
             </div>
         </div>
@@ -17,5 +17,5 @@
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts() }}
+    {!! $dataTable->scripts() !!}
 @endpush

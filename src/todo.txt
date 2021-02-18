@@ -5,3 +5,4 @@
 5. Services page
 6. Sync flavors + save database
 7. S3 ssl request on off
+8. Documentation (+ .env)

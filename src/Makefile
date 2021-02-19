@@ -8,3 +8,5 @@ migrate:
 	docker-compose run --rm php-cli php artisan migrate
 user:
 	docker-compose run --rm php-cli php artisan make:user
+sync:
+	docker-compose run --rm php-cli php artisan sync:flavors

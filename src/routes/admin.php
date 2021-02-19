@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('product-category', ProductCategoryController::class)->except(['show']);
     Route::get('product-category/{id}/delete', [ProductCategoryController::class, 'delete'])->name('product-category.delete');
+
+    Route::resource('products', ProductsController::class)->except(['show']);
+    Route::get('products/select-category', [ProductsController::class, 'selectCategory'])->name('products.select-category');
+    Route::get('products/{id}/delete', [ProductsController::class, 'delete'])->name('products.delete');
 
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);

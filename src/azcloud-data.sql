@@ -1,49 +1,12 @@
---
--- Database: `azcloud`
---
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- --------------------------------------------------------
-
---
--- Table structure for table `certificates`
---
-
-CREATE TABLE IF NOT EXISTS `certificates` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `certificates`
---
 
 INSERT INTO `certificates` (`id`, `status`, `created_at`, `updated_at`) VALUES
 (2, 1, '2021-02-14 09:35:30', '2021-02-14 09:39:10'),
 (3, 1, '2021-02-14 09:38:55', '2021-02-14 09:38:55');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `certificate_translations`
---
-
-CREATE TABLE IF NOT EXISTS `certificate_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `certificate_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `certificate_translations_certificate_id_locale_unique` (`certificate_id`,`locale`),
-  KEY `certificate_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `certificate_translations`
---
 
 INSERT INTO `certificate_translations` (`id`, `certificate_id`, `locale`, `title`, `content`) VALUES
 (4, 2, 'az', 'TIER III STANDARTI', '<p><span style=\"color:rgb(0,0,0);\">ABŞ-ın Uptime Institute-u tərəfindən işlənib-hazırlanmış Tier III kateqoriyasının əsas xüsusiyyətlərinə mühəndis altsistemlərinin paralel fəaliyyəti, ehtiyat soyutma sistemi, ehtiyat enerji təminatı sistemi, ehtiyat telekommunikasiya infrastrukturu daxildir.</span></p>'),
@@ -53,47 +16,11 @@ INSERT INTO `certificate_translations` (`id`, `certificate_id`, `locale`, `title
 (8, 3, 'en', 'ISO/IEC 20000 STANDARTI', '<p><span style=\"color:rgb(0,0,0);\">ISO/IEC 20000 şirkətlərə İT idarəetməsi sahəsində mükəmməlliyi nümayiş etdirməyə və ən effektiv metodları tətbiq etməyə imkan verən standartdır.</span></p>'),
 (9, 3, 'ru', 'ISO/IEC 20000 STANDARTI', '<p><span style=\"color:rgb(0,0,0);\">ISO/IEC 20000 şirkətlərə İT idarəetməsi sahəsində mükəmməlliyi nümayiş etdirməyə və ən effektiv metodları tətbiq etməyə imkan verən standartdır.</span></p>');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `data_centers`
---
-
-CREATE TABLE IF NOT EXISTS `data_centers` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `data_centers`
---
 
 INSERT INTO `data_centers` (`id`, `status`) VALUES
 (1, 1),
 (2, 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `data_center_translations`
---
-
-CREATE TABLE IF NOT EXISTS `data_center_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `data_center_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `data_center_translations_data_center_id_locale_unique` (`data_center_id`,`locale`),
-  KEY `data_center_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `data_center_translations`
---
 
 INSERT INTO `data_center_translations` (`id`, `data_center_id`, `locale`, `title`, `description`, `content`) VALUES
 (1, 1, 'az', 'Baki Data Merkezi', '\"AZCLOUD\" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib.', '<p>“AzInTelecom” MMC Nəqliyyat, Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN) nəzdində fəaliyyət göstərir. Data mərkəzimiz Almaniyanın beynəlxalq səviyyəli şirkəti tərəfindən inşa edilmiş və “Uptime Institute”unun test sınaqlarından uğurla keçərək TIER III</p><p>Beynəlxalq sertifikatına, IT xidmətlərinin göstərilməsi və idarə edilməsi üzrə ISO 20000, biznesin davamlılığı idarəetməsi üzrə ISO 22301 və informasiya təhlükəsizliyi üzrə isə ISO 27001 standartlarına layiq görülüb.</p>'),
@@ -103,57 +30,6 @@ INSERT INTO `data_center_translations` (`id`, `data_center_id`, `locale`, `title
 (5, 2, 'en', 'Yevlax Data Merkezi', '\"AZCLOUD\" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib.', '<p>“AzInTelecom” MMC Nəqliyyat, Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN) nəzdində fəaliyyət göstərir. Data mərkəzimiz Almaniyanın beynəlxalq səviyyəli şirkəti tərəfindən inşa edilmiş və “Uptime Institute”unun test sınaqlarından uğurla keçərək TIER III</p><p>Beynəlxalq sertifikatına, IT xidmətlərinin göstərilməsi və idarə edilməsi üzrə ISO 20000, biznesin davamlılığı idarəetməsi üzrə ISO 22301 və informasiya təhlükəsizliyi üzrə isə ISO 27001 standartlarına layiq görülüb.</p>'),
 (6, 2, 'ru', 'Yevlax Data Merkezi', '\"AZCLOUD\" Azərbaycan və Cənubi Qafqaz regionunda TIER III, ISO 20000, ISO 22301 və ISO 27001 sertifikatlarına malik ilk data mərkəzi, 2016-cı ilin dekabr ayında “AzInTelecom” MMC tərəfindən istismara verilib.', '<p>“AzInTelecom” MMC Nəqliyyat, Rabitə və Yüksək Texnologiyalar Nazirliyi (NRYTN) nəzdində fəaliyyət göstərir. Data mərkəzimiz Almaniyanın beynəlxalq səviyyəli şirkəti tərəfindən inşa edilmiş və “Uptime Institute”unun test sınaqlarından uğurla keçərək TIER III</p><p>Beynəlxalq sertifikatına, IT xidmətlərinin göstərilməsi və idarə edilməsi üzrə ISO 20000, biznesin davamlılığı idarəetməsi üzrə ISO 22301 və informasiya təhlükəsizliyi üzrə isə ISO 27001 standartlarına layiq görülüb.</p>');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `failed_jobs`
---
-
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `media`
---
-
-CREATE TABLE IF NOT EXISTS `media` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `collection_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mime_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `disk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `conversions_disk` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `size` bigint(20) UNSIGNED NOT NULL,
-  `manipulations` json NOT NULL,
-  `custom_properties` json NOT NULL,
-  `generated_conversions` json NOT NULL,
-  `responsive_images` json NOT NULL,
-  `order_column` int(10) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `media_uuid_unique` (`uuid`),
-  KEY `media_model_type_model_id_index` (`model_type`,`model_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=308 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `media`
---
 
 INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
 (1, 'App\\Entities\\Post\\Post', 1, 'ea8b9784-d354-46d0-b109-824c69586f50', 'cover', 'cover', 'cover.jpg', 'image/jpeg', 'public', 'public', 78546, '[]', '[]', '[]', '[]', 1, '2021-01-14 12:04:55', '2021-01-14 12:04:55'),
@@ -363,6 +239,7 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (233, 'App\\Entities\\Page\\Page', 14, '46743098-73ca-420b-a8c8-8808beb0e504', 'gallery', 'block-gallery', 'block-gallery.jpg', 'image/jpeg', 'public', 'public', 104954, '[]', '[]', '[]', '[]', 222, '2021-02-13 14:41:01', '2021-02-13 14:41:01'),
 (235, 'App\\Entities\\DataCenter\\DataCenter', 1, '9e94e8e5-082b-4e0e-b7c7-72751a96207e', 'gallery', 'image0', 'image0.jpg', 'image/jpeg', 'public', 'public', 92873, '[]', '[]', '[]', '[]', 223, '2021-02-13 15:18:54', '2021-02-13 15:18:54'),
 (236, 'App\\Entities\\DataCenter\\DataCenter', 1, 'c68a15a4-789c-4395-aef8-390f3c28e39e', 'gallery', 'image1', 'image1.jpg', 'image/jpeg', 'public', 'public', 76255, '[]', '[]', '[]', '[]', 224, '2021-02-13 15:18:54', '2021-02-13 15:18:54');
+
 INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
 (237, 'App\\Entities\\DataCenter\\DataCenter', 1, '43cf443c-1e7f-4cf5-925b-675688b5c283', 'gallery', 'image2', 'image2.jpg', 'image/jpeg', 'public', 'public', 39074, '[]', '[]', '[]', '[]', 225, '2021-02-13 15:18:55', '2021-02-13 15:18:55'),
 (238, 'App\\Entities\\DataCenter\\DataCenter', 1, 'b594c554-1f05-465d-a57c-7f57cc20eff5', 'gallery', 'image3', 'image3.jpg', 'image/jpeg', 'public', 'public', 74048, '[]', '[]', '[]', '[]', 226, '2021-02-13 15:18:55', '2021-02-13 15:18:55'),
@@ -399,96 +276,6 @@ INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, 
 (305, 'App\\Entities\\Page\\Page', 46, '701fccd7-5023-4c97-ad3b-66ceba0ec117', 'gallery', 'icon-like', 'icon-like.svg', 'image/svg', 'public', 'public', 2167, '[]', '[]', '[]', '[]', 269, '2021-02-17 09:56:58', '2021-02-17 09:56:58'),
 (306, 'App\\Entities\\Page\\Page', 47, 'f7d18d41-94a2-44d2-86f7-1433cd5fa008', 'gallery', 'icon-star', 'icon-star.svg', 'image/svg', 'public', 'public', 963, '[]', '[]', '[]', '[]', 270, '2021-02-17 09:58:25', '2021-02-17 09:58:25'),
 (307, 'App\\Entities\\Page\\Page', 50, '16495c27-1ca6-4555-bb58-b8a102847526', 'gallery', 'image0', 'image0.jpg', 'image/jpeg', 'public', 'public', 9506, '[]', '[]', '[]', '[]', 271, '2021-02-17 10:07:26', '2021-02-17 10:07:26');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2019_08_19_000000_create_failed_jobs_table', 1),
-(3, '2020_12_21_160604_create_posts_table', 1),
-(4, '2020_12_21_160621_create_post_translations_table', 1),
-(5, '2020_12_22_171730_create_tags_table', 1),
-(6, '2020_12_22_171807_create_post_tag_table', 1),
-(7, '2021_01_05_182517_create_media_table', 1),
-(8, '2021_01_19_070620_create_services_table', 2),
-(9, '2021_01_19_071325_create_service_translations_table', 2),
-(12, '2021_01_19_160008_create_settings_table', 3),
-(13, '2021_01_20_125213_create_newsletter_table', 4),
-(19, '2021_02_13_132131_create_pages_table', 5),
-(20, '2021_02_13_132427_create_page_translations_table', 5),
-(21, '2021_02_13_162013_add_order_column_to_pages', 6),
-(24, '2021_02_13_184747_create_data_centers_table', 7),
-(25, '2021_02_13_184851_create_data_center_translations_table', 7),
-(27, '2021_02_13_194340_create_partners_table', 8),
-(28, '2021_02_14_124251_create_certificates_table', 9),
-(29, '2021_02_14_124408_create_certificate_translations_table', 9),
-(30, '2021_02_15_141632_add_meta_to_page_translations', 10),
-(31, '2021_02_15_162431_add_meta_to_post_translations', 11),
-(32, '2021_02_15_163745_create_slider_table', 12),
-(33, '2021_02_15_163926_create_slider_translations_table', 12),
-(34, '2021_02_16_144916_add_parent_id_to_pages', 13),
-(39, '2021_02_18_214621_create_product_category_table', 14),
-(40, '2021_02_18_214724_create_product_category_translations_table', 14),
-(42, '2021_02_18_223530_create_products_table', 15),
-(43, '2021_02_18_225050_create_product_flavors_table', 16);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `newsletter`
---
-
-CREATE TABLE IF NOT EXISTS `newsletter` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subscribed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `newsletter_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `newsletter`
---
-
-INSERT INTO `newsletter` (`id`, `email`, `ip`, `subscribed_at`) VALUES
-(2, 'vagif@rufullazada.me', '172.18.0.1', '2021-01-20 13:04:21'),
-(3, 'test@test.com', '172.18.0.1', '2021-02-13 08:30:08'),
-(4, 'test@mail.com', '172.18.0.1', '2021-02-13 08:30:50'),
-(5, 'asdasd@mail.com', '172.18.0.1', '2021-02-13 08:38:29'),
-(6, 'asdasd2@mail.com', '172.18.0.1', '2021-02-13 08:38:33'),
-(7, 'asd2asd@mail.com', '172.18.0.1', '2021-02-13 08:38:36'),
-(8, 'example@example.com', '172.18.0.1', '2021-02-13 08:59:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pages`
---
-
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `identity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pages`
@@ -541,25 +328,6 @@ INSERT INTO `pages` (`id`, `parent_id`, `identity`, `status`, `order`) VALUES
 (48, 38, 'homepage-exposure-server', 1, 9),
 (49, 38, 'homepage-testimonials', 1, 10),
 (50, 49, 'homepage-testimonials-1', 1, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `page_translations`
---
-
-CREATE TABLE IF NOT EXISTS `page_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `page_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `meta` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `page_translations_page_id_locale_unique` (`page_id`,`locale`),
-  KEY `page_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `page_translations`
@@ -705,20 +473,6 @@ INSERT INTO `page_translations` (`id`, `page_id`, `locale`, `title`, `descriptio
 (149, 50, 'en', 'Əhməd Rəcəbli', 'Piere Cardin company, CEO', '<p>«İdarə edilən xidmət provayderi (MSP) bizim xidmətlərimizdən istifadə edərək son istifadəçi üçün şəbəkə və ya İT infrastrukturu yaratmaqda kömək etməklə yanaşı onların idarə edilməsini təmin edir»</p>', '{\"title\":null,\"keywords\":null,\"description\":null}'),
 (150, 50, 'ru', 'Əhməd Rəcəbli', 'Piere Cardin company, CEO', '<p>«İdarə edilən xidmət provayderi (MSP) bizim xidmətlərimizdən istifadə edərək son istifadəçi üçün şəbəkə və ya İT infrastrukturu yaratmaqda kömək etməklə yanaşı onların idarə edilməsini təmin edir»</p>', '{\"title\":null,\"keywords\":null,\"description\":null}');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `partners`
---
-
-CREATE TABLE IF NOT EXISTS `partners` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `partners`
 --
@@ -728,22 +482,6 @@ INSERT INTO `partners` (`id`, `title`, `link`, `status`) VALUES
 (2, 'Pioner', NULL, 1),
 (3, 'Test partner2', NULL, 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `posts`
---
-
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `author_id` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `posts_author_id_foreign` (`author_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `posts`
 --
@@ -752,18 +490,16 @@ INSERT INTO `posts` (`id`, `author_id`, `status`, `created_at`, `updated_at`) VA
 (99, NULL, 1, '2020-10-28 19:21:14', '2021-02-15 12:33:52'),
 (100, NULL, 1, '2020-06-09 20:42:50', '2021-02-16 10:18:52');
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `post_tag`
+-- Dumping data for table `tags`
 --
 
-CREATE TABLE IF NOT EXISTS `post_tag` (
-  `post_id` int(10) UNSIGNED NOT NULL,
-  `tag_id` int(10) UNSIGNED NOT NULL,
-  KEY `post_tag_post_id_foreign` (`post_id`),
-  KEY `post_tag_tag_id_foreign` (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `tags` (`id`, `slug`, `name`) VALUES
+(4, 'testing', 'testing'),
+(5, 'vagif', 'vagif'),
+(10, 'test', 'test'),
+(11, 'tag', 'tag'),
+(12, 'this-is-new-tag', 'this-is-new-tag');
 
 --
 -- Dumping data for table `post_tag`
@@ -775,24 +511,6 @@ INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
 (99, 11),
 (99, 12);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `post_translations`
---
-
-CREATE TABLE IF NOT EXISTS `post_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `post_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `meta` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `post_translations_post_id_locale_slug_unique` (`post_id`,`locale`,`slug`),
-  KEY `post_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_translations`
@@ -809,21 +527,24 @@ INSERT INTO `post_translations` (`id`, `post_id`, `locale`, `title`, `slug`, `co
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Dumping data for table `product_category`
 --
 
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category_id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `products_slug_unique` (`slug`),
-  KEY `products_category_id_foreign` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `product_category` (`id`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'compute', '1', '2021-02-18 18:32:58', '2021-02-18 18:33:50'),
+(2, 'storage', '1', '2021-02-18 18:34:15', '2021-02-18 18:34:15'),
+(3, 'networking', '1', '2021-02-18 18:34:38', '2021-02-18 19:35:02');
+
+INSERT INTO `product_category_translations` (`id`, `category_id`, `locale`, `title`, `description`) VALUES
+(1, 1, 'az', 'Compute', 'Compute haqqinda qisa melumat'),
+(2, 1, 'en', 'Compute', 'Compute haqqinda qisa melumat'),
+(3, 1, 'ru', 'Compute', 'Compute haqqinda qisa melumat'),
+(4, 2, 'az', 'Storage', 'Storage haqqinda melumat'),
+(5, 2, 'en', 'Storage', 'Storage haqqinda melumat'),
+(6, 2, 'ru', 'Storage', 'Storage haqqinda melumat'),
+(7, 3, 'az', 'Networking', 'Networking haqqinda melumat'),
+(8, 3, 'en', 'Networking', 'Networking haqqinda melumat'),
+(9, 3, 'ru', 'Networking', 'Networking haqqinda melumat');
 
 --
 -- Dumping data for table `products`
@@ -834,256 +555,6 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `slug`, `status`, `created
 (2, 2, 'ASB', 'asb', 1, '2021-02-18 18:48:46', '2021-02-18 18:48:46'),
 (3, 3, 'ALB-A', 'alb-a', 1, '2021-02-18 18:49:48', '2021-02-18 18:49:48');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `product_category`
---
-
-CREATE TABLE IF NOT EXISTS `product_category` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `product_category_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_category`
---
-
-INSERT INTO `product_category` (`id`, `slug`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'computed', '1', '2021-02-18 18:32:58', '2021-02-18 18:33:50'),
-(2, 'storage', '1', '2021-02-18 18:34:15', '2021-02-18 18:34:15'),
-(3, 'networking', '1', '2021-02-18 18:34:38', '2021-02-18 19:35:02');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_category_translations`
---
-
-CREATE TABLE IF NOT EXISTS `product_category_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `product_category_translations_category_id_locale_unique` (`category_id`,`locale`),
-  KEY `product_category_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_category_translations`
---
-
-INSERT INTO `product_category_translations` (`id`, `category_id`, `locale`, `title`, `description`) VALUES
-(1, 1, 'az', 'Computed', 'Computed haqqinda qisa melumat'),
-(2, 1, 'en', 'Computed', 'Computed haqqinda qisa melumat'),
-(3, 1, 'ru', 'Computed', 'Computed haqqinda qisa melumat'),
-(4, 2, 'az', 'Storage', 'Storage haqqinda melumat'),
-(5, 2, 'en', 'Storage', 'Storage haqqinda melumat'),
-(6, 2, 'ru', 'Storage', 'Storage haqqinda melumat'),
-(7, 3, 'az', 'Networking', 'Networking haqqinda melumat'),
-(8, 3, 'en', 'Networking', 'Networking haqqinda melumat'),
-(9, 3, 'ru', 'Networking', 'Networking haqqinda melumat');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_flavors`
---
-
-CREATE TABLE IF NOT EXISTS `product_flavors` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flavor_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `family` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cpu` int(11) DEFAULT NULL,
-  `ram` int(11) DEFAULT NULL,
-  `disk` int(11) DEFAULT NULL,
-  `size` int(11) DEFAULT NULL,
-  `isWindowsOnly` tinyint(1) DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_flavors_product_id_foreign` (`product_id`),
-  KEY `product_flavors_flavor_id_index` (`flavor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_flavors`
---
-
-INSERT INTO `product_flavors` (`id`, `product_id`, `type`, `flavor_id`, `name`, `family`, `price`, `cpu`, `ram`, `disk`, `size`, `isWindowsOnly`, `description`, `created_at`, `updated_at`) VALUES
-(1, 1, 'vm', 'ae9e562a-99f7-46a6-b71c-be088969d747', 'C1.2', 'C', '27.13', 1, 2, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(2, 1, 'vm', 'eb0b803a-6b7a-4147-823c-cfc6abd9845e', 'B1.2', 'B', '30.91', 1, 2, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(3, 1, 'vm', 'ce3d7388-afea-4586-a8a5-41702c50067f', 'C1.4', 'C', '40.13', 1, 4, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(4, 1, 'vm', 'e76e72e8-39da-46bf-a2c8-6e3b71bb70c9', 'B1.4', 'B', '43.91', 1, 4, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(5, 1, 'vm', '0dd6a711-bcd3-4155-9cbf-02b1c6cd6024', 'A1,2', 'A', '47.17', 1, 2, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(6, 1, 'vm', 'a13a34ea-5823-41bd-82c9-ecef08f85f1e', 'C2.4', 'C', '48.52', 2, 4, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(7, 1, 'vm', '06605de7-db8b-4e7c-b0d1-91f918dbe39e', 'C1.2', 'C', '50.58', 1, 2, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(8, 1, 'vm', '98c90f57-0cc8-4992-94a3-7b808e718fa1', 'B1.2', 'B', '54.36', 1, 2, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(9, 1, 'vm', '9f0489fb-9f23-4acb-a8a9-3dbdcdcd0844', 'B2.4', 'B', '56.08', 2, 4, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(10, 1, 'vm', '5cf8f4bd-87a0-4af6-9df5-aa09f1226202', 'A1.4', 'A', '66.19', 1, 4, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(11, 1, 'vm', '91f4b4aa-9528-4888-9272-7390b1c93bc8', 'A1.2', 'A', '70.62', 1, 2, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(12, 1, 'vm', '2056fe0d-3e64-4a8d-8b55-e30b620c5f14', 'C2.4', 'C', '71.96', 2, 4, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(13, 1, 'vm', 'd31c70ab-5316-4f54-87a4-8629dd4328ce', 'C2.8', 'C', '74.32', 2, 8, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(14, 1, 'vm', 'a840709d-28e9-4880-8259-37398ec6b0b1', 'B2.4', 'B', '79.52', 2, 4, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(15, 1, 'vm', '9ef83a97-0c22-4318-9bb2-e4d38890ba93', 'B2.8', 'B', '82.08', 2, 8, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(16, 1, 'vm', '10c33e18-e2a3-4498-a1e5-457ebe9de28e', 'A2.4', 'A', '88.6', 2, 4, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(17, 1, 'vm', '89d7a2b5-386d-438e-8eea-ba581f4d2060', 'C4.8', 'C', '91.29', 4, 8, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(18, 1, 'vm', 'e98e7ebe-da35-4a85-b7c7-28e0010c0897', 'B4.8', 'B', '106.41', 4, 8, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(19, 1, 'vm', 'f1f71a07-47e1-4494-ae3c-a206e591f131', 'A2.4', 'A', '112.05', 2, 4, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(20, 1, 'vm', '5fa09dee-4bf4-4de2-9bbe-118ce1498183', 'A2.8', 'A', '126.63', 2, 8, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(21, 1, 'vm', 'cd374bc4-d863-40d2-a23e-866b3611c662', 'C4.16', 'C', '143.3', 4, 16, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(22, 1, 'vm', 'ca795234-4ed0-4ffb-a1da-a25cc2ee217d', 'B4.16', 'B', '158.42', 4, 16, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(23, 1, 'vm', '6d05aad9-6f0b-4231-a32a-7d0d38367a20', 'A4.8', 'A', '171.46', 4, 8, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(24, 1, 'vm', '3f1352c8-450b-4f8f-864f-bdea8293eda6', 'C8.16', 'C', '176.84', 8, 16, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(25, 1, 'vm', '5b535b20-4d80-42f0-bee3-38b44f32ab95', 'B8.16', 'B', '207.08', 8, 16, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(26, 1, 'vm', '2c5aac21-141d-4f8d-85a3-8b826aae0570', 'A4.16', 'A', '247.51', 4, 16, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(27, 1, 'vm', '2182a8dd-3e7b-4115-b462-9d778dd55cbb', 'C4.32', 'C', '290.77', 4, 32, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(28, 1, 'vm', '4484aaa8-bef0-49cb-933f-127b252a41a2', 'B4.32', 'B', '305.89', 4, 32, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(29, 1, 'vm', 'b12d82b0-4304-45a9-ab50-17c52755ec2a', 'A8.16', 'A', '337.18', 8, 16, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(30, 1, 'vm', '2665b1b2-b6bc-4e85-9d0b-cdf4631451dc', 'C16.32', 'C', '347.94', 16, 32, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(31, 1, 'vm', '09c88c07-655a-4d4f-9662-fd2621828045', 'B16.32', 'B', '408.42', 16, 32, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(32, 1, 'vm', '54b6439b-efa8-4922-be05-ce0fe2d0c584', 'A4.32', 'A', '443.06', 4, 32, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(33, 1, 'vm', '1e924c31-f929-4838-b9d3-05fbea35563e', 'C16.64', 'C', '555.98', 16, 64, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(34, 1, 'vm', '431cdc4b-b419-458f-9c45-a2fdc4763669', 'C8.64', 'C', '572.35', 8, 64, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(35, 1, 'vm', 'c716dae9-485e-43f6-a610-c03a04d6bad2', 'B8.64', 'B', '602.59', 8, 64, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(36, 1, 'vm', '53097a37-e123-4d73-bcfb-1de9d84a0ef4', 'B16.64', 'B', '616.46', 16, 64, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(37, 1, 'vm', 'e204e6f1-5abd-4e60-8f6e-030dc838b77b', 'A16.32', 'A', '668.62', 16, 32, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(38, 1, 'vm', '6353ba2f-4352-4311-afae-630faef3d44e', 'C32.64', 'C', '690.14', 32, 64, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(39, 1, 'vm', '1fcb7836-849a-499f-bba4-4139f7f1cab7', 'B32.64', 'B', '811.1', 32, 64, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(40, 1, 'vm', 'f56d117b-9774-411b-9319-827b9e94348c', 'A8.64', 'A', '876.92', 8, 64, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(41, 1, 'vm', 'b4b03271-0054-44bb-93e5-cad07727f20a', 'C16.128', 'C', '972.06', 16, 128, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(42, 1, 'vm', 'f78d5b52-33b2-4b44-ba1d-91519fa4342a', 'A16.64', 'A', '972.82', 16, 64, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(43, 1, 'vm', 'cbec3aee-75c9-4f49-8d8e-8a192934ec4d', 'B16.128', 'B', '1032.54', 16, 128, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(44, 1, 'vm', 'cf780eb4-635e-445a-80b0-3b71a347fce6', 'C32.128', 'C', '1106.22', 32, 128, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(45, 1, 'vm', '8e6ab0aa-6047-4844-b0b4-e8a0b08dcd4f', 'C16.128', 'C', '1135.51', 16, 128, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(46, 1, 'vm', '79e475f8-dd98-46ad-a43d-3d570ebc6f1c', 'B16.128', 'B', '1195.99', 16, 128, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(47, 1, 'vm', '4c33adec-6328-48dd-a779-d183c8b15125', 'B32.128', 'B', '1227.18', 32, 128, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(48, 1, 'vm', 'd2080ca5-c003-424c-b2f1-8c55117f841e', 'A32.64', 'A', '1331.5', 32, 64, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(49, 1, 'vm', 'b24b061c-bc69-4dd9-b1ca-8bd2bd968316', 'A16.128', 'A', '1581.21', 16, 128, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(50, 1, 'vm', 'e369c69a-01ca-49d9-b522-194f1824a6c1', 'A16.128', 'A', '1744.66', 16, 128, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(51, 1, 'vm', '76824d8b-fc19-42a2-b725-60fc46648152', 'C32.256', 'C', '1938.38', 32, 256, 20, NULL, 0, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(52, 1, 'vm', '4536fb6f-6330-43a9-9dee-7d3062c94bf1', 'A32.128', 'A', '1939.89', 32, 128, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(53, 1, 'vm', '33f1741d-18b0-4ace-8952-85e293d59563', 'B32.256', 'B', '2059.34', 32, 256, 20, NULL, 0, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(54, 1, 'vm', 'bc6acc91-aecb-47bf-bd93-2f616bf35781', 'C32.256', 'C', '2261.83', 32, 256, 32, NULL, 1, ' General purposed virtual machines that  are optimized for compute-intensive workloads and deliver very cost-effective performance at a low price per compute ratio.', NULL, NULL),
-(55, 1, 'vm', '53270f7b-dbe6-4c7f-a463-30da0a4a78a0', 'B32.256', 'B', '2382.79', 32, 256, 32, NULL, 1, 'Virtual machines that are optimized for compute-intensive workloads and deliver cost-effective high performance at a low price per compute ratio.', NULL, NULL),
-(56, 1, 'vm', 'a1a6090b-8ba9-4ea2-a5ff-5c798f532072', 'A32.256', 'A', '3156.68', 32, 256, 20, NULL, 0, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(57, 1, 'vm', '1532412a-3b5f-4e13-9b74-63e9d75253f1', 'A32.256', 'A', '3480.12', 32, 256, 32, NULL, 1, 'Accelerated virtual machines that are ideal for high compute applications requiring high levels of compute performance.', NULL, NULL),
-(58, 2, 'volume', '22876f4c-b1b2-42c1-9a11-efe7b40d9c24', 'T1', 'T', '7.53', NULL, NULL, NULL, 10, NULL, 'Turbo performance storages. ', NULL, NULL),
-(59, 2, 'volume', '8b0eebf2-a705-4f3d-aab8-85024e67a670', 'U1 ', 'U', '2.87', NULL, NULL, NULL, 10, NULL, 'Ultra performance storages.', NULL, NULL),
-(60, 2, 'volume', 'ae096562-381a-4ac0-ae9c-7e58f77d6721', 'S1', 'S', '1.8', NULL, NULL, NULL, 10, NULL, 'Standart performance storages.', NULL, NULL),
-(61, 2, 'volume', 'b259d244-0655-4c9e-ad13-135258a5e740', 'v1.test', 'v', '5', NULL, NULL, NULL, 20, NULL, 'Smallest volume', NULL, NULL),
-(62, 2, 'volume', '2afbec91-c865-4bce-a512-45edad8d318c', 'Test-volume', 'T', '2', NULL, NULL, NULL, 20, NULL, '', NULL, NULL),
-(63, 2, 'volume', '744faa6d-4c3e-4fac-ac66-e662c33e99e1', 'T2', 'T', '22.59', NULL, NULL, NULL, 30, NULL, 'Turbo performance storages.', NULL, NULL),
-(64, 2, 'volume', 'cc5bb213-c60d-45fb-a5d0-a6539f3dfd93', 'U2', 'U', '8.61', NULL, NULL, NULL, 30, NULL, 'Ultra performance storages.', NULL, NULL),
-(65, 2, 'volume', 'c1f4d07a-adcc-4e59-bfa3-55f2404e6ca5', 'S2', 'S', '5.4', NULL, NULL, NULL, 30, NULL, 'Standart performance storages.', NULL, NULL),
-(66, 2, 'volume', '383d3f0f-c3e3-4475-ae2c-d4872cb273b5', 'T3', 'T', '37.65', NULL, NULL, NULL, 50, NULL, 'Turbo performance storages.', NULL, NULL),
-(67, 2, 'volume', '68067f34-2304-4068-9d06-89087feddcae', 'U3', 'U', '14.35', NULL, NULL, NULL, 50, NULL, 'Ultra performance storages.', NULL, NULL),
-(68, 2, 'volume', 'fb2b5c98-ed0c-4772-ba00-84932fc7a03e', 'S3', 'S', '9', NULL, NULL, NULL, 50, NULL, 'Standart performance storages.', NULL, NULL),
-(69, 2, 'volume', '9c03ad03-24e5-49d6-b0c5-a154e373e6f4', 'T4', 'T', '75.3', NULL, NULL, NULL, 100, NULL, 'Turbo performance storages.', NULL, NULL),
-(70, 2, 'volume', '307888f8-5cb6-40c2-84ed-2b581309fc67', 'U4', 'U', '28.7', NULL, NULL, NULL, 100, NULL, 'Ultra performance storages.', NULL, NULL),
-(71, 2, 'volume', '89d73257-be7e-4421-9431-1ad62143ce80', 'S4', 'S', '18', NULL, NULL, NULL, 100, NULL, 'Standart performance storages.', NULL, NULL),
-(72, 2, 'volume', 'c033c48f-2625-486b-8b4b-7745ed2de437', 'T5', 'T', '150.6', NULL, NULL, NULL, 200, NULL, 'Turbo performance storages.', NULL, NULL),
-(73, 2, 'volume', 'a12ac6fc-de13-42cb-80cc-fd6ad450d81e', 'U5', 'U', '57.4', NULL, NULL, NULL, 200, NULL, 'Ultra performance storages.', NULL, NULL),
-(74, 2, 'volume', '5ed2e249-9595-4fcc-ab5c-2fc1d425801a', 'S5', 'S', '36', NULL, NULL, NULL, 200, NULL, 'Standart performance storages.', NULL, NULL),
-(75, 2, 'volume', 'a6236755-b85c-4e40-b803-4f87f055c723', 'T6', 'T', '376.5', NULL, NULL, NULL, 500, NULL, 'Turbo performance storages.', NULL, NULL),
-(76, 2, 'volume', 'fd68f3a0-b31c-4b31-b0a4-ef69238ae25e', 'U6', 'U', '143.5', NULL, NULL, NULL, 500, NULL, 'Ultra performance storages.', NULL, NULL),
-(77, 2, 'volume', '18b51df2-f943-4c67-8afe-22f7305a5912', 'S6', 'S', '90', NULL, NULL, NULL, 500, NULL, 'Standart performance storages.', NULL, NULL),
-(78, 2, 'volume', '9ce667d2-44a6-4123-ad33-1d1c92c45cc3', 'T7', 'T', '602.4', NULL, NULL, NULL, 800, NULL, 'Turbo performance storages.', NULL, NULL),
-(79, 2, 'volume', '189f37c2-4346-4bac-99ef-ceb6ca1cb187', 'U7', 'U', '229.6', NULL, NULL, NULL, 800, NULL, 'Ultra performance storages.', NULL, NULL),
-(80, 2, 'volume', '01713661-6b25-43d6-905b-985787d4fda2', 'S7', 'S', '144', NULL, NULL, NULL, 800, NULL, 'Standard performance storages.', NULL, NULL),
-(81, 2, 'volume', '8dc88a2d-fde9-4b28-8601-96f72ff83455', 'T8', 'T', '771.07', NULL, NULL, NULL, 1024, NULL, 'Turbo performance storages.', NULL, NULL),
-(82, 2, 'volume', '778157d6-8a04-47c9-b60a-c76050a9213b', 'U8', 'U', '293.89', NULL, NULL, NULL, 1024, NULL, 'Ultra performance storages.', NULL, NULL),
-(83, 2, 'volume', 'e1a4cf62-8492-47a1-8938-405c68c59ffd', 'S8', 'S', '184.32', NULL, NULL, NULL, 1024, NULL, 'Standard performance storages.', NULL, NULL),
-(84, 2, 'volume', 'aaa47089-9d8f-4633-a58d-fd7ece9462da', 'T9', 'T', '1542.14', NULL, NULL, NULL, 2048, NULL, 'Turbo performance storages.', NULL, NULL),
-(85, 2, 'volume', 'db1140ff-736f-4a58-a38b-be79a903650e', 'U9', 'U', '587.78', NULL, NULL, NULL, 2048, NULL, 'Ultra performance storages.', NULL, NULL),
-(86, 2, 'volume', '6d28771b-55e9-44ef-9457-20807913e138', 'S9', 'S', '368.64', NULL, NULL, NULL, 2048, NULL, 'Standard performance storages.', NULL, NULL),
-(87, 2, 'volume', '4038876d-8a2c-41d4-b601-7b97a38188fc', 'T10', 'T', '2313.22', NULL, NULL, NULL, 3072, NULL, 'Turbo performance storages.', NULL, NULL),
-(88, 2, 'volume', '434b4f71-699e-409e-a292-585ff5722f3c', 'U10', 'U', '881.66', NULL, NULL, NULL, 3072, NULL, 'Ultra performance storages.', NULL, NULL),
-(89, 2, 'volume', 'baff0a5b-c0d1-4a35-ac37-02e6338f02cd', 'S10', 'S', '552.96', NULL, NULL, NULL, 3072, NULL, 'Standard performance storages.', NULL, NULL),
-(90, 2, 'volume', 'a4973339-4621-4803-936b-c6818cb037ea', 'T11', 'T', '3084.29', NULL, NULL, NULL, 4096, NULL, 'Turbo performance storages.', NULL, NULL),
-(91, 2, 'volume', '592215b9-1d63-451e-91b7-e18fedf6f5d5', 'U11', 'U', '1175.55', NULL, NULL, NULL, 4096, NULL, 'Ultra performance storages.', NULL, NULL),
-(92, 2, 'volume', '7b98391d-1dbb-4bf2-93ee-60886e674767', 'S11', 'S', '737.28', NULL, NULL, NULL, 4096, NULL, 'Standard performance storages.', NULL, NULL),
-(93, 2, 'volume', '9dbaca7a-cfbb-4eb8-8de9-b13df1771347', 'T12', 'T', '3855.36', NULL, NULL, NULL, 5120, NULL, 'Turbo performance storages.', NULL, NULL),
-(94, 2, 'volume', 'f512e4f0-8bf3-44f0-950b-755356f9f330', 'U12', 'U', '1469.44', NULL, NULL, NULL, 5120, NULL, 'Ultra performance storages.', NULL, NULL),
-(95, 2, 'volume', '4e4d53c3-6d42-4403-9d2d-c3b256eae23a', 'S12', 'S', '921.6', NULL, NULL, NULL, 5120, NULL, 'Standard performance storages.', NULL, NULL),
-(96, 2, 'volume', 'e0355992-eb76-42e8-9f52-5cd974ab2ecb', 'T13', 'T', '4626.43', NULL, NULL, NULL, 6144, NULL, 'Turbo performance storages.', NULL, NULL),
-(97, 2, 'volume', '75c49b83-d440-499b-b2ad-c6ff0487abb2', 'U13', 'U', '1763.33', NULL, NULL, NULL, 6144, NULL, 'Ultra performance storages.', NULL, NULL),
-(98, 2, 'volume', 'a3615eb6-c1e3-461b-afc9-4b5c22e7d4cb', 'S13', 'S', '1105.92', NULL, NULL, NULL, 6144, NULL, 'Standard performance storages.', NULL, NULL),
-(99, 3, 'lb', '16c7c770-4d28-4c8a-a1c1-2b72edfd4f9a', 'ALB-S', 'A', '29', NULL, NULL, NULL, NULL, NULL, 'ALB Standard is the best choice for Static websites and blogs with low to moderate traffic.', NULL, NULL),
-(100, 3, 'lb', 'cb61c3ac-9b1b-4a14-b4d9-5d08c381e981', 'ALB-U', 'A', '49', NULL, NULL, NULL, NULL, NULL, 'ALB Ultra is the best choice for transaction-driven sites or services with moderate traffic.', NULL, NULL),
-(101, 3, 'lb', 'fd4aaf34-e682-49e6-8f04-a038a8a69355', 'ALB-T', 'A', '95', NULL, NULL, NULL, NULL, NULL, 'ALB Turbo is the best choice for busy sites, services, or endpoints where high performance is a must.', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `services`
---
-
-CREATE TABLE IF NOT EXISTS `services` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `price` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `settings`
---
-
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `settings_key_unique` (`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `settings`
---
-
-INSERT INTO `settings` (`id`, `key`, `value`) VALUES
-(1, 'city_phone_number', '+994 12 200 0020'),
-(2, 'mobile_phone_number', '+994 122 000 020'),
-(3, 'email', 'sales@azcloud.az'),
-(4, 'support_email', 'soc24@azintelecom.az'),
-(5, 'address', 'Alibay Huseynzade 74, AZ1009, Baku, Azerbaijan'),
-(6, 'google_map_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.2711005773235!2d49.83144801535468!3d40.380683779369335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307da2889a6453%3A0x2d4deb685609c5a5!2zNzQgxo9saWLJmXkgSMO8c2V5bnphZMmZLCBCYWvEsSwg0JDQt9C10YDQsdCw0LnQtNC20LDQvQ!5e0!3m2!1sru!2s!4v1607630178503!5m2!1sru!2s'),
-(7, 'facebook_page_url', 'https://www.facebook.com/azcloud.az'),
-(8, 'contact_email', 'soc24@azintelecom.az');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slider`
---
-
-CREATE TABLE IF NOT EXISTS `slider` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `buy_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `prices_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order` tinyint(4) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `slider`
@@ -1092,23 +563,6 @@ CREATE TABLE IF NOT EXISTS `slider` (
 INSERT INTO `slider` (`id`, `buy_link`, `prices_link`, `order`, `status`, `created_at`, `updated_at`) VALUES
 (1, NULL, NULL, 1, 1, NULL, NULL),
 (2, 'https://google.com', NULL, 2, 1, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slider_translations`
---
-
-CREATE TABLE IF NOT EXISTS `slider_translations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `slider_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `slider_translations_slider_id_locale_unique` (`slider_id`,`locale`),
-  KEY `slider_translations_locale_index` (`locale`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `slider_translations`
@@ -1122,50 +576,6 @@ INSERT INTO `slider_translations` (`id`, `slider_id`, `locale`, `title`, `descri
 (5, 2, 'en', 'Another slider', 'Some description here'),
 (6, 2, 'ru', 'Another slider', 'Some description here');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tags`
---
-
-CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tags_name_unique` (`name`),
-  UNIQUE KEY `unique_tags_slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tags`
---
-
-INSERT INTO `tags` (`id`, `slug`, `name`) VALUES
-(4, 'testing', 'testing'),
-(5, 'vagif', 'vagif'),
-(10, 'test', 'test'),
-(11, 'tag', 'tag'),
-(12, 'this-is-new-tag', 'this-is-new-tag');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1174,72 +584,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'AzCloud', 'root@azcloud.az', '$2y$10$S8CUUhjB5uHajgyB8a7uruy8E8vsAuV2oGigKgk3j7ka.oJuv3IPO', 1, NULL, '2021-01-14 12:04:55', '2021-01-14 12:04:55');
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `certificate_translations`
---
-ALTER TABLE `certificate_translations`
-  ADD CONSTRAINT `certificate_translations_certificate_id_foreign` FOREIGN KEY (`certificate_id`) REFERENCES `certificates` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `data_center_translations`
---
-ALTER TABLE `data_center_translations`
-  ADD CONSTRAINT `data_center_translations_data_center_id_foreign` FOREIGN KEY (`data_center_id`) REFERENCES `data_centers` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `page_translations`
---
-ALTER TABLE `page_translations`
-  ADD CONSTRAINT `page_translations_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `post_tag`
---
-ALTER TABLE `post_tag`
-  ADD CONSTRAINT `post_tag_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `post_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `post_translations`
---
-ALTER TABLE `post_translations`
-  ADD CONSTRAINT `post_translations_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`);
-
---
--- Constraints for table `product_category_translations`
---
-ALTER TABLE `product_category_translations`
-  ADD CONSTRAINT `product_category_translations_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `product_flavors`
---
-ALTER TABLE `product_flavors`
-  ADD CONSTRAINT `product_flavors_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Constraints for table `slider_translations`
---
-ALTER TABLE `slider_translations`
-  ADD CONSTRAINT `slider_translations_slider_id_foreign` FOREIGN KEY (`slider_id`) REFERENCES `slider` (`id`) ON DELETE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

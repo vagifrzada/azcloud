@@ -121,7 +121,7 @@
                         </a>
                         <ul class='site-menu-sub site-menu-sub-up' data-plugin='menu'>
                             <li class="site-menu-item">
-                                <a href="#">
+                                <a href="{{ route('admin.products.index') }}">
                                     <i class="site-menu-icon md-view-list-alt"></i>
                                     <span class="site-menu-title">Product list</span>
                                 </a>

@@ -80,12 +80,12 @@ class SyncFlavorsConsoleCommand extends Command
     {
         $category = mb_strtolower($category, 'UTF-8');
         $categoryMap = [
-            'vm' => 'computed', 'volume' => 'storage', 'lb' => 'networking',
+            'vm' => 'compute', 'volume' => 'storage', 'lb' => 'networking',
         ];
 
         if (!array_key_exists($category, $categoryMap)) {
             throw new \InvalidArgumentException(
-                "Invalid category suplied ! Category: {$category}, Acceptable (Mapped) categories: 'vm=computed', 'volume=storage', 'lb=networking'"
+                "Invalid category suplied ! Category: {$category}, Acceptable (Mapped) categories: 'vm=compute', 'volume=storage', 'lb=networking'"
             );
         }
 

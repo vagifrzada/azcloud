@@ -58,3 +58,12 @@ $('select[data-selectable]').each(function (key, item) {
     // Initialization.
     selector.select2(config);
 });
+
+$("select[data-selectable]").on("select2:select", function (evt) {
+    let element = evt.params.data.element;
+    let $element = $(element);
+
+    $element.detach();
+    $(this).append($element);
+    $(this).trigger("change");
+});

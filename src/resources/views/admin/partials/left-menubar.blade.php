@@ -114,7 +114,7 @@
                     </li>
 
                     {{-- Products  --}}
-                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'products')) open active @endif">
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'product')) open active @endif">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-cloud"></i>
                             <span class="site-menu-title">Products <i class="site-menu-arrow"></i></span>
@@ -127,10 +127,31 @@
                                 </a>
                             </li>
 
-                            <li class="site-menu-item">
+                            <li class="site-menu-item @if(str_contains(request()->url(), 'product-category')) active @endif">
                                 <a href="{{ route('admin.product-category.index') }}">
                                     <i class="site-menu-icon md-view-list-alt"></i>
-                                    <span class="site-menu-title">Category list</span>
+                                    <span class="site-menu-title">Categories</span>
+                                </a>
+                            </li>
+
+                            <li class="site-menu-item @if(str_contains(request()->url(), 'product-bundles')) active @endif">
+                                <a href="{{ route('admin.product-bundles.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Bundles</span>
+                                </a>
+                            </li>
+
+                            <li class="site-menu-item @if(str_contains(request()->url(), 'product-benefits')) active @endif">
+                                <a href="{{ route('admin.product-benefits.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Benefits</span>
+                                </a>
+                            </li>
+
+                            <li class="site-menu-item @if(str_contains(request()->url(), 'product-cases')) active @endif">
+                                <a href="{{ route('admin.product-cases.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Use Cases</span>
                                 </a>
                             </li>
 
@@ -139,7 +160,7 @@
 
 
                     {{-- Data centers  --}}
-                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'data-centers')) open active @endif">
+                    <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'data-centers')) active @endif">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-cloud-box"></i>
                             <span class="site-menu-title">Data centers <i class="site-menu-arrow"></i></span>

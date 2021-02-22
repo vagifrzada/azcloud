@@ -12,7 +12,7 @@ class CreateProductTranslations extends Migration
             $table->increments('id');
             $table->unsignedInteger('product_id');
             $table->string('locale')->index();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->text('use_cases_description')->nullable();
             $table->text('additional_features')->nullable();
             $table->text('meta')->nullable();

@@ -40,7 +40,7 @@ class Bundle extends Model implements TranslatableContract
 
     public function scopeForNetworking(Builder $query): Builder
     {
-        return $query->where('price', '!=', 0)->orWhereNotNull('price');
+        return $query->where('price', '<>', 0);
     }
 
     public function scopeActive(Builder $query): Builder

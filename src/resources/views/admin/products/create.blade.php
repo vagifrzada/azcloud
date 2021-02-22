@@ -11,7 +11,7 @@
 
     <form id="{{ $category->getSlug() }}-store" method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" value="{{ $category->getSlug() }}">
+        <input type="hidden" value="{{ $category->getId() }}" name="category">
 
         <div class="row">
             <div class="col-lg-8">
@@ -46,8 +46,23 @@
                                             <h3>Use Cases</h3>
                                             <br>
 
-                                            <div class="form-group form-material cases">
-                                                <textarea rows="2" name="cases_description[{{ $locale }}]" placeholder="Enter use cases description" id="description" class="form-control"></textarea>
+                                            <div class="form-group form-material use_cases_description">
+                                                <textarea rows="2" name="use_cases_description[{{ $locale }}]" placeholder="Enter use cases description" id="description" class="form-control">{!! old('use_cases_description.' . $locale) !!}</textarea>
+                                            </div>
+
+                                            <div class="form-group form-material meta">
+                                                <fieldset>
+                                                    <legend>Meta tags</legend>
+                                                    <br>
+                                                    <label class="form-control-label" for="meta-title-{{ $locale }}">Meta title</label>
+                                                    <input type="text" name="meta[{{ $locale }}][title]" id="meta-title-{{ $locale }}" class="form-control">
+                                                    <br>
+                                                    <label class="form-control-label" for="meta-keywords-{{ $locale }}">Meta keywords</label>
+                                                    <input type="text" name="meta[{{ $locale  }}][keywords]" id="meta-keywords-{{ $locale }}" class="form-control">
+                                                    <br>
+                                                    <label class="form-control-label" for="meta-description-{{ $locale }}">Meta description</label>
+                                                    <textarea name="meta[{{ $locale }}][description]" id="meta-description-{{ $locale }}" class="form-control"></textarea>
+                                                </fieldset>
                                             </div>
 
                                             <h3>Additional features</h3>
@@ -56,7 +71,7 @@
                                                 <div class="features-container-{{ $locale }}">
                                                     <fieldset data-index="0">
                                                         <p>Feature:</p>
-                                                        <input name="additional_features[{{ $locale }}][]" class="form-control">
+                                                        <input name="additional_features[{{ $locale }}][title]" class="form-control">
                                                     </fieldset>
                                                 </div>
 
@@ -69,6 +84,7 @@
                                 </div>
                             @endforeach
 
+
                         </div>
                     </div>
                 </div>
@@ -80,9 +96,33 @@
                         <h3 class="panel-title">Settings</h3>
                     </div>
                     <div class="panel-body">
+                        <div class="form-group form-material title required">
+                            <label for="title" class="form-control-label">Name of the product (Required)</label>
+                            <input id="title" type="text" name="title" class="form-control" required value="{{ old('title') }}">
+                            @if ($errors->has('title'))
+                                <p class="help-block help-block-error">{{ $errors->first('title') }}</p>
+                            @endif
+                        </div>
+
+
+                        @if (str_contains($category->getSlug(), 'network'))
+                            <div class="form-group form-material parent_id required">
+                                <label class="form-control-label" for="parent_id">Parent product</label>
+                                <select name="parent_id" id="parent_id" class="form-control">
+                                    <option value="0">Default</option>
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->getId() }}">{{ $product->getTitle() }}</option>
+                                        @if (filled($children = $product->children))
+                                            @include('admin.products._children', ['children' => $children, 'dash' => 2, 'product' => $product])
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
                         @if ($category->getSlug() !== 'storage')
                             <div class="form-group form-material bundles required">
-                                <label class="form-control-label" for="bundles">Bundles</label>
+                                <label class="form-control-label" for="bundles">Bundles (Required)</label>
                                 <select name="bundles[]" id="bundles"
                                         multiple="multiple"
                                         class="form-control"
@@ -97,8 +137,16 @@
                             </div>
                         @endif
 
+                        <div class="form-group benefits_cover">
+                            <label for="benefits_cover">Benefits cover image (Optional)</label>
+                            <input id="benefits_cover" type="file" name="benefits_cover" class="form-control" data-preview-file-type="text">
+                            @if ($errors->has('benefits_cover'))
+                                <p class="help-block help-block-error">{{ $errors->first('benefits_cover') }}</p>
+                            @endif
+                        </div>
+
                         <div class="form-group form-material benefits required">
-                            <label class="form-control-label" for="bundles">Benefits</label>
+                            <label class="form-control-label" for="bundles">Benefits (Required)</label>
                             <select name="benefits[]" id="benefits"
                                     multiple="multiple"
                                     class="form-control"
@@ -113,7 +161,7 @@
                         </div>
 
                         <div class="form-group cases_cover">
-                            <label for="cases_cover">UseCases cover image</label>
+                            <label for="cases_cover">UseCases cover image (Optional)</label>
                             <input id="cases_cover" type="file" name="cases_cover" class="form-control" data-preview-file-type="text">
                             @if ($errors->has('cases_cover'))
                                 <p class="help-block help-block-error">{{ $errors->first('cases_cover') }}</p>
@@ -121,7 +169,7 @@
                         </div>
 
                         <div class="form-group use_cases form-material">
-                            <label for="use_cases" class="form-control-label">Use Cases</label>
+                            <label for="use_cases" class="form-control-label">Use Cases (Required)</label>
                             <select name="use_cases[]" id="use_cases"
                                     multiple="multiple"
                                     class="form-control"
@@ -136,7 +184,7 @@
                         </div>
 
                         <div class="form-group form-material features required">
-                            <label class="form-control-label" for="features">Features</label>
+                            <label class="form-control-label" for="features">Features (Required)</label>
                             <select name="features[]" id="features"
                                     multiple="multiple"
                                     class="form-control"

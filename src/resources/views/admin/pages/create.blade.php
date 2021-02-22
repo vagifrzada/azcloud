@@ -107,7 +107,7 @@
                             @foreach($pages as $page)
                                 <option value="{{ $page->getId() }}">{{ $page->getTitle() }}</option>
                                 @if (filled($children = $page->children))
-                                    @include('admin.pages._children', ['children' => $children, 'dash' => 2])
+                                    @include('admin.pages._children', ['children' => $children, 'dash' => 2, 'page' => $page])
                                 @endif
                             @endforeach
                         </select>

@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SyncFlavorsConsoleCommand extends Command
 {
@@ -44,7 +45,7 @@ class SyncFlavorsConsoleCommand extends Command
         foreach ($decodedData as $product) {
             $name = $product['product'];
             $category = $product['slug'];
-            $slug = mb_strtolower($name, 'UTF-8');
+            $slug = Str::slug($name);
 
             $productEntity = Product::where('slug', $slug)
                 ->orWhere('title', $name)

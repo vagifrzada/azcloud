@@ -155,6 +155,13 @@
                                 </a>
                             </li>
 
+                            <li class="site-menu-item @if(str_contains(request()->url(), 'product-features')) active @endif">
+                                <a href="{{ route('admin.product-features.index') }}">
+                                    <i class="site-menu-icon md-view-list-alt"></i>
+                                    <span class="site-menu-title">Features</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
 

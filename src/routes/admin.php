@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductFeaturesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProductUseCasesController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -51,6 +52,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('product-benefits', ProductBenefitsController::class)->except(['show']);
     Route::get('benefits/{id}/delete', [ProductBenefitsController::class, 'delete'])->name('product-benefits.delete');
+
+    Route::resource('product-features', ProductFeaturesController::class)->except(['show']);
+    Route::get('product-features/{id}/delete', [ProductBenefitsController::class, 'delete'])->name('product-features.delete');
 
     // Posts
     Route::resource('posts', PostsController::class)->except(['destroy', 'show']);

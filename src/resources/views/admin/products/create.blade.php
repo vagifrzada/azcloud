@@ -2,11 +2,14 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
+    <style>
+        .additional_features fieldset {border: 2px dashed #ddd; padding: 10px; margin-bottom: 17px}
+    </style>
 @endpush
 
 @section('content')
 
-    <form id="compute-store-{{ $category->getSlug() }}" method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+    <form id="{{ $category->getSlug() }}-store" method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
         @csrf
         <input type="hidden" value="{{ $category->getSlug() }}">
 
@@ -46,6 +49,21 @@
                                             <div class="form-group form-material cases">
                                                 <textarea rows="2" name="cases_description[{{ $locale }}]" placeholder="Enter use cases description" id="description" class="form-control"></textarea>
                                             </div>
+
+                                            <h3>Additional features</h3>
+                                            <br>
+                                            <div class="form-group form-material additional_features">
+                                                <div class="features-container-{{ $locale }}">
+                                                    <fieldset data-index="0">
+                                                        <p>Feature:</p>
+                                                        <input name="additional_features[{{ $locale }}][]" class="form-control">
+                                                    </fieldset>
+                                                </div>
+
+                                                <br>
+                                                <br>
+                                                <button class="btn btn-xs btn-round btn-success float-right add-feature">Add feature</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -62,20 +80,22 @@
                         <h3 class="panel-title">Settings</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group form-material bundles required">
-                            <label class="form-control-label" for="bundles">Bundles</label>
-                            <select name="bundles[]" id="bundles"
-                                    multiple="multiple"
-                                    class="form-control"
-                                    data-selectable="true">
-                                @foreach($bundles as $bundle)
-                                    <option value="{{ $bundle->id }}">{{ $bundle->title }} (ID: {{ $bundle->id }})</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('bundles'))
-                                <p class="help-block help-block-error">{{ $errors->first('bundles')  }}</p>
-                            @endif
-                        </div>
+                        @if ($category->getSlug() !== 'storage')
+                            <div class="form-group form-material bundles required">
+                                <label class="form-control-label" for="bundles">Bundles</label>
+                                <select name="bundles[]" id="bundles"
+                                        multiple="multiple"
+                                        class="form-control"
+                                        data-selectable="true">
+                                    @foreach($bundles as $bundle)
+                                        <option value="{{ $bundle->id }}">{{ $bundle->title }} (ID: {{ $bundle->id }})</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('bundles'))
+                                    <p class="help-block help-block-error">{{ $errors->first('bundles')  }}</p>
+                                @endif
+                            </div>
+                        @endif
 
                         <div class="form-group form-material benefits required">
                             <label class="form-control-label" for="bundles">Benefits</label>
@@ -112,6 +132,21 @@
                             </select>
                             @if ($errors->has('use_cases'))
                                 <p class="help-block help-block-error">{{ $errors->first('use_cases') }}</p>
+                            @endif
+                        </div>
+
+                        <div class="form-group form-material features required">
+                            <label class="form-control-label" for="features">Features</label>
+                            <select name="features[]" id="features"
+                                    multiple="multiple"
+                                    class="form-control"
+                                    data-selectable="true">
+                                @foreach($features as $feature)
+                                    <option value="{{ $feature->id }}">{{ $feature->title }} (ID: {{ $feature->id }})</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('features'))
+                                <p class="help-block help-block-error">{{ $errors->first('features')  }}</p>
                             @endif
                         </div>
 
@@ -160,5 +195,33 @@
             dropZoneClickTitle: '',
             showCaption: false,
         });
+
+        $(document).on('click', 'button.add-feature', function (e) {
+            e.preventDefault();
+            let container;
+
+            locales.forEach(function (locale) {
+                container = $('.features-container-' + locale);
+                let index = container.find('fieldset').length;
+                container.append(`
+                  <fieldset data-index="${index}">
+                    <p>Feature:</p>
+                    <input name="additional_features[${locale}][]" class="form-control">
+                    <button class="btn btn-xs btn-round btn-danger float-right delete-feature">Delete</button>
+                  </fieldset>
+                `);
+            });
+        });
+
+        $(document).on('click', 'button.delete-feature', function (e) {
+            e.preventDefault();
+            let fieldset = $(this).parent('fieldset');
+            let container;
+
+            locales.forEach(function (locale) {
+                container = $('.features-container-' + locale);
+                container.find('fieldset[data-index="'+ fieldset.attr('data-index') +'"]').remove();
+            });
+        })
     </script>
 @endpush

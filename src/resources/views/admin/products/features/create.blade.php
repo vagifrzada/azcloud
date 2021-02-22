@@ -1,14 +1,12 @@
 @extends('layouts.admin')
 
 @push('styles')
-    <style>
-        .options fieldset {border: 2px dashed #ddd; padding: 10px; margin-bottom: 17px}
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
 @endpush
 
 @section('content')
 
-    <form id="bundle-create" method="POST" action="{{ route('admin.product-bundles.store') }}">
+    <form id="product-feature" method="POST" action="{{ route('admin.product-features.store') }}" enctype="multipart/form-data">
         @csrf
       <div class="row">
         <div class="col-lg-8">
@@ -40,30 +38,13 @@
                                     </div>
 
                                     <div class="form-group form-material description">
-                                        <label class="form-control-label" for="content-{{ $locale }}">Description</label>
-                                        <textarea rows="10" name="description[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">{!! old('description.' . $locale) !!}</textarea>
+                                        <label class="form-control-label" for="description-{{ $locale }}">Description</label>
+                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! old('description.' . $locale) !!}</textarea>
                                         @if ($errors->has('description.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('description.' . $locale) }}</p>
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material options">
-                                        <label class="form-control-label">Additional options (Fill options when you're creating bundle for "network" category)</label>
-                                        <br><br>
-
-                                         <div class="options-container-{{ $locale }}">
-                                             <fieldset data-index="0">
-                                                 <p>Title</p>
-                                                 <input type="text" class="form-control" name="options[{{ $locale }}][0][title]">
-                                                 <p>Description</p>
-                                                 <textarea name="options[{{ $locale }}][0][description]" cols="10" rows="3" class="form-control"></textarea>
-                                             </fieldset>
-                                         </div>
-
-                                        <br>
-                                        <br>
-                                        <button class="btn btn-xs btn-round btn-success float-right add-option">Add option</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,11 +62,12 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-material price">
-                        <label class="form-control-label" for="price">Price (Fill price when you're creating bundle for "network" category)</label>
-                        <input type="number" step="any" id="price" min="1" class="form-control" name="price" aria-required="true" value="{{ old('price') }}">
-                        @if ($errors->has('price'))
-                            <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
+
+                    <div class="form-group image">
+                        <label for="image">Icon</label>
+                        <input id="image" type="file" name="image" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('image'))
+                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
                         @endif
                     </div>
 
@@ -112,35 +94,27 @@
 
 @push('scripts')
     <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
+
     <script>
-        $(document).on('click', 'button.add-option', function (e) {
-            e.preventDefault();
-            let container;
-
-            locales.forEach(function (locale) {
-                container = $('.options-container-' + locale);
-                let index = container.find('fieldset').length;
-                container.append(`
-                 <fieldset data-index="${index}">
-                     <p>Title</p>
-                     <input type="text" class="form-control" name="options[${locale}][${index}][title]">
-                     <p>Description</p>
-                     <textarea name="options[${locale}][${index}][description]" cols="10" rows="3" class="form-control"></textarea>
-                     <button class="btn btn-xs btn-round btn-danger float-right delete-option">Delete</button>
-                 </fieldset>
-            `);
-            });
-        })
-
-        $(document).on('click', 'button.delete-option', function (e) {
-            e.preventDefault();
-            let fieldset = $(this).parent('fieldset');
-            let container;
-
-            locales.forEach(function (locale) {
-                container = $('.options-container-' + locale);
-                container.find('fieldset[data-index="'+ fieldset.attr('data-index') +'"]').remove();
-            });
-        })
+        $('input[type=file]').fileinput({
+            theme: 'fa',
+            showUpload: false,
+            allowedFileType: ['image'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
+            previewFileType: 'image',
+            dropZoneEnabled: true,
+            showRemove: false,
+            autoOrientImage: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            actionDelete: '',
+            dropZoneTitle: 'Click or drag image here for uploading.',
+            dropZoneClickTitle: '',
+            showCaption: false,
+        });
     </script>
 @endpush

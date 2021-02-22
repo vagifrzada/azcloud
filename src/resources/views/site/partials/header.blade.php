@@ -43,17 +43,15 @@
 
                     <ul class="external-links hidden-1200">
                         <li>
-                            <a href="#" target="_blank">Azcloud Enterprise</a>
+                            <a href="{{ settings('azcloud_enterprise_url') }}" target="_blank">Azcloud Enterprise</a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">G-Cloud solutions</a>
+                            <a href="{{ settings('azcloud_gcloud_url') }}" target="_blank">G-Cloud solutions</a>
                         </li>
-                        <!--
                         <li>
-                            <a href="#" target="_blank">Qiriş / </a>
-                            <a href="#" target="_blank">Qeydiyyat</a>
+                            <a href="{{ settings('azcloud_console_url') }}" target="_blank">@lang('main.sign_in') / </a>
+                            <a href="{{ settings('azcloud_console_url') }}" target="_blank">@lang('main.sign_up')</a>
                         </li>
-                        -->
                     </ul>
 
                     <div class="search-toggler">

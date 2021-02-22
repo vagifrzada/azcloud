@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="footer-contacts">
-                                <p class="label">Əlaqə</p>
+                                <p class="label">@lang('main.contact')</p>
                                 <table>
                                     <tr>
                                         <td><strong>Ünvan:</strong></td>
@@ -130,5 +130,4 @@
             </div>
         </div>
     </div>
-    <!-- footer bottom-->
 </footer>

@@ -36,4 +36,7 @@ return [
 
     'type_post' => 'Blog',
     'type_service' => 'Service',
+
+    'sign_in' => 'Sign in',
+    'sign_up' => 'Sign up',
 ];

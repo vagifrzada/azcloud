@@ -36,4 +36,7 @@ return [
 
     'type_post' => 'Bloq',
     'type_service' => 'Servis',
+
+    'sign_in' => 'Giriş',
+    'sign_up' => 'Qeydiyyat',
 ];

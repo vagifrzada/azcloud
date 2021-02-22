@@ -37,4 +37,6 @@ return [
     'type_post' => 'Блог',
     'type_service' => 'Сервис',
 
+    'sign_in' => 'Войти',
+    'sign_up' => 'Регистрация',
 ];

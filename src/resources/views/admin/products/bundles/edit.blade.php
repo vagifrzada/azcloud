@@ -41,9 +41,9 @@
                                         @endif
                                     </div>
 
-                                    <div class="form-group form-material description">
-                                        <label class="form-control-label" for="description-{{ $locale }}">Description</label>
-                                        <textarea rows="10" name="description[{{ $locale  }}]" id="description-{{ $locale }}" class="form-control">{!! $translation->description !!}</textarea>
+                                    <div class="form-group form-material content">
+                                        <label class="form-control-label" for="content-{{ $locale }}">Description</label>
+                                        <textarea rows="10" name="description[{{ $locale  }}]" id="content-{{ $locale }}" class="form-control">{!! $translation->description !!}</textarea>
                                         @if ($errors->has('description.' . $locale))
                                             <p class="help-block help-block-error">{{ $errors->first('description.' . $locale) }}</p>
                                         @endif
@@ -120,6 +120,8 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
+
     <script>
         $(document).on('click', 'button.add-option', function (e) {
             e.preventDefault();

@@ -19,7 +19,7 @@ class ProductBundlesDatatable extends DataTable
                 return $bundle->price === 0 ? 'Not defined' : (($bundle->price / 100) . ' AZN');
             })
             ->editColumn('description', function (Bundle $bundle) {
-                return Str::limit($bundle->description);
+                return Str::limit(strip_tags($bundle->description));
             })
             ->addColumn('action', 'admin.products.bundles.actions');
     }

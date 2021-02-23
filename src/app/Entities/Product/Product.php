@@ -23,6 +23,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int parent_id
  * @property int category_id
  * @property string title
+ * @property string description
+ * @property string use_cases_description
+ * @property string additional_features
  * @property string slug
  * @property boolean status
  * @property Category category
@@ -38,7 +41,7 @@ class Product extends Model implements TranslatableContract, HasMedia
     public $translationModel = Translation::class;
     public $translatedAttributes = ['description', 'use_cases_description', 'additional_features', 'meta'];
     public $jsonableAttributes = ['additional_features', 'meta'];
-    public $with = ['translations'];
+    public $with = ['bundles', 'benefits', 'cases', 'features', 'translations'];
     protected $fillable = ['parent_id', 'category_id', 'title', 'slug', 'status'];
 
     public function getId(): int
@@ -49,6 +52,21 @@ class Product extends Model implements TranslatableContract, HasMedia
     public function getParent(): int
     {
         return $this->parent_id;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getUseCasesDescription(): ?string
+    {
+        return $this->use_cases_description;
+    }
+
+    public function getAdditionalFeatures(): array
+    {
+        return json_decode($this->additional_features, true);
     }
 
     public function getTitle(): string

@@ -42,9 +42,9 @@ class SyncFlavorsConsoleCommand extends Command
     {
         DB::table('product_flavors')->truncate();
 
-        foreach ($decodedData as $product) {
-            $name = $product['product'];
-            $category = $product['slug'];
+        foreach ($decodedData as $item) {
+            $name = $item['product'];
+            $category = $item['slug'];
             $slug = Str::slug($name);
 
             $productEntity = Product::where('slug', $slug)
@@ -60,8 +60,8 @@ class SyncFlavorsConsoleCommand extends Command
                 ]);
             }
 
-            if (!filled($flavors = $product['flavors'])) {
-                $this->info("No flavors found for product: {$product}");
+            if (!filled($flavors = $item['flavors'])) {
+                $this->info("No flavors found for product: {$name}");
                 return;
             }
 

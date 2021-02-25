@@ -80,7 +80,7 @@ class ProductBenefitsController extends Controller
 
             $benefit->save();
 
-            if ($request->has('image')) {
+            if ($request->hasFile('image')) {
                 $benefit->addMedia($request->file('image'))->toMediaCollection('cover');
             }
 

@@ -64,7 +64,7 @@
                 <div class="panel-body">
 
                     <div class="form-group image">
-                        <label for="image">Icon</label>
+                        <label for="image">Image</label>
                         <input id="image" type="file" name="image" class="form-control" data-preview-file-type="text">
                         @if ($errors->has('image'))
                             <p class="help-block help-block-error">{{ $errors->first('image') }}</p>

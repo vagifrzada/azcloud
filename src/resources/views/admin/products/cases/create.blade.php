@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
+@endpush
+
 @section('content')
 
-    <form id="case-create" method="POST" action="{{ route('admin.product-cases.store') }}">
+    <form id="case-create" method="POST" action="{{ route('admin.product-cases.store') }}" enctype="multipart/form-data">
         @csrf
       <div class="row">
         <div class="col-lg-8">
@@ -50,6 +54,14 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group cover">
+                        <label for="cover">Image</label>
+                        <input id="cover" type="file" name="image" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('image'))
+                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
+                        @endif
+                    </div>
+
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
                         <input type="hidden" name="status"  value="0">
@@ -70,3 +82,31 @@
     </form>
 
 @endsection
+
+
+@push('scripts')
+    <script src="{{ asset('assets/remark/js/posts.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
+
+    <script>
+        $('input[type=file]').fileinput({
+            theme: 'fa',
+            showUpload: false,
+            allowedFileType: ['image'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
+            previewFileType: 'image',
+            dropZoneEnabled: true,
+            showRemove: false,
+            autoOrientImage: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            actionDelete: '',
+            dropZoneTitle: 'Click or drag image here for uploading.',
+            dropZoneClickTitle: '',
+            showCaption: false,
+        });
+    </script>
+@endpush

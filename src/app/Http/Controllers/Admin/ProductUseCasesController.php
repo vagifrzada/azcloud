@@ -40,6 +40,11 @@ class ProductUseCasesController extends Controller
                     $case->translateOrNew($locale)->{$attribute} = $value;
 
             $case->save();
+
+            if ($request->hasFile('image')) {
+                $case->addMedia($request->file('image'))->toMediaCollection('cover');
+            }
+
             DB::commit();
             return redirect()->route('admin.product-cases.index')->with('success', 'Use case created successfully !');
         } catch (\Exception $e) {
@@ -72,6 +77,11 @@ class ProductUseCasesController extends Controller
                     $product_case->translate($locale)->{$attribute} = $value;
 
             $product_case->save();
+
+            if ($request->hasFile('image')) {
+                $product_case->addMedia($request->file('image'))->toMediaCollection('cover');
+            }
+
             DB::commit();
             return redirect()->back()->with('success', 'Use case update successfully !');
         } catch (\Exception $e) {

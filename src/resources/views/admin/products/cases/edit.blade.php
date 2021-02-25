@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
+@endpush
+
 @section('content')
 
-    <form id="case-update" method="POST" action="{{ route('admin.product-cases.update', ['product_case' => $useCase->id]) }}">
+    <form id="case-update" method="POST" action="{{ route('admin.product-cases.update', ['product_case' => $useCase->id]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
       <div class="row">
@@ -51,6 +55,15 @@
                     <h3 class="panel-title">Settings</h3>
                 </div>
                 <div class="panel-body">
+
+                    <div class="form-group cover">
+                        <label for="cover">Image</label>
+                        <input id="cover" type="file" name="image" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('image'))
+                            <p class="help-block help-block-error">{{ $errors->first('image') }}</p>
+                        @endif
+                    </div>
+
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
                         <input type="hidden" name="status"  value="0">
@@ -71,3 +84,47 @@
     </form>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/piexif.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/plugins/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
+
+    <script>
+        let imageUrl = '{{ optional($useCase->getCover())->getUrl() }}';
+        let config = {
+            uploadAsync: false,
+            overwriteInitial: true,
+            theme: 'fa',
+            showUpload: false,
+            allowedFileType: ['image'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
+            previewFileType: 'image',
+            dropZoneEnabled: true,
+            showRemove: false,
+            autoOrientImage: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            actionDelete: '',
+            dropZoneTitle: 'Click or drag image here for uploading.',
+            dropZoneClickTitle: '',
+            showCaption: false,
+        };
+
+        if (imageUrl !== '') {
+            config. initialPreview = [imageUrl];
+            config.initialPreviewAsData = true;
+            config.initialPreviewConfig = [
+                {
+                    caption: imageUrl,
+                    downloadUrl: imageUrl,
+                    width: '120px',
+                }
+            ];
+        }
+
+
+        $('#cover').fileinput(config);
+    </script>
+@endpush

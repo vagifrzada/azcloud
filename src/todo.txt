@@ -3,5 +3,5 @@
 3. Main page - Rendering services
 4. Main page - Rendering calculator
 5. Services page
-7. S3 ssl request on off
-8. Documentation (+ .env, .env.example)
+
+6. Documentation (+ .env, .env.example)

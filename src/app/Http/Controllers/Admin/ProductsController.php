@@ -90,6 +90,11 @@ class ProductsController extends Controller
 
             $product->save();
 
+            if ($request->hasFile(Product::MEDIA_COVER)) {
+                $product->addMedia($request->file(Product::MEDIA_COVER))
+                    ->toMediaCollection(Product::MEDIA_COVER);
+            }
+
             $product->bundles()->sync($request->get('bundles', []));
 
             if ($request->hasFile(Product::MEDIA_BENEFITS_COVER)) {
@@ -178,6 +183,11 @@ class ProductsController extends Controller
             }
 
             $product->save();
+
+            if ($request->hasFile(Product::MEDIA_COVER)) {
+                $product->addMedia($request->file(Product::MEDIA_COVER))
+                    ->toMediaCollection(Product::MEDIA_COVER);
+            }
 
             $product->bundles()->sync($request->get('bundles', []));
 

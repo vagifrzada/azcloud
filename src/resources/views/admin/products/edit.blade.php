@@ -31,6 +31,11 @@
                                     </a>
                                 </li>
                             @endforeach
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cover" data-toggle="tab">
+                                        Image
+                                    </a>
+                                </li>
                         </ul>
 
                         <div class="tab-content mt-4">
@@ -105,6 +110,9 @@
                                 </div>
                             @endforeach
 
+                            <div class="tab-pane" id="cover">
+                                <input id="product_cover" type="file" name="cover" class="form-control" data-preview-file-type="text">
+                            </div>
 
                         </div>
                     </div>
@@ -325,6 +333,43 @@
         }
 
         $('#cases_cover').fileinput(fileInputConfigForCases);
+
+        let productCoverConfig = {
+            uploadAsync: false,
+            overwriteInitial: true,
+            theme: 'fa',
+            showUpload: false,
+            allowedFileType: ['image'],
+            allowedFileExtensions: ['jpg','jpeg','png', 'gif', 'svg'],
+            previewFileType: 'image',
+            dropZoneEnabled: true,
+            showRemove: false,
+            autoOrientImage: false,
+            showBrowse: false,
+            browseOnZoneClick: true,
+            actionDelete: '',
+            dropZoneTitle: 'Click or drag image here for uploading.',
+            deleteUrl: '{{ route('admin.media.delete') }}',
+            dropZoneClickTitle: '',
+            showCaption: false,
+        };
+
+        let productCover = '{{ optional($product->getCover())->getUrl() }}';
+
+        if (productCover !== '') {
+            productCoverConfig.initialPreview = [productCover];
+            productCoverConfig.initialPreviewAsData = true;
+            productCoverConfig.initialPreviewConfig =  [
+                {
+                    key: '{{ optional($product->getCover())->uuid  }}',
+                    caption: productCover,
+                    downloadUrl: productCover,
+                    width: '120px',
+                }
+            ];
+        }
+
+        $('#product_cover').fileinput(productCoverConfig);
 
         $(document).on('click', 'button.add-feature', function (e) {
             e.preventDefault();

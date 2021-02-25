@@ -28,6 +28,11 @@
                                     </a>
                                 </li>
                             @endforeach
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cover" data-toggle="tab">
+                                        Image
+                                    </a>
+                                </li>
                         </ul>
 
                         <div class="tab-content mt-4">
@@ -83,8 +88,9 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
+                            <div class="tab-pane" id="cover">
+                                <input id="product_cover" type="file" name="cover" class="form-control" data-preview-file-type="text">
+                            </div>
                         </div>
                     </div>
                 </div>

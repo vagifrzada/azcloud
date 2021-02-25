@@ -6,6 +6,7 @@ use App\DataTables\ProductCategoriesDataTable;
 use App\Entities\Product\Category\Category;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +22,7 @@ class ProductCategoryController extends Controller
         return view('admin.products.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title'     => 'required|array|min:3',
@@ -43,6 +44,11 @@ class ProductCategoryController extends Controller
 
             $category->save();
 
+            if ($request->hasFile(Category::MEDIA_COVER)) {
+                $category->addMedia($request->file(Category::MEDIA_COVER))
+                    ->toMediaCollection(Category::MEDIA_COVER);
+            }
+
             DB::commit();
             return redirect()->route('admin.product-category.index')->with('success', 'Category created successfully !');
         } catch (Exception $e) {
@@ -57,7 +63,7 @@ class ProductCategoryController extends Controller
         return view('admin.products.categories.edit', ['category' => $product_category]);
     }
 
-    public function update(Category $product_category, Request $request)
+    public function update(Category $product_category, Request $request): RedirectResponse
     {
         $request->validate([
             'title'     => 'required|array|min:3',
@@ -76,6 +82,11 @@ class ProductCategoryController extends Controller
                     $category->translate($locale)->{$attribute} = $value;
 
             $category->save();
+
+            if ($request->hasFile(Category::MEDIA_COVER)) {
+                $category->addMedia($request->file(Category::MEDIA_COVER))
+                    ->toMediaCollection(Category::MEDIA_COVER);
+            }
 
             DB::commit();
             return redirect()->back()->with('success', 'Category updated successfully !');

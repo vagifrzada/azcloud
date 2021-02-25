@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
+@endpush
+
 @section('content')
 
-    <form id="category-create" method="POST" action="{{ route('admin.product-category.store') }}">
+    <form id="category-create" method="POST" action="{{ route('admin.product-category.store') }}" enctype="multipart/form-data">
         @csrf
       <div class="row">
         <div class="col-lg-8">
@@ -63,6 +67,14 @@
                         <input type="text" id="slug" class="form-control" name="slug" aria-required="true" value="{{ old('slug') }}">
                         @if ($errors->has('slug'))
                             <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="form-group cover">
+                        <label for="cover">Category image (Optional)</label>
+                        <input id="cover" type="file" name="cover" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('cover'))
+                            <p class="help-block help-block-error">{{ $errors->first('cover') }}</p>
                         @endif
                     </div>
 

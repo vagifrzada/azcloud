@@ -3,11 +3,14 @@
 namespace App\Entities\Product\Category;
 
 use App\Entities\Product\Product;
-use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property int id
@@ -19,9 +22,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Category findOrFail(int $id)
  * @method static Builder active()
  */
-class Category extends Model implements TranslatableContract
+class Category extends Model implements TranslatableContract, HasMedia
 {
-    use Translatable;
+    use Translatable, InteractsWithMedia;
+
+    public const MEDIA_COVER = 'cover';
 
     public $table = 'product_category';
     public $translationModel = Translation::class;
@@ -52,6 +57,16 @@ class Category extends Model implements TranslatableContract
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getCover(): ?Media
+    {
+        return $this->getFirstMedia(self::MEDIA_COVER);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(self::MEDIA_COVER)->singleFile();
     }
 
     public function scopeActive(Builder $query): Builder

@@ -36,6 +36,7 @@ class Product extends Model implements TranslatableContract, HasMedia
 
     public const MEDIA_BENEFITS_COVER = 'benefits_cover';
     public const MEDIA_CASES_COVER = 'cases_cover';
+    public const MEDIA_COVER = 'cover';
 
     public $table = 'products';
     public $translationModel = Translation::class;
@@ -88,6 +89,12 @@ class Product extends Model implements TranslatableContract, HasMedia
     {
         $this->addMediaCollection(self::MEDIA_BENEFITS_COVER)->singleFile();
         $this->addMediaCollection(self::MEDIA_CASES_COVER)->singleFile();
+        $this->addMediaCollection(self::MEDIA_COVER)->singleFile();
+    }
+
+    public function getCover(): ?Media
+    {
+        return $this->getFirstMedia(self::MEDIA_COVER);
     }
 
     public function getBenefitsCover(): ?Media

@@ -1,8 +1,15 @@
 @extends('layouts.admin')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/remark/global/vendor/fileinput/css/fileinput.min.css') }}">
+@endpush
+
 @section('content')
 
-    <form id="category-edit" method="POST" action="{{ route('admin.product-category.update', ['product_category' => $category->id]) }}">
+    <form id="category-edit" method="POST"
+          action="{{ route('admin.product-category.update', ['product_category' => $category->id]) }}"
+          enctype="multipart/form-data"
+    >
         @csrf
         @method('PUT')
       <div class="row">
@@ -65,6 +72,14 @@
                         <input type="text" id="slug" disabled class="form-control" name="slug" aria-required="true" value="{{ $category->slug }}">
                     </div>
 
+                    <div class="form-group cover">
+                        <label for="cover">Category image (Optional)</label>
+                        <input id="cover" type="file" name="cover" class="form-control" data-preview-file-type="text">
+                        @if ($errors->has('cover'))
+                            <p class="help-block help-block-error">{{ $errors->first('cover') }}</p>
+                        @endif
+                    </div>
+
                     <div class="form-group form-material status required">
                         <label class="form-control-label" for="status">Status</label>
                         <input type="hidden" name="status"  value="0">
@@ -94,7 +109,9 @@
     <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
 
     <script>
-        $('input[type=file]').fileinput({
+        let categoryCoverConfig = {
+            uploadAsync: false,
+            overwriteInitial: true,
             theme: 'fa',
             showUpload: false,
             allowedFileType: ['image'],
@@ -107,8 +124,26 @@
             browseOnZoneClick: true,
             actionDelete: '',
             dropZoneTitle: 'Click or drag image here for uploading.',
+            deleteUrl: '{{ route('admin.media.delete') }}',
             dropZoneClickTitle: '',
             showCaption: false,
-        });
+        };
+
+        let categoryCover = '{{ optional($category->getCover())->getUrl() }}';
+
+        if (categoryCover !== '') {
+            categoryCoverConfig.initialPreview = [categoryCover];
+            categoryCoverConfig.initialPreviewAsData = true;
+            categoryCoverConfig.initialPreviewConfig =  [
+                {
+                    key: '{{ optional($category->getCover())->uuid  }}',
+                    caption: categoryCover,
+                    downloadUrl: categoryCover,
+                    width: '120px',
+                }
+            ];
+        }
+
+        $('#cover').fileinput(categoryCoverConfig);
     </script>
 @endpush

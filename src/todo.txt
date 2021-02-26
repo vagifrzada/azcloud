@@ -1,5 +1,4 @@
 1. Menu
-2. Search - Connecting services
 3. Main page - Rendering services
 4. Main page - Rendering calculator
 5. Services page

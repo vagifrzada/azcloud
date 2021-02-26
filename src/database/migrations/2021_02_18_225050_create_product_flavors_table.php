@@ -15,7 +15,8 @@ class CreateProductFlavorsTable extends Migration
             $table->string('flavor_id')->index();
             $table->string('name');
             $table->string('family')->nullable();
-            $table->string('price');
+            $table->double('monthly_price', 10, 2, true);
+            $table->double('hourly_price', 10, 3, true);
             $table->integer('cpu')->nullable();
             $table->integer('ram')->nullable();
             $table->integer('disk')->nullable();

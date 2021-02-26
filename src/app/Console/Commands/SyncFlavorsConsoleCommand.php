@@ -21,7 +21,7 @@ class SyncFlavorsConsoleCommand extends Command
         try {
             $storage = Storage::disk('s3');
             if (!$storage->exists(self::FLAVORS_FILE_NAME)) {
-                $this->info(self::FLAVORS_FILE_NAME . ' does not exist in bucket !');
+                $this->error(self::FLAVORS_FILE_NAME . ' does not exist in bucket !');
                 return;
             }
 
@@ -32,7 +32,7 @@ class SyncFlavorsConsoleCommand extends Command
                 $this->info('Flavors synced successfully.');
                 return;
             }
-            $this->info('Can not decode json file.');
+            $this->error('Can not decode json file.');
         } catch (FileNotFoundException $e) {
             dd($e->getMessage());
         }
@@ -66,11 +66,15 @@ class SyncFlavorsConsoleCommand extends Command
             }
 
             foreach ($flavors as &$flavor) {
+                $flavor['monthly_price'] = $flavor['price'];
+                $flavor['hourly_price'] = $flavor['price'] / 720;
+
                 $flavor['product_id'] = $productEntity->id;
                 $flavor['flavor_id'] = $flavor['id'];
-                unset($flavor['id']);
                 $flavor['type'] = $category;
                 $flavor['family'] = mb_substr($flavor['name'], 0, 1, 'UTF-8');
+
+                unset($flavor['id'], $flavor['price']);
             }
 
             DB::table('product_flavors')->insert($flavors);

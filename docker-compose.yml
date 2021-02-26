@@ -28,6 +28,8 @@ services:
       - composer_data:/home/appuser/.composer/cache
     environment:
       - XDG_CONFIG_HOME=/app/storage/framework
+    depends_on:
+      - db
 
   db:
     build: ./docker/mysql

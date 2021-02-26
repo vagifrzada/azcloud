@@ -4,4 +4,4 @@
 4. Main page - Rendering calculator
 5. Services page
 
-6. Documentation (+ .env, .env.example)
+6. Documentation (Add AWS credentials to .env.example)

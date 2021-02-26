@@ -42,7 +42,7 @@ class Product extends Model implements TranslatableContract, HasMedia
     public $translationModel = Translation::class;
     public $translatedAttributes = ['description', 'use_cases_description', 'additional_features', 'meta'];
     public $jsonableAttributes = ['additional_features', 'meta'];
-    public $with = ['bundles', 'benefits', 'cases', 'features', 'translations'];
+    public $with = ['bundles', 'benefits', 'cases', 'features', 'translations', 'media'];
     protected $fillable = ['parent_id', 'category_id', 'title', 'slug', 'status'];
 
     public function getId(): int

@@ -15,23 +15,44 @@ class SearchService
         $countSql = "
              SELECT COUNT(*) AS `count` FROM posts AS p
              INNER JOIN post_translations AS pt ON p.id = pt.post_id
-             WHERE p.status = 1 AND pt.locale = :locale AND pt.title LIKE '%{$searchable}%'
+             WHERE p.status = 1 AND pt.locale = ? AND (pt.title LIKE '%{$searchable}%' OR pt.content LIKE '%{$searchable}%')
+             UNION 
+             SELECT COUNT(*) AS `count` FROM products as pr
+             LEFT JOIN product_translations AS prt ON pr.id = prt.product_id
+             INNER JOIN product_category AS pc ON pc.id = pr.category_id
+             WHERE pr.status = 1 AND pr.title LIKE '%{$searchable}%'  
+                   OR (prt.locale = ? AND (prt.description LIKE '%{$searchable}%' 
+                   OR prt.use_cases_description LIKE '%{$searchable}%'))
         ";
         $countSqlStmt = $pdo->prepare($countSql);
-        $countSqlStmt->bindValue(':locale', $locale);
+        $countSqlStmt->bindValue(1, $locale);
+        $countSqlStmt->bindValue(2, $locale);
         $countSqlStmt->execute();
-        $resultCount = $countSqlStmt->fetch(\PDO::FETCH_ASSOC)['count'] ?? 0;
+        $resultCountData = $countSqlStmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $resultCount = 0;
+        foreach ($resultCountData as $item)
+            $resultCount += $item['count'];
 
         $sql = "
-             SELECT p.id, pt.title, pt.slug, 'post' AS type FROM posts AS p
+             SELECT p.id, pt.title, pt.slug, NULL AS category, 'post' AS type 
+             FROM posts AS p
              INNER JOIN post_translations AS pt ON p.id = pt.post_id
-             WHERE p.status = 1 AND pt.locale = :locale AND pt.title LIKE '%{$searchable}%'
-             -- UNION
+             WHERE (p.status = 1) AND (pt.locale = ?) AND (pt.title LIKE '%{$searchable}%')
+             UNION 
+             SELECT pr.id, pr.title, pr.slug, pc.slug AS category, 'product' AS type 
+             FROM products as pr
+             LEFT JOIN product_translations AS prt ON pr.id = prt.product_id
+             INNER JOIN product_category AS pc ON pc.id = pr.category_id
+             WHERE (pr.status = 1) AND (pr.title LIKE '%{$searchable}%') OR 
+                   (prt.locale = ? AND (prt.description LIKE '%{$searchable}%' OR 
+                   prt.use_cases_description LIKE '%{$searchable}%'))
              LIMIT {$limit} OFFSET {$offset}
         ";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':locale', $locale);
+        $stmt->bindValue(1, $locale);
+        $stmt->bindValue(2, $locale);
         $stmt->execute();
 
         return [

@@ -42,3 +42,22 @@ if (! function_exists('escapeLike')) {
         );
     }
 }
+
+if (! function_exists('searchRoute')) {
+    function searchRoute(array $item): ?string
+    {
+        $routes = [
+            'post' => 'site.blog.show',
+            'product' => 'site.products.show',
+        ];
+
+        if (!isset($item['type'])) return null;
+        if (!array_key_exists($item['type'], $routes)) return null;
+
+        $params = ['slug' => $item['slug']];
+        if ($item['type'] === 'product')
+            $params['category'] = $item['category'];
+
+        return route($routes[$item['type']], $params);
+    }
+}

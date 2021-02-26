@@ -35,7 +35,7 @@ return [
     'apply_label' => 'Sualınız var? Sizə kömək etməkdən məmnunuq!',
 
     'type_post' => 'Bloq',
-    'type_service' => 'Servis',
+    'type_product' => 'Servis',
 
     'sign_in' => 'Giriş',
     'sign_up' => 'Qeydiyyat',

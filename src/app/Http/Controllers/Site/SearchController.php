@@ -24,7 +24,11 @@ class SearchController extends Controller
         $offset = ($page - 1) * self::SEARCH_LIMIT;
         $result = $this->searchService->handle($request->get('q'), self::SEARCH_LIMIT, $offset);
         $resultCount = $result['resultCount'];
-        $payload = ['data' => $result['data'], 'resultCount' => $resultCount, 'canLoadMore' => ($resultCount >= self::SEARCH_LIMIT)];
+        $payload = [
+            'data' => $result['data'],
+            'resultCount' => $resultCount,
+            'canLoadMore' => ($resultCount >= self::SEARCH_LIMIT),
+        ];
         if ($request->ajax())
             return response()->json(['success' => true, 'html' => view('site.partials.search-blocks', $payload)->render()]);
         return view('site.pages.search', $payload);

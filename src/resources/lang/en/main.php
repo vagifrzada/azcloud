@@ -35,7 +35,7 @@ return [
     'apply_label' => 'Any questions left? We are happy to help answer them!',
 
     'type_post' => 'Blog',
-    'type_service' => 'Service',
+    'type_product' => 'Service',
 
     'sign_in' => 'Sign in',
     'sign_up' => 'Sign up',

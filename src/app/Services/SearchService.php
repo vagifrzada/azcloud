@@ -11,28 +11,28 @@ class SearchService
         $pdo = DB::connection('mysql')->getPdo();
         $searchable = e(escapeLike($query));
         $locale = app()->getLocale();
+        session()->put('query', $searchable);
 
         $countSql = "
-             SELECT COUNT(*) AS `count` FROM posts AS p
-             INNER JOIN post_translations AS pt ON p.id = pt.post_id
-             WHERE p.status = 1 AND pt.locale = ? AND (pt.title LIKE '%{$searchable}%' OR pt.content LIKE '%{$searchable}%')
+            SELECT COUNT(*) AS total FROM (
+                 SELECT p.id AS `count` FROM posts AS p
+                 INNER JOIN post_translations AS pt ON p.id = pt.post_id
+                 WHERE p.status = 1 AND pt.locale = ? AND (pt.title LIKE '%{$searchable}%' OR pt.content LIKE '%{$searchable}%')
              UNION 
-             SELECT COUNT(*) AS `count` FROM products as pr
-             LEFT JOIN product_translations AS prt ON pr.id = prt.product_id
-             INNER JOIN product_category AS pc ON pc.id = pr.category_id
-             WHERE pr.status = 1 AND pr.title LIKE '%{$searchable}%'  
+                SELECT pr.id AS `count` FROM products as pr
+                LEFT JOIN product_translations AS prt ON pr.id = prt.product_id
+                INNER JOIN product_category AS pc ON pc.id = pr.category_id
+                WHERE pr.status = 1 AND pr.title LIKE '%{$searchable}%'  
                    OR (prt.locale = ? AND (prt.description LIKE '%{$searchable}%' 
-                   OR prt.use_cases_description LIKE '%{$searchable}%'))
+                   OR prt.use_cases_description LIKE '%{$searchable}%'))                  
+            ) AS x
         ";
         $countSqlStmt = $pdo->prepare($countSql);
         $countSqlStmt->bindValue(1, $locale);
         $countSqlStmt->bindValue(2, $locale);
         $countSqlStmt->execute();
-        $resultCountData = $countSqlStmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $resultCount = 0;
-        foreach ($resultCountData as $item)
-            $resultCount += $item['count'];
+        $resultCount = $countSqlStmt->fetch(\PDO::FETCH_ASSOC)['total'] ?? 0;
 
         $sql = "
              SELECT p.id, pt.title, pt.slug, NULL AS category, 'post' AS type 

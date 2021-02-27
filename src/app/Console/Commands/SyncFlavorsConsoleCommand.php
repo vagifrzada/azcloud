@@ -6,6 +6,7 @@ use App\Entities\Product\Category\Category;
 use App\Entities\Product\Product;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class SyncFlavorsConsoleCommand extends Command
             $decodedData = json_decode($flavors, true);
             if (filled($decodedData)) {
                 $this->saveToDatabase($decodedData);
+                $this->flushCache();
                 $this->info('Flavors synced successfully.');
                 return;
             }
@@ -65,14 +67,19 @@ class SyncFlavorsConsoleCommand extends Command
                 return;
             }
 
-            foreach ($flavors as &$flavor) {
+            foreach ($flavors as $key => &$flavor) {
+                if (stripos($flavor['name'], 'test') !== false) {
+                    unset($flavors[$key]);
+                    continue;
+                }
+
                 $flavor['monthly_price'] = $flavor['price'];
-                $flavor['hourly_price'] = $flavor['price'] / 720;
+                $flavor['hourly_price'] = round($flavor['price'] / 720, 9);
 
                 $flavor['product_id'] = $productEntity->id;
                 $flavor['flavor_id'] = $flavor['id'];
                 $flavor['type'] = $category;
-                $flavor['family'] = mb_substr($flavor['name'], 0, 1, 'UTF-8');
+                $flavor['family'] = strtolower(mb_substr($flavor['name'], 0, 1, 'UTF-8'));
 
                 unset($flavor['id'], $flavor['price']);
             }
@@ -102,5 +109,13 @@ class SyncFlavorsConsoleCommand extends Command
         }
 
         return $categoryEntity->id;
+    }
+
+    private function flushCache(): void
+    {
+        Cache::forget('product_flavors_vm');
+        Cache::forget('product_flavors_vm_families');
+        Cache::forget('product_flavors_storage');
+        Cache::forget('product_flavors_storage_families');
     }
 }

@@ -44,6 +44,7 @@
     <script type="text/javascript" src="{{ asset('assets/site/js/main.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/site/js/blog.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/site/js/service.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/site/js/calculator.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/site/js/custom.js') }}"></script>
     @stack('scripts')
 </body>

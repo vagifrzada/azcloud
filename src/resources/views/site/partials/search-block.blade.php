@@ -18,10 +18,10 @@
                             <img src="{{ asset('assets/site/images/icons/icon-search-white.svg') }}" alt="Icon search">
                         </button>
                         <div class="search-examples hidden-991">
-                            <span>Ex.</span>
+                            <!-- <span>Ex.</span>
                             <a href="/search?q=Servers">Servers</a>
                             <a href="/search?q=Datacenters">Datacenters</a>
-                            <a href="/search?q=Video konfrans">Video konfrans</a>
+                            <a href="/search?q=Video konfrans">Video konfrans</a> -->
                         </div>
                     </form>
                 </div>

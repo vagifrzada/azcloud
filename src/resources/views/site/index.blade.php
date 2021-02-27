@@ -320,6 +320,10 @@
     @endif
     <!-- Advantages-->
 
+    @if (filled($calculator = PagePlugin::getByIdentity(['identity' => 'homepage-calculator'])))
+        @widget('CalculatorWidget', ['page' => $calculator])
+    @endif
+
     @if (filled($item = PagePlugin::getByIdentity(['identity' => 'homepage-exposure-server'])))
     <div class="full-width-section ptb-16" data-aos="fade-in" data-aos-duration="800">
         <div class="bg-video">

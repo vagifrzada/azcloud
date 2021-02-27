@@ -14,8 +14,8 @@
                     <div class="search-form v2">
                         <form action="{{ route('site.search') }}" method="GET">
                             <div class="form-group">
-                                <label for="search-field">Search</label>
-                                <input class="form-control" type="text" id="search-field" name="q" placeholder="@lang('main.search') ..." autocomplete="off">
+                                <label for="search-field">@lang('main.search')</label>
+                                <input class="form-control" type="text" value="{{ session('query') }}" id="search-field" name="q" placeholder="@lang('main.search') ..." autocomplete="off">
                             </div>
                             <button class="submit-search" type="submit">
                                 <img src="{{ asset('assets/site/images/icons/icon-search.svg') }}" alt="Icon search">

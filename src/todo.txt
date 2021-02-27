@@ -1,4 +1,6 @@
-1. Menu
-3. Main page - Rendering services
-4. Main page - Rendering calculator
-5. Services page
+1. Main page - Rendering services
+2. Services page
+3. Menu
+4. Menu in admin panel
+5. Export sql for dump.
+

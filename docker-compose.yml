@@ -47,6 +47,7 @@ services:
       MYSQL_DATABASE: azcloud
       SERVICE_NAME: mysql
       TZ: Asia/Baku
+    command: --sql_mode=""
 
   redis:
     image: redis:latest

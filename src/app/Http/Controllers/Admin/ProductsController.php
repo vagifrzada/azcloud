@@ -59,6 +59,7 @@ class ProductsController extends Controller
     {
         $rules = [
             'title' => 'required|unique:products',
+            'subtitle' => 'required',
             'benefits' => 'required|array',
             'use_cases' => 'required|array',
             'features' => 'required|array',
@@ -73,6 +74,7 @@ class ProductsController extends Controller
         try {
             $product = new Product();
             $product->title = $request->get('title');
+            $product->subtitle = $request->get('subtitle');
             $product->slug = Str::slug($product->title);
             $product->category_id = $category->getId();
             $product->status = (bool) $request->get('status');
@@ -150,6 +152,7 @@ class ProductsController extends Controller
     {
         $rules = [
             'title' => 'required',
+            'subtitle' => 'required',
             'benefits' => 'required|array',
             'use_cases' => 'required|array',
             'features' => 'required|array',
@@ -167,6 +170,7 @@ class ProductsController extends Controller
 
         try {
             $product->title = $request->get('title');
+            $product->subtitle = $request->get('subtitle');
             $product->slug = Str::slug($product->title);
             $product->category_id = $category->getId();
             $product->status = (bool) $request->get('status');

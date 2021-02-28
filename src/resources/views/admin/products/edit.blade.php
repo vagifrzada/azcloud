@@ -133,8 +133,15 @@
                             @endif
                         </div>
 
+                        <div class="form-group form-material subtitle required">
+                            <label for="subtitle" class="form-control-label">Subtitle of the product (Required)</label>
+                            <input id="subtitle" type="text" name="subtitle" class="form-control" required value="{{ $product->getSubtitle() }}">
+                            @if ($errors->has('subtitle'))
+                                <p class="help-block help-block-error">{{ $errors->first('subtitle') }}</p>
+                            @endif
+                        </div>
 
-                        @if (str_contains($category->getSlug(), 'network'))
+                    @if (str_contains($category->getSlug(), 'network'))
                             <div class="form-group form-material parent_id required">
                                 <label class="form-control-label" for="parent_id">Parent product</label>
                                 <select name="parent_id" id="parent_id" class="form-control">

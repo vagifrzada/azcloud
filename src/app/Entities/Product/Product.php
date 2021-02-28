@@ -23,6 +23,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int parent_id
  * @property int category_id
  * @property string title
+ * @property string subtitle
  * @property string description
  * @property string use_cases_description
  * @property string additional_features
@@ -73,6 +74,11 @@ class Product extends Model implements TranslatableContract, HasMedia
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
     }
 
     public function getSlug(): string

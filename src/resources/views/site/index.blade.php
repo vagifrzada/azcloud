@@ -71,9 +71,149 @@
             </div>
         </div>
         @endif
+        <!-- Services heading-->
 
-        @widget('ServicesWidget')
+        <div class="services-body ptb-14">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 offset-xl-2">
+                        <div class="section-header">
+                            <h2 class="section-title">Xİdmətlərimiz</h2>
+                        </div>
 
+                        <div class="services-grid flex" data-aos="fade-in" data-aos-duration="800">
+                            <div class="service-card wider">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Bulud infrastrukturu</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Bulud infrastrukturu</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+
+                            <div class="service-card">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Virtual İP telefoniya</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">20 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Virtual İP telefoniya</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">20 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+
+                            <div class="service-card">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Təhlükəsizlik həlləri</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">980 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg')  }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Təhlükəsizlik həlləri</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">980 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+
+                            <div class="service-card">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Rezervlənmə xidməti</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Rezervlənmə xidməti</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+
+                            <div class="service-card">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Microsoft məhsulları</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Microsoft məhsulları</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+
+                            <div class="service-card wider">
+                                <div class="rotator">
+                                    <div class="card-front">
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Yerləşdirmə</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">249 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
+                                        <a class="service-item" href="service-inner.html">
+                                            <span class="title">Yerləşdirmə</span>
+                                            <span class="subtitle">resurs elastikliyi</span>
+                                            <span class="price">249 AZN-dan<i class="icon-arrow-right"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Service card-->
+                        </div>
+                        <!-- Services grid-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Services body-->
     </section>
     <!-- Services-->
 

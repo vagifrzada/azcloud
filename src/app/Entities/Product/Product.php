@@ -29,6 +29,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string additional_features
  * @property string slug
  * @property boolean status
+ * @property string meta
  * @property Category category
  */
 class Product extends Model implements TranslatableContract, HasMedia
@@ -74,6 +75,11 @@ class Product extends Model implements TranslatableContract, HasMedia
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public function getMeta(): array
+    {
+        return ($this->meta !== null) ? json_decode($this->meta, true) : [];
     }
 
     public function getSubtitle(): ?string

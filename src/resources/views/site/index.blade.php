@@ -11,25 +11,23 @@
         <div class="wave-texture bottom-right"></div>
         <div class="swiper-container" data-aos="fade-in" data-aos-duration="800">
             <div class="swiper-wrapper">
-
                 @foreach($sliders as $slider)
-                <div class="swiper-slide no-swipe">
-                    <div class="service-preview flex">
-                        <div class="left">
-                            <h1 class="title">{{ $slider->title }}</h1>
-                            <h2 class="subtitle">{!! $slider->description !!}</h2>
-                            <div class="actions">
-                                <a class="btn btn-primary" @if($slider->buy_link) target="_blank" @endif href="{{ $slider->buy_link ?? '#' }}">@lang('main.buy')</a>
-                                <a class="btn btn-outline" @if($slider->prices_link) target="_blank" @endif href="{{ $slider->prices_link ?? '#' }}">@lang('main.price_list')</a>
+                    <div class="swiper-slide no-swipe">
+                        <div class="service-preview flex">
+                            <div class="left">
+                                <h1 class="title">{{ $slider->title }}</h1>
+                                <h2 class="subtitle">{!! $slider->description !!}</h2>
+                                <div class="actions">
+                                    <a class="btn btn-primary" @if($slider->buy_link) target="_blank" @endif href="{{ $slider->buy_link ?? 'javascript:void(0)' }}">@lang('main.buy')</a>
+                                    <a class="btn btn-outline" @if($slider->prices_link) target="_blank" @endif href="{{ $slider->prices_link ?? 'javascript:void(0)' }}">@lang('main.price_list')</a>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <img src="{{ optional($slider->getCover())->getUrl() }}" alt="Service image">
                             </div>
                         </div>
-                        <div class="right">
-                            <img src="{{ optional($slider->getCover())->getUrl() }}" alt="Service image">
-                        </div>
                     </div>
-                </div>
                 @endforeach
-
             </div>
             <!-- Swiper wrapper-->
 
@@ -71,149 +69,21 @@
             </div>
         </div>
         @endif
-        <!-- Services heading-->
 
-        <div class="services-body ptb-14">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2">
-                        <div class="section-header">
-                            <h2 class="section-title">Xİdmətlərimiz</h2>
-                        </div>
-
-                        <div class="services-grid flex" data-aos="fade-in" data-aos-duration="800">
-                            <div class="service-card wider">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Bulud infrastrukturu</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Bulud infrastrukturu</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
+        @if (filled($servicesPage = PagePlugin::getByIdentity(['identity' => 'homepage-services'])))
+            <div class="services-body ptb-14">
+                 <div class="container-fluid">
+                      <div class="row">
+                         <div class="col-xl-8 offset-xl-2">
+                           <div class="section-header">
+                               <h2 class="section-title">{{ $servicesPage->getTitle() }}</h2>
                             </div>
-                            <!-- Service card-->
-
-                            <div class="service-card">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Virtual İP telefoniya</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">20 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Virtual İP telefoniya</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">20 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Service card-->
-
-                            <div class="service-card">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Təhlükəsizlik həlləri</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">980 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg')  }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Təhlükəsizlik həlləri</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">980 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Service card-->
-
-                            <div class="service-card">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Rezervlənmə xidməti</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Rezervlənmə xidməti</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Service card-->
-
-                            <div class="service-card">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Microsoft məhsulları</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Microsoft məhsulları</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">Ətraflı bax<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Service card-->
-
-                            <div class="service-card wider">
-                                <div class="rotator">
-                                    <div class="card-front">
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Yerləşdirmə</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">249 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="card-bg cover-center" style="background-image: url({{ asset('assets/site/images/service-card-bg.jpg') }})"></div>
-                                        <a class="service-item" href="service-inner.html">
-                                            <span class="title">Yerləşdirmə</span>
-                                            <span class="subtitle">resurs elastikliyi</span>
-                                            <span class="price">249 AZN-dan<i class="icon-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Service card-->
-                        </div>
-                        <!-- Services grid-->
-                    </div>
+                             @widget('ServicesWidget')
+                         </div>
+                      </div>
                 </div>
-            </div>
-        </div>
-        <!-- Services body-->
+           </div>
+        @endif
     </section>
     <!-- Services-->
 

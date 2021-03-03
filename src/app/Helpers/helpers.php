@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Helpers\LocalizedUrlGenerator;
 
-if (! function_exists('settings')) {
+if (!function_exists('settings')) {
 
     function settings($key, $default = null)
     {
@@ -23,7 +23,7 @@ if (! function_exists('settings')) {
     }
 }
 
-if (! function_exists('localizedUrl')) {
+if (!function_exists('localizedUrl')) {
 
     function localizedUrl(string $lang): string
     {
@@ -31,19 +31,19 @@ if (! function_exists('localizedUrl')) {
     }
 }
 
-if (! function_exists('escapeLike')) {
+if (!function_exists('escapeLike')) {
 
     function escapeLike(string $value, string $char = '\\'): string
     {
         return str_replace(
             [$char, '%', '_'],
-            [$char.$char, $char.'%', $char.'_'],
+            [$char . $char, $char . '%', $char . '_'],
             $value
         );
     }
 }
 
-if (! function_exists('searchRoute')) {
+if (!function_exists('searchRoute')) {
     function searchRoute(array $item): ?string
     {
         $routes = [
@@ -59,5 +59,12 @@ if (! function_exists('searchRoute')) {
             $params['category'] = $item['category'];
 
         return route($routes[$item['type']], $params);
+    }
+}
+
+if (!function_exists('getFirstParagraph')) {
+    function getFirstParagraph(?string $text): string
+    {
+        return ($text !== null) ? substr($text,0, strpos($text, "</p>") + 4) : '';
     }
 }

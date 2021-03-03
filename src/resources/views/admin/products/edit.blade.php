@@ -20,7 +20,7 @@
             <div class="col-lg-8">
                 <div class="panel">
                     <div class="panel-body">
-                        <h3>2. Creating product for category: {{$category->getTitle()}}</h3>
+                        <h3>2. Editing product for category: {{$category->getTitle()}}</h3>
                         <br>
 
                         <ul class="nav nav-tabs">
@@ -135,7 +135,7 @@
 
                         <div class="form-group form-material subtitle required">
                             <label for="subtitle" class="form-control-label">Subtitle of the product (Required)</label>
-                            <input id="subtitle" type="text" name="subtitle" class="form-control" required value="{{ $product->getSubtitle() }}">
+                            <input id="subtitle" type="text" name="subtitle" class="form-control" required value="{{ $product->getSubtitle() ?? old('subtitle') }}">
                             @if ($errors->has('subtitle'))
                                 <p class="help-block help-block-error">{{ $errors->first('subtitle') }}</p>
                             @endif

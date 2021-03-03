@@ -1,5 +1,4 @@
-1. Main page - Rendering services
-2. Services page
-3. Menu
-4. Menu in admin panel
-5. Export sql for dump.
+1. Menu
+2. Menu in admin panel
+3. Export sql for dump.
+4. Test installation process

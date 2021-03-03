@@ -33,6 +33,11 @@ class Bundle extends Model implements TranslatableContract
         return ($this->price / 100);
     }
 
+    public function getOptions(): array
+    {
+        return filled($this->options) ? json_decode($this->options, true) : [];
+    }
+
     public function scopeForCompute(Builder $query): Builder
     {
         return $query->where('price', '=', 0)->orWhereNull('price');

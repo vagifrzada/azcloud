@@ -83,7 +83,7 @@
                 <div class="panel-body">
                     <div class="form-group form-material price">
                         <label class="form-control-label" for="price">Price (Fill price when you're creating bundle for "network" category)</label>
-                        <input type="number" step="any" id="price" min="1" class="form-control" name="price" aria-required="true" value="{{ old('price') }}">
+                        <input type="number" step="any" id="price" min="0" class="form-control" name="price" aria-required="true" value="{{ old('price') }}">
                         @if ($errors->has('price'))
                             <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
                         @endif

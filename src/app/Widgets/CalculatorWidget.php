@@ -69,7 +69,7 @@ class CalculatorWidget extends AbstractWidget
             if ($storageList->isEmpty())
                 return collect();
 
-            $familyLabels = ['s' => 'standart', 'u' => 'ultimate', 't' => 'turbo'];
+            $familyLabels = $this->getFamilyLabes();
             $storageList->map(function ($item) use ($familyLabels) {
                 $item->label = sprintf('%s: %d GB, %f AZN/hour', $item->name, $item->size,  $item->hourly_price);
                 $item->family = $familyLabels[$item->family] ?? $item->family;
@@ -91,7 +91,7 @@ class CalculatorWidget extends AbstractWidget
                 ->get();
 
             if ($storageFamilies->isNotEmpty()) {
-                $familyLabels = ['s' => 'standart', 'u' => 'ultimate', 't' => 'turbo'];
+                $familyLabels = $this->getFamilyLabes();
                 $storageFamilies->map(function ($item) use ($familyLabels) {
                     $item->family = $familyLabels[$item->family] ?? $item->family;
                     return $item;
@@ -100,5 +100,14 @@ class CalculatorWidget extends AbstractWidget
 
             return $storageFamilies;
         });
+    }
+
+    private function getFamilyLabes(): array
+    {
+        return [
+            's' => strtolower(__('bundles.family-s')),
+            't' => strtolower(__('bundles.family-t')),
+            'u' => strtolower(__('bundles.family-u')),
+        ];
     }
 }

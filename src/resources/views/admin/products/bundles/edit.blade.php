@@ -92,7 +92,7 @@
                 <div class="panel-body">
                     <div class="form-group form-material price">
                         <label class="form-control-label" for="price">Price (Not required)</label>
-                        <input type="number" step="any" id="price" min="1" class="form-control" name="price" aria-required="true" value="{{ $bundle->getPrice() }}">
+                        <input type="number" step="any" id="price" min="0" class="form-control" name="price" aria-required="true" value="{{ $bundle->getPrice() }}">
                         @if ($errors->has('price'))
                             <p class="help-block help-block-error">{{ $errors->first('slug') }}</p>
                         @endif

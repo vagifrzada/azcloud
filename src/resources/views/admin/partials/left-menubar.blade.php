@@ -232,7 +232,7 @@
                         </ul>
                     </li>
 
-                    {{-- Settings --}}
+                    {{-- Newsletter --}}
                     <li class="site-menu-item has-sub @if(str_contains(request()->url(), 'newsletter')) open active @endif">
                         <a href="javascript:void(0)">
                             <i class="site-menu-icon md-accounts-list"></i>
@@ -246,6 +246,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="site-menu-item">
+                        <a href="{{ route('languages.index') }}" target="_blank">
+                            <i class="site-menu-icon  md-view-dashboard"></i>
+                            <span class="site-menu-title">Translations</span>
+                        </a>
                     </li>
 
                     {{-- Settings --}}

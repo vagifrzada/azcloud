@@ -31,6 +31,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
  * @property boolean status
  * @property string meta
  * @property Category category
+ * @property Flavor[] prices
  */
 class Product extends Model implements TranslatableContract, HasMedia
 {
@@ -124,6 +125,11 @@ class Product extends Model implements TranslatableContract, HasMedia
         return $this->category;
     }
 
+    public function prices(): HasMany
+    {
+        return $this->hasMany(Flavor::class)->orderBy('family', 'ASC');
+    }
+
     public function category(): HasOne
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
@@ -131,7 +137,7 @@ class Product extends Model implements TranslatableContract, HasMedia
 
     public function bundles(): BelongsToMany
     {
-        return $this->belongsToMany(Bundle::class, 'bundle_product');
+        return $this->belongsToMany(Bundle::class, 'bundle_product')->limit(3);
     }
 
     public function benefits(): BelongsToMany

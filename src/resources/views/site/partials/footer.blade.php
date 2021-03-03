@@ -15,37 +15,37 @@
                                 <p class="label">@lang('main.contact')</p>
                                 <table>
                                     <tr>
-                                        <td><strong>Ünvan:</strong></td>
+                                        <td><strong>@lang('main.address_singular'):</strong></td>
                                         <td>
-                                            <p>Əlibəy Hüseynzadə 74 AZ1009, Bakı, Azərbaycan</p>
+                                            <p>{{ settings('address') }}</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Telefon: </strong></td>
+                                        <td><strong>@lang('main.phone'): </strong></td>
                                         <td>
-                                            <p>(+99412) 200 0020</p>
+                                            <p>{{ settings('mobile_phone_number') }}</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><strong>E-mail:</strong></td>
+                                        <td><strong>@lang('main.email'):</strong></td>
                                         <td>
-                                            <p>sales@azсloud.az</p>
+                                            <p>{{ settings('email') }}</p>
                                         </td>
                                     </tr>
                                 </table>
                                 <ul class="socials">
                                     <li>
-                                        <a href="https://linkedin.com" rel="noreferrer" target="_blank">
+                                        <a href="{{ settings('linkedin_url') }}" rel="noreferrer" target="_blank">
                                             <i class="icon-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://youtube.com" rel="noreferrer" target="_blank">
+                                        <a href="{{ settings('youtube_url') }}" rel="noreferrer" target="_blank">
                                             <i class="icon-youtube-play"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://facebook.com" rel="noreferrer" target="_blank">
+                                        <a href="{{ settings('facebook_page_url') }}" rel="noreferrer" target="_blank">
                                             <i class="icon-facebook"></i>
                                         </a>
                                     </li>
@@ -60,9 +60,7 @@
                                     <div class="footer-links">
                                         <p class="label">Sitemap</p>
                                         <ul>
-                                            <li>
-                                                <a href="index.html">Əsas səhifə</a>
-                                            </li>
+                                            <li><a href="index.html">Əsas səhifə</a></li>
                                             <li>
                                                 <a href="about.html">Haqqımızda</a>
                                             </li>
@@ -125,7 +123,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
-                    <p>All right reserved 2020<img src="{{ asset('assets/site/images/icons/icon-hexagon-footer.svg') }}" alt="Hexagon">Made with love</p>
+                    <p>All rights reserved {{ date('Y') }}<img src="{{ asset('assets/site/images/icons/icon-hexagon-footer.svg') }}" alt="Hexagon">Made with love</p>
                 </div>
             </div>
         </div>

@@ -74,8 +74,13 @@ class Category extends Model implements TranslatableContract, HasMedia
         return $query->where('status', true);
     }
 
+    public function scopeParents(Builder $query): Builder
+    {
+        return $query->where('parent_id', 0);
+    }
+
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'category_id');
+        return $this->hasMany(Product::class, 'category_id')->where('parent_id', 0);
     }
 }

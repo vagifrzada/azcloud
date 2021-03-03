@@ -26,9 +26,7 @@ class ProductsController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        dd($product);
-
-        // $meta = $product->getMeta();
-        // $meta =  ['meta' => $product->getMeta() : ['title' => null, 'keywords' => null, 'description' => null]];
+        abort_if(!view()->exists(($template = 'site.products.' . $category->getSlug())), 404);
+        return view($template, ['category' => $category, 'product' => $product, 'meta' => $product->getMeta()]);
     }
 }

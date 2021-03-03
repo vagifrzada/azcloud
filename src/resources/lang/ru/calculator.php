@@ -1,10 +1,9 @@
 <?php
 
-return [
-    'quantity' => 'Количество',
-    'duration' => 'Длительность',
-
-    'hours' => 'ч.',
-    'weeks' => 'нед.',
-    'months' => 'мес.',
-];
+return array (
+  'quantity' => 'Количество',
+  'duration' => 'Длительность',
+  'hours' => 'ч.',
+  'weeks' => 'нед.',
+  'months' => 'мес.',
+);

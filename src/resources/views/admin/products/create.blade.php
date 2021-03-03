@@ -118,7 +118,7 @@
                             @endif
                         </div>
 
-                        @if (str_contains($category->getSlug(), 'network'))
+                        @if ($category->getSlug() === 'network')
                             <div class="form-group form-material parent_id required">
                                 <label class="form-control-label" for="parent_id">Parent product</label>
                                 <select name="parent_id" id="parent_id" class="form-control">

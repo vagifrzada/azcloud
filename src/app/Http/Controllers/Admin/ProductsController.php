@@ -44,7 +44,7 @@ class ProductsController extends Controller
             'products' => [],
         ];
 
-        if (str_contains($category->getSlug(), 'network')) {
+        if ($category->getSlug() === 'network') {
             $payload['products'] = Product::query()
                 ->with('children')
                 ->where('parent_id', 0)
@@ -79,7 +79,7 @@ class ProductsController extends Controller
             $product->category_id = $category->getId();
             $product->status = (bool) $request->get('status');
 
-            if (str_contains($category->getSlug(), 'network'))
+            if ($category->getSlug() === 'network')
                 $product->parent_id = $request->get('parent_id', 0);
 
             foreach ($product->translatedAttributes as $attribute) {
@@ -136,7 +136,7 @@ class ProductsController extends Controller
             'products' => [],
         ];
 
-        if (str_contains($category->getSlug(), 'network')) {
+        if ($category->getSlug() === 'network') {
             $payload['products'] = Product::query()
                 ->with('children')
                 ->where('parent_id', 0)
@@ -175,7 +175,7 @@ class ProductsController extends Controller
             $product->category_id = $category->getId();
             $product->status = (bool) $request->get('status');
 
-            if (str_contains($category->getSlug(), 'network'))
+            if ($category->getSlug() === 'network')
                 $product->parent_id = $request->get('parent_id', 0);
 
             foreach ($product->translatedAttributes as $attribute) {
@@ -231,7 +231,7 @@ class ProductsController extends Controller
     {
         switch ($category->getSlug()) {
             case 'compute': return Bundle::active()->forCompute()->get();
-            case 'networking': return Bundle::active()->forNetworking()->get();
+            case 'network': return Bundle::active()->forNetwork()->get();
             default: return collect();
         }
     }

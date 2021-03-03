@@ -3,9 +3,7 @@
 namespace App\Widgets;
 
 use Arrilot\Widgets\AbstractWidget;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\{Collection, Facades\DB, Facades\Cache};
 
 class CalculatorWidget extends AbstractWidget
 {

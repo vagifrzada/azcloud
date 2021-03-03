@@ -2,20 +2,20 @@
 
 namespace App\Entities\Product;
 
-use App\Entities\Product\Feature\Feature;
-use App\Entities\Product\UseCase\UseCase;
 use Spatie\MediaLibrary\HasMedia;
 use App\Entities\Product\Bundle\Bundle;
 use Illuminate\Database\Eloquent\Model;
 use App\Entities\Product\Benefit\Benefit;
 use Astrotomic\Translatable\Translatable;
+use App\Entities\Product\UseCase\UseCase;
+use App\Entities\Product\Feature\Feature;
 use App\Entities\Product\Category\Category;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  *

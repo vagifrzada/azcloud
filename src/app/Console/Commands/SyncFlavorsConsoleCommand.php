@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Entities\Product\Category\Category;
-use App\Entities\Product\Product;
-use Illuminate\Console\Command;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Console\Command;
+use App\Entities\Product\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use App\Entities\Product\Category\Category;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class SyncFlavorsConsoleCommand extends Command
 {
@@ -92,12 +92,12 @@ class SyncFlavorsConsoleCommand extends Command
     {
         $category = mb_strtolower($category, 'UTF-8');
         $categoryMap = [
-            'vm' => 'compute', 'volume' => 'storage', 'lb' => 'networking',
+            'vm' => 'compute', 'volume' => 'storage', 'lb' => 'network',
         ];
 
         if (!array_key_exists($category, $categoryMap)) {
             throw new \InvalidArgumentException(
-                "Invalid category suplied ! Category: {$category}, Acceptable (Mapped) categories: 'vm=compute', 'volume=storage', 'lb=networking'"
+                "Invalid category suplied ! Category: {$category}, Acceptable (Mapped) categories: 'vm=compute', 'volume=storage', 'lb=network'"
             );
         }
 

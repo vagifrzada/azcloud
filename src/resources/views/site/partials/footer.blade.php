@@ -58,24 +58,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="footer-links">
-                                        <p class="label">Sitemap</p>
+                                        <p class="label">@lang('main.sitemap')</p>
                                         <ul>
-                                            <li><a href="index.html">Əsas səhifə</a></li>
-                                            <li>
-                                                <a href="about.html">Haqqımızda</a>
-                                            </li>
-                                            <li>
-                                                <a href="services.html">Xidmətlər</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog.html">Blog</a>
-                                            </li>
-                                            <li>
-                                                <a href="partnership.html">Əməkdaşlıq</a>
-                                            </li>
-                                            <li>
-                                                <a href="contact.html">Əlaqə</a>
-                                            </li>
+                                            @foreach($menu as $item)
+                                                <li><a href="{{ $item->getUrl() }}">{{ $item->getTitle() }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -83,26 +70,15 @@
 
                                 <div class="col-sm-6">
                                     <div class="footer-links">
-                                        <p class="label">Xidmətlər</p>
+                                        <p class="label">@lang('main.our_services')</p>
                                         <ul>
-                                            <li>
-                                                <a href="service.html">Bulud infrastrukturu</a>
-                                            </li>
-                                            <li>
-                                                <a href="service.html">Virtual İP telefoniya</a>
-                                            </li>
-                                            <li>
-                                                <a href="service.html">Təhlükəsizlik həlləri</a>
-                                            </li>
-                                            <li>
-                                                <a href="service.html">Rezervlənmə xidməti</a>
-                                            </li>
-                                            <li>
-                                                <a href="service.html">Microsoft məhsulları</a>
-                                            </li>
-                                            <li>
-                                                <a href="service.html">Yerləşdirmə</a>
-                                            </li>
+                                            @foreach($footerProducts as $product)
+                                                <li>
+                                                    <a href="{{ route('site.products.show', ['slug' => $product->getSlug(), 'category' => $product->getCategory()->getSlug()]) }}" target="_blank">
+                                                        {{ $product->getTitle() }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

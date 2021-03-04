@@ -1,0 +1,80 @@
+@extends('layouts.admin')
+
+@section('content')
+
+    <form id="menu-edit" method="POST" action="{{ route('admin.menu.update', ['menu' => $menu->getId()]) }}">
+        @csrf
+        @method('PUT')
+      <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+
+                    <ul class="nav nav-tabs">
+                        @foreach ($supportedLocales as $locale => $info)
+                            <li class="nav-item">
+                                <a class="nav-link {{ $locale == config('app.locale') ? 'active' : null }}" href="#{{$locale}}" data-toggle="tab">
+                                    {{ $info['name'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    <div class="tab-content mt-4">
+                        @foreach ($supportedLocales as $locale => $info)
+                        <div class="tab-pane {{ $locale == config('app.locale') ? 'active' : null }}" id="{{ $locale }}">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div class="form-group form-material title required">
+                                        <label class="form-control-label" for="title-{{ $locale }}">Title</label>
+                                        <input type="text" id="title-{{ $locale }}" class="form-control" name="title[{{ $locale }}]" aria-required="true" value="{{ optional($menu->translate($locale))->title ?? old('title.' . $locale) }}">
+                                        @if ($errors->has('title.' . $locale))
+                                            <p class="help-block help-block-error">{{ $errors->first('title.' . $locale) }}</p>
+                                        @endif
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Settings</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group form-material url required">
+                        <label class="form-control-label" for="url">Url for menu item</label>
+                        <input type="text" class="form-control" required name="url" value="{{ $menu->getUrl() }}" placeholder="Example: /services or https://google.com">
+                        @if ($errors->has('url'))
+                            <p class="help-block help-block-error">{{ $errors->first('url')  }}</p>
+                        @endif
+                    </div>
+
+                    <div class="form-group form-material status required">
+                        <label class="form-control-label" for="status">Status</label>
+                        <input type="hidden" name="status"  value="0">
+                        <input id="status" type="checkbox" @if ($menu->isActive()) checked  @endif data-plugin="switchery" name="status" value="{{ old('status', 1)  }}">
+                        @if ($errors->has('status'))
+                            <p class="help-block help-block-error">{{ $errors->first('status')  }}</p>
+                        @endif
+                    </div>
+                    <br><br>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-round">Update !</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </form>
+@endsection

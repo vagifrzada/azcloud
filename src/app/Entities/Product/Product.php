@@ -2,6 +2,7 @@
 
 namespace App\Entities\Product;
 
+use Illuminate\Support\Facades\Cache;
 use Spatie\MediaLibrary\HasMedia;
 use App\Entities\Product\Bundle\Bundle;
 use Illuminate\Database\Eloquent\Model;
@@ -158,5 +159,20 @@ class Product extends Model implements TranslatableContract, HasMedia
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function () {
+            if (Cache::has('site_footer_products'))
+                Cache::forget('site_footer_products');
+        });
+
+        static::deleted(function () {
+            if (Cache::has('site_footer_products'))
+                Cache::forget('site_footer_products');
+        });
     }
 }

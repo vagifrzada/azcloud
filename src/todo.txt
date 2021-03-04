@@ -1,4 +1,2 @@
-1. Menu
-2. Menu in admin panel
-3. Export sql for dump.
-4. Test installation process
+1. Export sql for dump.
+2. Test installation process

@@ -18,24 +18,11 @@
                                         <a href="{{ settings('azcloud_console_url') }}">@lang('main.sign_in') / </a>
                                         <a href="{{ settings('azcloud_console_url') }}">@lang('main.sign_up')</a>
                                     </li>
-                                    <li>
-                                        <a class="menu-link" href="index.html">Əsas səhifə</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link" href="about.html">Haqqımızda</a>
-                                    </li>
-                                    <li>
-                                        <a class="services-link" href="services.html">Xidmətlər</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link" href="blog.html">Bloq</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link" href="partnership.html">Əməkdaşlıq</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-link" href="contact.html">Əlaqə</a>
-                                    </li>
+                                    @foreach($menu as $item)
+                                        <li>
+                                            <a class="{{ !str_contains($item->getUrl(), 'services') ? 'menu' : 'services' }}-link" href="{{ $item->getUrl() }}">{{ $item->getTitle() }}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </nav>
                         </div>
@@ -45,25 +32,27 @@
                             <div class="menu-right-container default">
                                 <div class="services-flips flex">
 
+                                    @foreach($menuItems as $item)
                                     <div class="service-flip">
                                         <div class="rotator">
                                             <div class="flip-front">
-                                                <a class="flip-item" href="service-inner.html">
-                                                    <span class="title">Bulud infrastrukturu</span>
-                                                    <span class="subtitle">resurs elastikliyi</span>
-                                                    <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
+                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}">
+                                                    <span class="title">{{ $item->getTitle() }}</span>
+                                                    <span class="subtitle">{{ $item->getSubtitle() }}</span>
+                                                    <span class="price">{{ $item->getDescription() }}<i class="icon-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                             <div class="flip-back">
-                                                <div class="flip-bg cover-center" style="background-image: url(images/service-card-bg.jpg)"></div>
-                                                <a class="flip-item" href="service-inner.html">
-                                                    <span class="title">Bulud infrastrukturu</span>
-                                                    <span class="subtitle">resurs elastikliyi</span>
-                                                    <span class="price">199 AZN-dan<i class="icon-arrow-right"></i></span>
+                                                <div class="flip-bg cover-center" style="background-image: url({{ optional($item->getCover())->getUrl() }})"></div>
+                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}">
+                                                    <span class="title">{{ $item->getTitle() }}</span>
+                                                    <span class="subtitle">{{ $item->getSubtitle() }}</span>
+                                                    <span class="price">{{ $item->getDescription() }}<i class="icon-arrow-right"></i></span>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
 
                                 </div>
 

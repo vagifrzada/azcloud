@@ -38,4 +38,5 @@ return array (
   'sign_up' => 'Qeydiyyat',
 
    'address_singular' => 'Ünvan',
+    'sitemap' => 'Sayt xəritəsi',
 );

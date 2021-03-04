@@ -38,4 +38,5 @@ return array (
   'sign_up' => 'Регистрация',
 
     'address_singular' => 'Адрес',
+    'sitemap' => 'Карта сайта',
 );

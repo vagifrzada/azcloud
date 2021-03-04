@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\ProductBenefitsController;
 use App\Http\Controllers\Admin\ProductBundlesController;
 use App\Http\Controllers\Admin\CertificatesController;
@@ -28,13 +30,23 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UsersController::class)->except(['destroy', 'show']);
     Route::get('users/{id}/delete', [UsersController::class, 'delete'])->name('users.delete');
 
+    // Menu
+    Route::resource('menu', MenuController::class)->except(['show']);
+    Route::post('menu/updateNestable', [MenuController::class, 'updateNestable'])
+        ->name('menu.update-nestable')->middleware('xhr-request');
+
+    Route::resource('menu-item', MenuItemController::class)->except(['show']);
+    Route::post('menu-item/updateNestable', [MenuItemController::class, 'updateNestable'])
+        ->name('menu-item.update-nestable')->middleware('xhr-request');
+
     // Slider
     Route::resource('slider', SliderController::class)->except(['destroy', 'show']);
     Route::get('slider/{id}/delete', [SliderController::class, 'delete'])->name('slider.delete');
 
     // Pages
     Route::resource('pages', PagesController::class)->except(['show']);
-    Route::post('pages/updateNestable', [PagesController::class, 'updateNestable'])->name('pages.update-nestable')->middleware('xhr-request');
+    Route::post('pages/updateNestable', [PagesController::class, 'updateNestable'])
+        ->name('pages.update-nestable')->middleware('xhr-request');
 
     // Products
     Route::resource('product-category', ProductCategoryController::class)->except(['show']);

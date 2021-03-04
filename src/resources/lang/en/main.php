@@ -38,4 +38,5 @@ return array (
   'sign_up' => 'Sign up',
 
     'address_singular' => 'Address',
+    'sitemap' => 'Sitemap',
 );

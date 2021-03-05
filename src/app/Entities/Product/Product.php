@@ -121,7 +121,7 @@ class Product extends Model implements TranslatableContract, HasMedia
         return $this->getFirstMedia(self::MEDIA_CASES_COVER);
     }
 
-    public function getCategory(): Category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }

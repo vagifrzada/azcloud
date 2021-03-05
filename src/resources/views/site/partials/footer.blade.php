@@ -73,11 +73,13 @@
                                         <p class="label">@lang('main.our_services')</p>
                                         <ul>
                                             @foreach($footerProducts as $product)
-                                                <li>
-                                                    <a href="{{ route('site.products.show', ['slug' => $product->getSlug(), 'category' => $product->getCategory()->getSlug()]) }}" target="_blank">
-                                                        {{ $product->getTitle() }}
-                                                    </a>
-                                                </li>
+                                                @if (filled($category = $product->getCategory()))
+                                                    <li>
+                                                        <a href="{{ route('site.products.show', ['slug' => $product->getSlug(), 'category' => $category->getSlug()]) }}" target="_blank">
+                                                            {{ $product->getTitle() }}
+                                                        </a>
+                                                    </li>
+                                                @endif
                                             @endforeach
                                         </ul>
                                     </div>

@@ -1,4 +1,4 @@
-init: pull-images build composer-install generate migrate storage-link
+init: pull-images build composer-install generate migrate user storage-link up
 
 pull-images:
 	docker-compose pull
@@ -18,3 +18,5 @@ sync:
 	docker-compose run --rm php-cli php artisan sync:flavors
 composer-update:
 	docker-compose run --rm php-cli composer update
+up:
+	docker-compose up -d

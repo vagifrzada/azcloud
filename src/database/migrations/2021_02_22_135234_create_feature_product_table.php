@@ -19,10 +19,6 @@ class CreateFeatureProductTable extends Migration
 
     public function down()
     {
-        Schema::table('feature_product', function (Blueprint $table) {
-            $table->dropForeign(['feature_id', 'product_id']);
-        });
-
         Schema::dropIfExists('feature_product');
     }
 }

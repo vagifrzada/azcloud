@@ -102,18 +102,8 @@
     <script src="{{ asset('assets/remark/global/vendor/fileinput/themes/fa/theme.min.js') }}"></script>
 
     <script>
-        let imageUrl = '{{ optional($benefit->getCover())->getUrl() }}';
-        $('#image').fileinput({
+        let fileInputConfigForBenefits = {
             uploadAsync: false,
-            initialPreview: [imageUrl],
-            initialPreviewAsData: true,
-            initialPreviewConfig: [
-                {
-                    caption: imageUrl,
-                    downloadUrl: imageUrl,
-                    width: '120px',
-                }
-            ],
             overwriteInitial: true,
             theme: 'fa',
             showUpload: false,
@@ -127,8 +117,26 @@
             browseOnZoneClick: true,
             actionDelete: '',
             dropZoneTitle: 'Click or drag image here for uploading.',
+            deleteUrl: '{{ route('admin.media.delete') }}',
             dropZoneClickTitle: '',
             showCaption: false,
-        });
+        };
+
+        let benefitsCover = '{{ optional($benefit->getCover())->getUrl() }}';
+
+        if (benefitsCover !== '') {
+            fileInputConfigForBenefits.initialPreview = [benefitsCover];
+            fileInputConfigForBenefits.initialPreviewAsData = true;
+            fileInputConfigForBenefits.initialPreviewConfig =  [
+                {
+                    key: '{{ optional($benefit->getCover())->uuid  }}',
+                    caption: benefitsCover,
+                    downloadUrl: benefitsCover,
+                    width: '120px',
+                }
+            ];
+        }
+
+        $('#image').fileinput(fileInputConfigForBenefits);
     </script>
 @endpush

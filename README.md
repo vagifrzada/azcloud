@@ -13,4 +13,6 @@
 - `make sync`
 
 # Notes
-- **SQL dump** location - ./src/azcloud-data.sql (You need import this after initialization)
+- Add application related credentials to **.env** file.
+- **SQL dump** location - ./src/azcloud.sql (You need import this after initialization)
+- For synchronization **flavors** you need to add correct **AWS bucket**  credentials to **.env** file.

@@ -19,10 +19,6 @@ class CreateBundleProductTable extends Migration
 
     public function down()
     {
-        Schema::table('bundle_product', function (Blueprint $table) {
-            $table->dropForeign(['bundle_id', 'product_id']);
-        });
-
         Schema::dropIfExists('bundle_product');
     }
 }

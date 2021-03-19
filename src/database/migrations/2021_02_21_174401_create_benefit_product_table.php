@@ -29,10 +29,6 @@ class CreateBenefitProductTable extends Migration
      */
     public function down()
     {
-        Schema::table('benefit_product', function (Blueprint $table) {
-            $table->dropForeign(['benefit_id', 'product_id']);
-        });
-
         Schema::dropIfExists('benefit_product');
     }
 }

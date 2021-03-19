@@ -1,2 +1,0 @@
-1. Export sql for dump.
-2. Test installation process

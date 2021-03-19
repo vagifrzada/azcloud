@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Plugins\Page\Plugin;
+use Illuminate\Support\Facades\URL;
 use Psr\Container\ContainerInterface;
 use App\Plugins\Page\PagePlugin;
 use Illuminate\Support\ServiceProvider;
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 }

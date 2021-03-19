@@ -31,6 +31,7 @@ class CreateMenuItem extends Migration
 
     public function down()
     {
+        Schema::dropIfExists('menu_item_translations');
         Schema::dropIfExists('menu_item');
     }
 }

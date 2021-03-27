@@ -6,8 +6,9 @@
                     <div class="col-lg-6">
                         <div class="logos">
                             <img src="{{ asset('assets/site/images/azcloud-logo.svg') }}" alt="Logo azcloud">
-                            <a href="#" target="_blank">
-                                <img src="{{ asset('assets/site/images/azintelecom-logo.svg') }}" alt="Logo azintelecom"></a>
+                            <a href="https://azintelecom.az" target="_blank">
+                                <img src="{{ asset('assets/site/images/azintelecom-logo.svg') }}" alt="Logo azintelecom">
+                            </a>
                         </div>
                     </div>
                     <!-- Col-->
@@ -18,7 +19,7 @@
                                 {!! $seo->getContent() !!}
                             </div>
                         </div>
-                @endif
+                    @endif
                 <!-- Col-->
                 </div>
             </div>

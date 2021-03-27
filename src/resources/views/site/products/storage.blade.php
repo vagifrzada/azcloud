@@ -1,14 +1,19 @@
 @extends('layouts.site')
 
+@section('meta_title', $meta['title'] ?? $product->getTitle())
+@section('meta_keywords', $meta['keywords'] ?? '')
+@section('meta_description', $meta['description'] ?? '')
+
 @php
     /** @var \App\Entities\Product\Product $product **/
     $firstParagraph = getFirstParagraph($product->getDescription());
     $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescription());
-@endphp
 
-@section('meta_title', $meta['title'] ?? $product->getTitle())
-@section('meta_keywords', $meta['keywords'] ?? '')
-@section('meta_description', $meta['description'] ?? '')
+    $benefits = $product->benefits;
+    $cases = $product->cases;
+    $features = $product->features;
+    $priceList = \Widget::run('productPriceListWidget', ['product' => $product]);
+@endphp
 
 @section('content')
 <section class="page">
@@ -74,18 +79,26 @@
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
                     <ul class="nav">
+                        @if (filled($benefits))
                         <li class="nav-item">
                             <a class="nav-link" href="#benefits">@lang('products.benefits')</a>
                         </li>
+                        @endif
+                        @if (filled($cases))
                         <li class="nav-item">
                             <a class="nav-link" href="#use-cases">@lang('products.use_cases')</a>
                         </li>
+                        @endif
+                        @if (filled($features))
                         <li class="nav-item">
                             <a class="nav-link" href="#main-features">@lang('products.features')</a>
                         </li>
+                        @endif
+                        @if (!$priceList->isEmpty())
                         <li class="nav-item">
                             <a class="nav-link" href="#prices">@lang('products.prices')</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -93,7 +106,9 @@
     </div>
     <!-- Service nav-->
 
+
     <div class="service-benefits flat ptb-14" id="benefits" data-aos="fade-in" data-aos-duration="800">
+        @if (filled($benefits))
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
@@ -103,7 +118,7 @@
 
                     <div class="benefits-list flex">
 
-                        @foreach($product->benefits as $benefit)
+                        @foreach($benefits as $benefit)
                             <div class="benefits-list__item">
                                 <div class="benefits-list__icon">
                                     <img src="{{ optional($benefit->getCover())->getUrl() }}" alt="Icon">
@@ -121,13 +136,15 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
+
     <!-- Benefits-->
 
-    @include('site.products._use_cases', ['product' => $product])
-    @include('site.products._main_features', ['product' => $product])
+    @includeWhen(filled($cases), 'site.products._use_cases', ['product' => $product, 'cases' => $cases])
+    @includeWhen(filled($features), 'site.products._main_features', ['product' => $product, 'features' => $features])
 
-    @widget('ProductPriceListWidget', ['product' => $product])
+    {{ $priceList }}
 
     @include('site.partials.seo-block')
 </section>

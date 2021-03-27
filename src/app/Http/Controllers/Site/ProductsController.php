@@ -26,7 +26,10 @@ class ProductsController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        abort_if(!view()->exists(($template = 'site.products.' . $category->getSlug())), 404);
+        $template = !view()->exists(($template = 'site.products.' . $category->getSlug()))
+            ? 'site.products.compute'
+            : $template;
+
         return view($template, ['category' => $category, 'product' => $product, 'meta' => $product->getMeta()]);
     }
 }

@@ -3,6 +3,7 @@
 return array (
   'home' => 'Əsas səhifə',
   'contact' => 'Əlaqə',
+  'contact-exposure' => 'Sizin mətniniz...',
   'city_phone_number' => 'Şəhər telefon nömrəsi',
   'phone_number' => 'Telefon nömrəsi',
   'support' => 'Texniki dəstək',

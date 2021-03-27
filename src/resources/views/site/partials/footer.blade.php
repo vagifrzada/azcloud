@@ -101,7 +101,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
-                    <p>All rights reserved {{ date('Y') }}<img src="{{ asset('assets/site/images/icons/icon-hexagon-footer.svg') }}" alt="Hexagon">Made with love</p>
+                    <p>@lang('footer.all_rights') &nbsp; {{ date('Y') }}
+                        <img src="{{ asset('assets/site/images/icons/icon-hexagon-footer.svg') }}" alt="Hexagon">
+                        @lang('footer.additional_text')
+                    </p>
                 </div>
             </div>
         </div>

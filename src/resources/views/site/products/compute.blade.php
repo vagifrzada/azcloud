@@ -1,14 +1,20 @@
 @extends('layouts.site')
 
+@section('meta_title', $meta['title'] ?? $product->getTitle())
+@section('meta_keywords', $meta['keywords'] ?? '')
+@section('meta_description', $meta['description'] ?? '')
+
 @php
 /** @var \App\Entities\Product\Product $product **/
 $firstParagraph = getFirstParagraph($product->getDescription());
 $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescription());
-@endphp
 
-@section('meta_title', $meta['title'] ?? $product->getTitle())
-@section('meta_keywords', $meta['keywords'] ?? '')
-@section('meta_description', $meta['description'] ?? '')
+$bundles = $product->bundles;
+$benefits = $product->benefits;
+$cases = $product->cases;
+$features = $product->features;
+$priceList = \Widget::run('productPriceListWidget', ['product' => $product]);
+@endphp
 
 @section('content')
 
@@ -76,21 +82,31 @@ $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescrip
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <ul class="nav">
+                            @if (filled($bundles))
                             <li class="nav-item">
                                 <a class="nav-link" href="#vm-families">@lang('products.vm_categories_families')</a>
                             </li>
+                            @endif
+                           @if (filled($benefits))
                             <li class="nav-item">
                                 <a class="nav-link" href="#benefits">@lang('products.benefits')</a>
                             </li>
+                           @endif
+                            @if (filled($cases))
                             <li class="nav-item">
                                 <a class="nav-link" href="#use-cases">@lang('products.use_cases')</a>
                             </li>
+                            @endif
+                           @if (filled($features))
                             <li class="nav-item">
                                 <a class="nav-link" href="#main-features">@lang('products.features')</a>
                             </li>
+                            @endif
+                            @if (!$priceList->isEmpty())
                             <li class="nav-item">
                                 <a class="nav-link" href="#prices">@lang('products.prices')</a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -99,45 +115,48 @@ $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescrip
         <!-- Service nav-->
 
         <div class="vm-categories ptb-11" id="vm-families" data-aos="fade-in" data-aos-duration="800">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2">
-                        <div class="section-header">
-                            <h2 class="section-title">@lang('products.vm_categories_families')</h2>
-                        </div>
+            @if (filled($bundles))
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-8 offset-xl-2">
+                            <div class="section-header">
+                                <h2 class="section-title">@lang('products.vm_categories_families')</h2>
+                            </div>
 
-                        <div class="vm-families">
-                            <div class="row">
+                            <div class="vm-families">
+                                <div class="row">
 
-                                @foreach($product->bundles as $bundle)
-                                    <div class="col-lg-4 col-sm-6">
-                                        <div class="vm-family flex">
-                                            <div class="textures">
-                                                <div class="texture masked"></div>
-                                                <div class="texture masked"></div>
+                                    @foreach($bundles as $bundle)
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="vm-family flex">
+                                                <div class="textures">
+                                                    <div class="texture masked"></div>
+                                                    <div class="texture masked"></div>
+                                                </div>
+                                                <p class="name">{{ $product->getTitle() }}</p>
+                                                <p class="level">{{ $bundle->title }}</p>
+                                                <div class="description">
+                                                    {!! $bundle->description !!}
+                                                </div>
+                                                <a class="purchase" href="{{ settings('azcloud_console_url') }}" target="_blank">
+                                                    @lang('main.buy')
+                                                </a>
                                             </div>
-                                            <p class="name">{{ $product->getTitle() }}</p>
-                                            <p class="level">{{ $bundle->title }}</p>
-                                            <div class="description">
-                                                {!! $bundle->description !!}
-                                            </div>
-                                            <a class="purchase" href="{{ settings('azcloud_console_url') }}" target="_blank">
-                                                @lang('main.buy')
-                                            </a>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
 
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Row-->
                 </div>
-                <!-- Row-->
-            </div>
+            @endif
         </div>
         <!-- VM categories-->
 
-        <div class="service-benefits ptb-14" id="benefits" data-aos="fade-in" data-aos-duration="800">
+        @if (filled($benefits))
+            <div class="service-benefits ptb-14" id="benefits" data-aos="fade-in" data-aos-duration="800">
             <div class="benefits-bg hidden-767">
                 <img src="{{ optional($product->getBenefitsCover())->getUrl() ?? asset('assets/site/images/values-bg.jpg') }}" alt="Benefits background">
             </div>
@@ -165,15 +184,16 @@ $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescrip
                 </div>
             </div>
         </div>
+        @endif
         <!-- Benefits-->
 
-        @include('site.products._use_cases', ['product' => $product])
+        @includeWhen(filled($cases), 'site.products._use_cases', ['product' => $product, 'cases' => $cases])
         <!-- Use cases-->
 
-        @include('site.products._main_features', ['product' => $product])
+        @includeWhen(filled($features), 'site.products._main_features', ['product' => $product, 'features' => $features])
         <!-- Main features-->
 
-        @widget('ProductPriceListWidget', ['product' => $product])
+        {{ $priceList }}
 
         @include('site.partials.seo-block')
     </section>

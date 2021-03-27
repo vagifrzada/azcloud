@@ -60,13 +60,13 @@ class ProductsController extends Controller
         $rules = [
             'title' => 'required|unique:products',
             'subtitle' => 'required',
-            'benefits' => 'required|array',
-            'use_cases' => 'required|array',
-            'features' => 'required|array',
+            'benefits' => 'array',
+            'use_cases' => 'array',
+            'features' => 'array',
         ];
         $category = Category::findOrFail((int) $request->get('category'));
         if ($category->getSlug() !== 'storage')
-            $rules['bundles'] = 'required|array';
+            $rules['bundles'] = 'array';
         $request->validate($rules);
 
         DB::beginTransaction();
@@ -153,13 +153,13 @@ class ProductsController extends Controller
         $rules = [
             'title' => 'required',
             'subtitle' => 'required',
-            'benefits' => 'required|array',
-            'use_cases' => 'required|array',
-            'features' => 'required|array',
+            'benefits' => 'array',
+            'use_cases' => 'array',
+            'features' => 'array',
         ];
         $category = $product->getCategory();
         if ($category->getSlug() !== 'storage')
-            $rules['bundles'] = 'required|array';
+            $rules['bundles'] = 'array';
 
         if ($product->getTitle() !== $request->get('title'))
             $rules['title'] = 'required|unique:products';
@@ -232,7 +232,7 @@ class ProductsController extends Controller
         switch ($category->getSlug()) {
             case 'compute': return Bundle::active()->forCompute()->get();
             case 'network': return Bundle::active()->forNetwork()->get();
-            default: return collect();
+            default: return Bundle::active()->get();
         }
     }
 }

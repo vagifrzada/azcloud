@@ -1,14 +1,19 @@
 @extends('layouts.site')
 
+@section('meta_title', $meta['title'] ?? $product->getTitle())
+@section('meta_keywords', $meta['keywords'] ?? '')
+@section('meta_description', $meta['description'] ?? '')
+
 @php
     /** @var \App\Entities\Product\Product $product **/
     $firstParagraph = getFirstParagraph($product->getDescription());
     $editorBodyDescription = str_replace($firstParagraph, null, $product->getDescription());
-@endphp
 
-@section('meta_title', $meta['title'] ?? $product->getTitle())
-@section('meta_keywords', $meta['keywords'] ?? '')
-@section('meta_description', $meta['description'] ?? '')
+    $bundles = $product->bundles;
+    $benefits = $product->benefits;
+    $cases = $product->cases;
+    $features = $product->features;
+@endphp
 
 @section('content')
 
@@ -100,18 +105,26 @@
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#benefits">@lang('products.benefits')</a>
-                            </li>
+                            @if (filled($benefits))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#benefits">@lang('products.benefits')</a>
+                                </li>
+                            @endif
+                            @if (filled($cases))
                             <li class="nav-item">
                                 <a class="nav-link" href="#use-cases">@lang('products.use_cases')</a>
                             </li>
+                            @endif
+                            @if (filled($features))
                             <li class="nav-item">
                                 <a class="nav-link" href="#main-features">@lang('products.features')</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#bundles">@lang('products.prices')</a>
-                            </li>
+                            @endif
+                            @if (filled($bundles))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#bundles">@lang('products.prices')</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -120,6 +133,7 @@
         <!-- Service nav-->
 
         <div class="service-benefits flat ptb-14" id="benefits" data-aos="fade-in" data-aos-duration="800">
+            @if (filled($benefits))
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
@@ -129,7 +143,7 @@
 
                         <div class="benefits-list flex">
 
-                            @foreach($product->benefits as $benefit)
+                            @foreach($benefits as $benefit)
                                 <div class="benefits-list__item">
                                     <div class="benefits-list__icon">
                                         <img src="{{ optional($benefit->getCover())->getUrl() }}" alt="Icon">
@@ -147,15 +161,17 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         <!-- Benefits-->
 
-        @include('site.products._use_cases', ['product' => $product])
+        @includeWhen(filled($cases), 'site.products._use_cases', ['product' => $product, 'cases' => $cases])
         <!-- Use cases-->
 
-        @include('site.products._main_features', ['product' => $product])
+        @includeWhen(filled($features), 'site.products._main_features', ['product' => $product, 'features' => $features])
         <!-- Main features-->
 
+        @if (filled($bundles))
         <div class="service-bundles ptb-11" id="bundles" data-aos="fade-in" data-aos-duration="800">
             <div class="container-fluid">
                 <div class="row">
@@ -163,7 +179,7 @@
 
                         <div class="service-bundles-list">
                             <div class="row">
-                                @foreach($product->bundles as $index => $bundle)
+                                @foreach($bundles as $index => $bundle)
                                     <div class="col-lg-4 col-sm-6">
                                     <div class="service-bundle flex">
                                         <div class="textures">
@@ -176,14 +192,16 @@
                                         <?php
                                             $firstPar = getFirstParagraph($bundle->description);
                                             $morePar = str_replace($firstPar, null, $bundle->description);
+                                            $options = $bundle->getOptions();
                                         ?>
 
                                         <div class="bundle-description">{!! $firstPar !!}</div>
                                         <div class="bundle-usage">{!! $morePar !!}</div>
 
+                                        @if(count($options) > 0 && isset($options[0]['title']) && filled($options[0]['title']))
                                         <div class="bundle-params">
                                             <div class="params-accordion">
-                                                @foreach($bundle->getOptions() as $option)
+                                                @foreach($options as $option)
                                                     <div class="accordion-item">
                                                         <a href="#accordion-{{ $index }}-{{ $loop->index }}" data-toggle="collapse">{{ $option['title'] }}</a>
                                                         <div class="collapse" id="accordion-{{ $index }}-{{ $loop->index }}">
@@ -196,6 +214,7 @@
                                             </div>
                                             <button class="collapse-all">@lang('products.collapse_all')</button>
                                         </div>
+                                        @endif
                                         <div class="bundle-price">
                                             <p class="price">{{ $bundle->getPrice() }}</p>
                                             <div class="currency-period">
@@ -214,6 +233,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- Service bundles section-->
 
         @include('site.partials.seo-block')

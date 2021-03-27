@@ -10,7 +10,7 @@
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
 
-                            @foreach($product->features as $feature)
+                            @foreach($features as $feature)
                                 <div class="feature-slide swiper-slide">
                                     <div class="feature-slide__bg">
                                         <img class="swiper-lazy" data-src="{{ optional($feature->getCover())->getUrl() }}" alt="Slide background">

@@ -8,6 +8,14 @@ use Illuminate\Support\{Collection, Facades\DB, Facades\Cache};
 class CalculatorWidget extends AbstractWidget
 {
     protected $config = [];
+    protected $locale;
+
+    public function __construct(array $config = [])
+    {
+        parent::__construct($config);
+
+        $this->locale = app()->getLocale();
+    }
 
     public function run()
     {
@@ -26,7 +34,7 @@ class CalculatorWidget extends AbstractWidget
 
     private function parseVmList(): Collection
     {
-        return Cache::rememberForever('product_flavors_vm', function() {
+        return Cache::rememberForever('product_flavors_vm_' . $this->locale, function() {
             $vmList = DB::table('product_flavors')
                 ->where('type', 'vm')
                 ->orderBy('hourly_price', 'ASC')
@@ -36,7 +44,9 @@ class CalculatorWidget extends AbstractWidget
                 return collect();
 
             $vmList->map(function ($item) {
-                $item->label = sprintf('%s: %d vCPU, %d GB RAM, %d GB Root Volume, %f AZN/hour', $item->name, $item->cpu, $item->ram, $item->disk, $item->hourly_price);
+                $item->label = sprintf('%s: %d vCPU, %d GB RAM, %d GB %s, %f AZN/%s',
+                    $item->name, $item->cpu, $item->ram, $item->disk, trans('calculator.volume'), $item->hourly_price, trans('calculator.hours')
+                );
                 $item->os = ($item->isWindowsOnly == 1) ? 'windows' : 'linux';
                 return $item;
             });
@@ -59,7 +69,7 @@ class CalculatorWidget extends AbstractWidget
 
     private function getStorageList()
     {
-        return Cache::rememberForever('product_flavors_storage', function() {
+        return Cache::rememberForever('product_flavors_storage_' . $this->locale, function() {
             $storageList = DB::table('product_flavors')
                 ->select(['name', 'size', 'family', 'hourly_price'])
                 ->where('type', 'volume')
@@ -71,7 +81,7 @@ class CalculatorWidget extends AbstractWidget
 
             $familyLabels = $this->getFamilyLabes();
             $storageList->map(function ($item) use ($familyLabels) {
-                $item->label = sprintf('%s: %d GB, %f AZN/hour', $item->name, $item->size,  $item->hourly_price);
+                $item->label = sprintf('%s: %d GB, %f AZN/%s', $item->name, $item->size,  $item->hourly_price, trans('calculator.hours'));
                 $item->family = $familyLabels[$item->family] ?? $item->family;
                 return $item;
             });

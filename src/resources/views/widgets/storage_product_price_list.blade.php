@@ -57,7 +57,7 @@
                                 <tr data-os="linux" data-family="linux-{{ $price->family }}">
                                     <td>{{ $price->name }}</td>
                                     <td>{{ $price->size }} GB</td>
-                                    <td>{{ number_format($price->hourly_price, 5) }} AZN/hour</td>
+                                    <td>{{ number_format($price->hourly_price, 5) }} AZN/@lang('calculator.hours')</td>
                                     <td>
                                         <a class="purchase" target="_blank" href="{{ settings('azcloud_console_url') }}">
                                             @lang('main.buy')

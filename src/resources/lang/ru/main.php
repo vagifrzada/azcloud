@@ -3,6 +3,7 @@
 return array (
   'home' => 'Главная',
   'contact' => 'Контакты',
+  'contact-exposure' => 'Sizin mətniniz...',
   'city_phone_number' => 'Городской номер телефона',
   'phone_number' => 'Телефонный номер',
   'support' => 'Техподдержка',

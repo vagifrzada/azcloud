@@ -207,7 +207,7 @@
                 <div class="col-xl-8 offset-xl-2">
                     <h3 class="section-title">{{ $item->getTitle() }}</h3>
                     <p class="subtitle">{{ $item->getDescription() }}</p>
-                    <a class="btn btn-white" href="{{ route('site.contact') }}#contact-form">@lang('main.contact')</a>
+                    <a class="btn btn-white" href="{{ route('site.contact') }}#contact-form">@lang('main.contact-exposure')</a>
                 </div>
             </div>
         </div>

@@ -6,8 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use App\Entities\Product\Product;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 use App\Entities\Product\Category\Category;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
@@ -92,7 +92,9 @@ class SyncFlavorsConsoleCommand extends Command
     {
         $category = mb_strtolower($category, 'UTF-8');
         $categoryMap = [
-            'vm' => 'compute', 'volume' => 'storage', 'lb' => 'network',
+            'vm' => 'compute',
+            'volume' => 'storage',
+            'lb' => 'network',
         ];
 
         if (!array_key_exists($category, $categoryMap)) {
@@ -113,9 +115,6 @@ class SyncFlavorsConsoleCommand extends Command
 
     private function flushCache(): void
     {
-        Cache::forget('product_flavors_vm');
-        Cache::forget('product_flavors_vm_families');
-        Cache::forget('product_flavors_storage');
-        Cache::forget('product_flavors_storage_families');
+        Artisan::call('cache:clear');
     }
 }

@@ -51,7 +51,7 @@
 
                                     <div class="form-group form-material options">
                                         <?php $options = $translation->getOptions();  ?>
-                                        <label class="form-control-label">Additional options (Not required)</label>
+                                        <label class="form-control-label">Additional options (Fill options when you're creating bundle for "network" category)</label>
                                         <br><br>
 
                                          <div class="options-container-{{ $locale }}">

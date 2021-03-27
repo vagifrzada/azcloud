@@ -82,7 +82,7 @@
                                     <td>{{ $price->cpu }}</td>
                                     <td>{{ $price->ram }} GB</td>
                                     <td>{{ $price->disk }} GB</td>
-                                    <td>{{ number_format($price->hourly_price, 5) }} AZN/hour</td>
+                                    <td>{{ number_format($price->hourly_price, 5) }} AZN/@lang('calculator.hours')</td>
                                     <td>
                                         <a class="purchase" target="_blank" href="{{ settings('azcloud_console_url') }}">
                                             @lang('main.buy')

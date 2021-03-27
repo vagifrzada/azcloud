@@ -25,8 +25,8 @@ class ProductBenefitsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'title'     => 'required|array|min:3',
-            'title.*'   => 'required|string|min:3',
+            'title'     => 'required|array|min:2',
+            'title.*'   => 'required|string|min:2',
             'status'    => 'required|boolean',
         ]);
 
@@ -63,8 +63,8 @@ class ProductBenefitsController extends Controller
     public function update(Benefit $product_benefit, Request $request): RedirectResponse
     {
         $request->validate([
-            'title'     => 'required|array|min:3',
-            'title.*'   => 'required|string|min:3',
+            'title'     => 'required|array|min:2',
+            'title.*'   => 'required|string|min:2',
             'status'    => 'required|boolean',
         ]);
 

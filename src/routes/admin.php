@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\PostsController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    Route::get('clear-cache', [HomeController::class, 'clearCache'])->name('clear-cache');
+
     // Users
     Route::resource('users', UsersController::class)->except(['destroy', 'show']);
     Route::get('users/{id}/delete', [UsersController::class, 'delete'])->name('users.delete');

@@ -18,7 +18,7 @@
                             </div>
 
                             <ul class="use-cases__examples">
-                                @foreach($product->cases as $case)
+                                @foreach($cases as $case)
                                     <li class="use-case__example" data-src="{{ optional($case->getCover())->getUrl() }}">
                                         {{ $case->title }}
                                     </li>

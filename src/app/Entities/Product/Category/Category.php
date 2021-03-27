@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string slug
  * @property boolean status
  * @property string title
- * @property string description
+ * @property string|null description
  *
  * @method static Category findOrFail(int $id)
  * @method static Builder active()
@@ -54,7 +54,7 @@ class Category extends Model implements TranslatableContract, HasMedia
         return $this->title;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

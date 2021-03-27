@@ -159,7 +159,7 @@
                         @if ($category->getSlug() !== 'storage')
                             @php $attachedBundles = $product->bundles->pluck('id')->toArray();  @endphp
                             <div class="form-group form-material bundles required">
-                                <label class="form-control-label" for="bundles">Bundles (Required)</label>
+                                <label class="form-control-label" for="bundles">Bundles</label>
                                 <select name="bundles[]" id="bundles"
                                         multiple="multiple"
                                         class="form-control"
@@ -184,7 +184,7 @@
 
                         <div class="form-group form-material benefits required">
                             @php $attachedBenefits = $product->benefits->pluck('id')->toArray();  @endphp
-                            <label class="form-control-label" for="bundles">Benefits (Required)</label>
+                            <label class="form-control-label" for="bundles">Benefits</label>
                             <select name="benefits[]" id="benefits"
                                     multiple="multiple"
                                     class="form-control"
@@ -208,7 +208,7 @@
 
                         <div class="form-group use_cases form-material">
                             @php $attachedCases = $product->cases->pluck('id')->toArray();  @endphp
-                            <label for="use_cases" class="form-control-label">Use Cases (Required)</label>
+                            <label for="use_cases" class="form-control-label">Use Cases</label>
                             <select name="use_cases[]" id="use_cases"
                                     multiple="multiple"
                                     class="form-control"
@@ -224,7 +224,7 @@
 
                         <div class="form-group form-material features required">
                             @php $attachedFeatures = $product->features->pluck('id')->toArray();  @endphp
-                            <label class="form-control-label" for="features">Features (Required)</label>
+                            <label class="form-control-label" for="features">Features</label>
                             <select name="features[]" id="features"
                                     multiple="multiple"
                                     class="form-control"

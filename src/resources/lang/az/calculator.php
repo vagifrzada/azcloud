@@ -1,9 +1,10 @@
 <?php
 
-return array (
-  'quantity' => 'Miqdar',
-  'duration' => 'Müddət',
-  'hours' => 'saat',
-  'weeks' => 'həftə',
-  'months' => 'ay',
+return array(
+    'quantity' => 'Miqdar',
+    'duration' => 'Müddət',
+    'hours' => 'saat',
+    'weeks' => 'həftə',
+    'months' => 'ay',
+    'volume' => 'Root həcm',
 );

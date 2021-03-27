@@ -56,7 +56,7 @@
                         <div class="col-xl-8 offset-xl-2">
                             <div class="first-chunk">
                                 <p>
-                                    {{ strip_tags($firstParagraph) }}
+                                    {!! strip_tags($firstParagraph) !!}
                                     @if (filled($editorBodyDescription))
                                         <button class="expand">@lang('products.show_more')</button>
                                     @endif

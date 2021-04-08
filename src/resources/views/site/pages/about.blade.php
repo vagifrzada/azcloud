@@ -41,9 +41,9 @@
             <div class="wave-texture bottom-right"></div>
 
             @if (filled($ourValues = PagePlugin::getByIdentity(['identity' => 'about-our-values'])))
-            <div class="values-bg hidden-767">
-                <img src="{{ asset('assets/site/images/values-bg.jpg') }}" alt="Azcloud values">
-            </div>
+                <div class="values-bg hidden-767">
+                    <img src="{{ optional($ourValues->getCover())->getUrl() }}" alt="Azcloud values">
+                </div>
             @endif
 
             <div class="container-fluid">

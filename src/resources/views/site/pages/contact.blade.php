@@ -1,5 +1,7 @@
 @extends('layouts.site')
 
+@php use App\Plugins\Page\PagePlugin; @endphp
+
 @section('meta_title', $meta['title'])
 @section('meta_keywords', $meta['keywords'])
 @section('meta_description', $meta['description'])
@@ -45,7 +47,9 @@
                             </div>
 
                             <div class="col-md-3 offset-md-1">
-                                <img src="{{ asset('assets/site/images/company-building.jpg') }}" alt="Company building">
+                                @if (filled($page = PagePlugin::getByIdentity(['identity' => 'contact'])))
+                                    <img src="{{ optional($page->getCover())->getUrl() }}" alt="Company building">
+                                @endif
                             </div>
                         </div>
                     </div>

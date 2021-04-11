@@ -17,7 +17,7 @@
                                     <tr>
                                         <td><strong>@lang('main.address_singular'):</strong></td>
                                         <td>
-                                            <p>{{ settings('address') }}</p>
+                                            <p>@lang('contact.address')</p>
                                         </td>
                                     </tr>
                                     <tr>

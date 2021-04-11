@@ -355,4 +355,5 @@
     <!-- Latest blog-->
 
    @include('site.partials.have-question')
+   @include('site.partials.newsletter')
 @endsection

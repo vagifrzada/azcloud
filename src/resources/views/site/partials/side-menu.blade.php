@@ -33,10 +33,10 @@
                                 <div class="services-flips flex">
 
                                     @foreach($menuItems as $item)
-                                    <div class="service-flip">
+                                    <div class=src/resources/views/site/pages/about.blade.php"service-flip">
                                         <div class="rotator">
                                             <div class="flip-front">
-                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}">
+                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}" @if (filled($item->getUrl())) target="_blank" @endif>
                                                     <span class="title">{{ $item->getTitle() }}</span>
                                                     <span class="subtitle">{{ $item->getSubtitle() }}</span>
                                                     <span class="price">{{ $item->getDescription() }}<i class="icon-arrow-right"></i></span>
@@ -44,7 +44,7 @@
                                             </div>
                                             <div class="flip-back">
                                                 <div class="flip-bg cover-center" style="background-image: url({{ optional($item->getCover())->getUrl() }})"></div>
-                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}">
+                                                <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}" @if (filled($item->getUrl())) target="_blank" @endif>
                                                     <span class="title">{{ $item->getTitle() }}</span>
                                                     <span class="subtitle">{{ $item->getSubtitle() }}</span>
                                                     <span class="price">{{ $item->getDescription() }}<i class="icon-arrow-right"></i></span>

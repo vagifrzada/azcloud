@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <div class="info-text">
-                            {!! $aboutMission->getDescription() !!}
+                            <h1>{!! $aboutMission->getDescription() !!}</h1>
                         </div>
                         <div class="statistic-nums ptb-11">
                             <div class="row">

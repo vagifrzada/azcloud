@@ -33,7 +33,7 @@
                                 <div class="services-flips flex">
 
                                     @foreach($menuItems as $item)
-                                    <div class=src/resources/views/site/pages/about.blade.php"service-flip">
+                                    <div class="service-flip">
                                         <div class="rotator">
                                             <div class="flip-front">
                                                 <a class="flip-item" href="{{ $item->getUrl() ?? 'javascript:void(0)' }}" @if (filled($item->getUrl())) target="_blank" @endif>

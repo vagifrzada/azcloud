@@ -28,6 +28,7 @@ class SyncFlavorsConsoleCommand extends Command
 
             $flavors = $storage->get(self::FLAVORS_FILE_NAME);
             $decodedData = json_decode($flavors, true);
+
             if (filled($decodedData)) {
                 $this->saveToDatabase($decodedData);
                 $this->flushCache();
@@ -58,7 +59,7 @@ class SyncFlavorsConsoleCommand extends Command
                     'category_id' => $this->mapCategory($category),
                     'title' => $name,
                     'slug' => $slug,
-                    'status' => 0,
+                    'status' => 1,
                 ]);
             }
 
@@ -91,11 +92,7 @@ class SyncFlavorsConsoleCommand extends Command
     private function mapCategory(string $category): int
     {
         $category = mb_strtolower($category, 'UTF-8');
-        $categoryMap = [
-            'vm' => 'compute',
-            'volume' => 'storage',
-            'lb' => 'network',
-        ];
+        $categoryMap = config('flavors.categories');
 
         if (!array_key_exists($category, $categoryMap)) {
             throw new \InvalidArgumentException(

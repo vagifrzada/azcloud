@@ -1,3 +1,14 @@
+<?php
+/** @var \Illuminate\Support\Collection $cases */
+$firstCover = null;
+if (filled($cases)) {
+    $firstCase = $cases->first();
+    if (filled($firstCase)) {
+        $firstCover = optional($firstCase->getCover())->getUrl();
+    }
+}
+?>
+
 <div class="use-cases" id="use-cases" data-aos="fade-in" data-aos-duration="800">
     <div class="container-fluid">
         <div class="row">
@@ -5,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="use-cases__img masked">
-                            <img src="{{ optional($product->getCasesCover())->getUrl() ?? asset('assets/site/images/values-bg.jpg') }}" alt="Use case">
+                            <img src="{{ optional($product->getCasesCover())->getUrl() ?? $firstCover }}" alt="Use case">
                         </div>
                     </div>
                     <!-- Inner col-->

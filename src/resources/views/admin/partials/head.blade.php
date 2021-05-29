@@ -7,8 +7,7 @@
 <link href="{{ asset('assets/remark/global/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/css/bootstrap-extend.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/assets/css/site.css?v=1.12') }}" rel="stylesheet">
-<link href="{{ asset('assets/remark/global/vendor/animsition/animsition.css')  }}" rel="stylesheet">
-<link href="{{ asset('assets/remark/global/vendor/switchery/switchery.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/remark/global/vendor/asscrollable/asScrollable.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/ckeditor5/sample/styles.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/remark/global/vendor/slidepanel/slidePanel.css') }}" rel="stylesheet">

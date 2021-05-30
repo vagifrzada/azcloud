@@ -18,9 +18,11 @@ class ProductPriceListWidget extends AbstractWidget
         /** @var Product $product */
         /** @var Collection $prices */
         if (!filled($product = $this->config['product'])) return '';
-        if (!filled($prices = $product->prices)) return '';
+        $prices = $product->prices()
+            ->orderBy('hourly_price', 'ASC')
+            ->get();
+        if (!filled($prices)) return '';
         $category = $product->getCategory();
-
         $familyLabels = $this->getFamilyLabes();
         $families = $prices->pluck('family')->unique()->map(function ($family) use ($familyLabels) {
             return ['value' => $family, 'label' => $familyLabels[$family] ?? $family];

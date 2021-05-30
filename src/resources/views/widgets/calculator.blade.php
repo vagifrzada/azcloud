@@ -55,7 +55,7 @@
                                     @foreach($vmFamilies as $item)
                                         <div>
                                             <div class="field-item">
-                                                <input type="radio" name="os-family" value="{{ $item->family  }}" id="os-family-{{ $item->family }}" @if ($loop->first) checked @endif>
+                                                <input type="radio" name="os-family" value="{{ $item->family  }}" id="os-family-{{ $item->family }}" @if ($item->family === 'c') checked @endif>
                                                 <label for="os-family-{{ $item->family }}">{{ strtoupper($item->family) }}</label>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                         @foreach($storageFamilies as $item)
                                             <div>
                                                 <div class="field-item">
-                                                    <input type="radio" name="disc-family" value="{{ $item->family }}" id="{{ $item->family }}" @if ($loop->first) checked @endif>
+                                                    <input type="radio" name="disc-family" value="{{ $item->family }}" id="{{ $item->family }}" @if (str_contains($item->family, 'standart')) checked @endif>
                                                     <label for="{{ $item->family }}">{{ ucfirst($item->family) }}</label>
                                                 </div>
                                             </div>
@@ -149,7 +149,7 @@
                                         <div>
                                             <p class="group-label">@lang('calculator.quantity')</p>
                                             <div class="field-item">
-                                                <input class="number-input" type="number" name="disc-qty" value="1">
+                                                <input class="number-input" type="number" name="disc-qty" value="0">
                                                 <div class="field-controls">
                                                     <button class="decrement" type="button">−</button>
                                                     <button class="increment" type="button">+</button>

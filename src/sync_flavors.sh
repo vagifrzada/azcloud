@@ -1,0 +1,1 @@
+docker-compose run --rm php-cli bash -c 'export http_proxy=10.20.20.20:3128; export https_proxy=10.20.20.20:3128; php artisan sync:flavors'

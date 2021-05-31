@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="keywords" content="@yield('meta_keywords')">
     <meta name="description" content="@yield('meta_description')">
+    @include('site.partials.meta-tags')
     @include('site.partials.favicon')
     {{-- Fonts --}}
     <link rel="preload" as="font" href="{{ asset('assets/site/fonts/Montserrat-Regular.woff')  }}" type="font/woff" crossorigin="anonymous">
@@ -20,6 +21,8 @@
     {{-- Styles   --}}
     <link href="{{ asset('assets/site/css/style.css') }}" rel="stylesheet">
     @stack('styles')
+
+    @include('site.partials.metrics')
 </head>
 <body>
     @include('site.partials.header')

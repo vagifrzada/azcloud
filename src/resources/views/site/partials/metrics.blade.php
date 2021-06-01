@@ -17,13 +17,13 @@
 <!-- End Facebook Pixel Code -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJR5QJX1DE"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92028510-4"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-ZJR5QJX1DE');
+    gtag('config', 'UA-92028510-4');
 </script>
 
 <!-- Yandex.Metrika counter -->

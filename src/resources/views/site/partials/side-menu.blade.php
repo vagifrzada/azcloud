@@ -18,6 +18,12 @@
                                         <a href="{{ settings('azcloud_console_url') }}">@lang('main.sign_in') / </a>
                                         <a href="{{ settings('azcloud_console_url') }}">@lang('main.sign_up')</a>
                                     </li>
+                                    <li class="visible-1200">
+                                        <a class="menu-link" href="{{ settings('azcloud_enterprise_url') }}" target="_blank">Azcloud Enterprise</a>
+                                    </li>
+                                    <li class="visible-1200">
+                                        <a class="menu-link" href="{{ settings('azcloud_gcloud_url') }}" target="_blank">G-Cloud solutions</a>
+                                    </li>
                                     @foreach($menu as $item)
                                         <li>
                                             <a class="{{ !str_contains($item->getUrl(), 'services') ? 'menu' : 'services' }}-link" href="{{ $item->getUrl() }}">{{ $item->getTitle() }}</a>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Helpers\reCaptcha;
 
 class ContactController extends Controller
 {
@@ -34,7 +35,9 @@ class ContactController extends Controller
     public function contact(Request $request): JsonResponse
     {
         try {
-            $data = $request->validate(['fullname' => 'required', 'phone' => 'required', 'email' => 'required|email', 'message'  => 'required']);
+            $data = $request->validate(['fullname' => 'required', 'phone' => 'required', 'email' => 'required|email', 'message'  => 'required', 'grecaptcha_token' => 'required']);
+            $botCheck = (new reCaptcha())->botCheck($request->post('grecaptcha_token'));
+            if(!$botCheck) throw new Exception("Incorrect google recaptcha token."); 
             Mail::to(settings('contact_email'))->send(new ContactFormMail($data));
             return response()->json(['success' => true, 'message' => 'Message has been successfully sent. We will contact you very soon!']);
         } catch (Throwable $e) {

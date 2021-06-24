@@ -38,6 +38,12 @@ return array (
   'sign_in' => 'Войти',
   'sign_up' => 'Регистрация',
 
-    'address_singular' => 'Адрес',
-    'sitemap' => 'Карта сайта',
+  'address_singular' => 'Адрес',
+  'sitemap' => 'Карта сайта',
+
+  "cookieMessage" => "Этот веб-сайт использует файлы cookie, чтобы вы могли максимально эффективно использовать наш веб-сайт",
+  "cookieLinkText" => "Политика использования файлов cookie",
+  "cookieAllowCookiesText" => "Разрешить",
+  "cookieDeclineText" => "Отклонить",
+  "cookieLink" => "https://azcloud.az/ru/blog/privacy"
 );

@@ -38,6 +38,12 @@ return array (
   'sign_in' => 'Giriş',
   'sign_up' => 'Qeydiyyat',
 
-   'address_singular' => 'Ünvan',
-    'sitemap' => 'Sayt xəritəsi',
+  'address_singular' => 'Ünvan',
+  'sitemap' => 'Sayt xəritəsi',
+
+  "cookieMessage" => "Bu veb sayt, veb saytımızdan ən yaxşı şəkildə faydalanmağınız üçün cookies-dən istifadə edir",
+  "cookieLinkText" => "Cookie işlətmə siyasəti",
+  "cookieAllowCookiesText" => "İcazə vermək",
+  "cookieDeclineText" => "İmtina",
+  "cookieLink" => "https://azcloud.az/az/blog/mexfilik-siyaseti"
 );

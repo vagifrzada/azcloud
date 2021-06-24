@@ -38,6 +38,12 @@ return array (
   'sign_in' => 'Sign in',
   'sign_up' => 'Sign up',
 
-    'address_singular' => 'Address',
-    'sitemap' => 'Sitemap',
+  'address_singular' => 'Address',
+  'sitemap' => 'Sitemap',
+
+  "cookieMessage" => "This website uses cookies to ensure you get the best experience on our website",
+  "cookieLinkText" => "Cookie policy",
+  "cookieAllowCookiesText" => "Allow cookies",
+  "cookieDeclineText" => "Decline",
+  "cookieLink" => "https://azcloud.az/en/blog/privacy"
 );

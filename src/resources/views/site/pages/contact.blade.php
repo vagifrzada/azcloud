@@ -85,18 +85,64 @@
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <h2 class="section-title">@lang('main.follow_us')</h2>
                             </div>
                             <!-- Col-->
-
-                            <div class="col-lg-2 offset-lg-2 col-md-6">
-                                <script src="https://platform.linkedin.com/in.js" type="text/javascript">
-                                    lang: en_US
-                                </script>
-                                <script type="IN/FollowCompany" data-id="43333995" data-counter="bottom"></script>
+                            <div class="col-lg-4 offset-lg-1 col-md-6">
+                                <ul class="follow-list">
+                                    <li class="follow-list__item follow-list__item_linkedin">
+                                        <a href="https://www.linkedin.com/company/azcloudaz" class="follow-link follow-link_linkedin" target="_blank"><i class="icon-linkedin" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followLinkedin')</span></a>
+                                        <script type="IN/FollowCompany" data-id="43333995" data-counter="bottom"></script>
+                                    </li>
+                                    <li class="follow-list__item follow-list__item_twitter">
+                                        <a href="https://twitter.com/azcloud_az" class="follow-link follow-link_twitter" target="_blank"><i class="icon-twitter" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followTwitter')</span></a>
+                                        <a href="https://twitter.com/azcloud_az?ref_src=twsrc%5Etfw" class="twitter-follow-button" style="display: none;" data-show-count="false">@lang('contact.followTwitter')</a>
+                                    </li>
+                                    <li class="follow-list__item follow-list__item_youtube">
+                                        <a href="https://www.youtube.com/channel/UCu5w75elZNyhHo20RXOHwMQ" class="follow-link follow-link_youtube" target="_blank"><i class="icon-youtube-play" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followYoutube')</span></a>
+                                        <div class="g-ytsubscribe" data-channelid="UCu5w75elZNyhHo20RXOHwMQ" data-layout="default" data-count="default"></div>
+                                    </li>
+                                </ul>
                             </div>
                             <!-- Col-->
+
+                            <style>
+                                .follow-list{
+                                    flex-direction: column;
+                                }
+                                .follow-list .follow-list__item{
+                                    margin-bottom: 16px;
+                                }
+                                .follow-list .follow-list__item:last-child{
+                                    margin-bottom: 0;
+                                }
+
+                                .follow-link{
+                                    display: flex;
+                                    text-decoration: none;
+                                    padding: 8px 16px;
+                                    font-family: 'Montserrat SemiBold';
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                    line-height: 40px;
+                                }
+
+                                .follow-link.follow-link_linkedin{
+                                    background-color: #265F93;
+                                    color: #fff;
+                                }
+
+                                .follow-link.follow-link_twitter{
+                                    background-color: #4595DA;
+                                    color: #fff;
+                                }
+
+                                .follow-link.follow-link_youtube{
+                                    background-color: #D43929;
+                                    color: #fff;
+                                }
+                            </style>
 
                             <div class="col-lg-4 col-md-6">
                                 <div class="fb-page" data-href="{{ settings('facebook_page_url') }}" data-tabs="" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
@@ -119,7 +165,7 @@
                             <div class="col-xl-6 col-lg-7" data-aos="fade-right" data-aos-duration="800">
                                 <h2 class="section-title">@lang('main.write_us')</h2>
 
-                                <form action="{{ route('site.contact.send') }}" method="POST">
+                                <form name="contactForm" id="contactForm" action="{{ route('site.contact.send') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="fullname">@lang('main.fullname')</label>
@@ -144,6 +190,23 @@
                                 <!-- Form-->
                             </div>
                             <!-- Col-->
+
+                            <script src="https://www.google.com/recaptcha/api.js?render=6Les8k0bAAAAADHEswRUgh6oekBPibg6Tt95A4lc"></script>
+                            <script>
+                                function onSubmit(token) {
+                                    onContactFormSubmit()
+                                    $("#contact-form form").trigget("submit");
+                                }
+                                // function onClick(e) {
+                                //     console.log(e)
+                                //     e.preventDefault();
+                                //     grecaptcha.ready(function() {
+                                //         grecaptcha.execute('6Les8k0bAAAAADHEswRUgh6oekBPibg6Tt95A4lc', {action: 'submit'}).then(function(token) {
+                                //             // Add your logic to submit to your backend server here.
+                                //         });
+                                //     });
+                                // }
+                            </script>
 
                             <div class="col-lg-5 hidden-991" data-aos="fade-left" data-aos-duration="800">
                                 @if (filled($page = PagePlugin::getByIdentity(['identity' => 'contact-form-image'])))

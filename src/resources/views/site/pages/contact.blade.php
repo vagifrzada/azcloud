@@ -100,7 +100,7 @@
                                         <a href="https://twitter.com/azcloud_az?ref_src=twsrc%5Etfw" class="twitter-follow-button" style="display: none;" data-show-count="false">@lang('contact.followTwitter')</a>
                                     </li>
                                     <li class="follow-list__item follow-list__item_youtube">
-                                        <a href="https://www.youtube.com/channel/UCu5w75elZNyhHo20RXOHwMQ" class="follow-link follow-link_youtube" target="_blank"><i class="icon-youtube-play" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followYoutube')</span></a>
+                                        <a href="https://www.youtube.com/channel/UCMaG50HL6TFn9Isje18Wzzw" class="follow-link follow-link_youtube" target="_blank"><i class="icon-youtube-play" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followYoutube')</span></a>
                                         <div class="g-ytsubscribe" data-channelid="UCu5w75elZNyhHo20RXOHwMQ" data-layout="default" data-count="default"></div>
                                     </li>
                                 </ul>

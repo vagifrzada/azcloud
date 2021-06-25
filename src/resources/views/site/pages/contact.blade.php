@@ -101,7 +101,7 @@
                                     </li>
                                     <li class="follow-list__item follow-list__item_youtube">
                                         <a href="https://www.youtube.com/channel/UCMaG50HL6TFn9Isje18Wzzw" class="follow-link follow-link_youtube" target="_blank"><i class="icon-youtube-play" style="display: block; margin-right: 16px;"></i><span style="display: block;">@lang('contact.followYoutube')</span></a>
-                                        <div class="g-ytsubscribe" data-channelid="UCu5w75elZNyhHo20RXOHwMQ" data-layout="default" data-count="default"></div>
+                                        <div class="g-ytsubscribe" data-channelid="UCMaG50HL6TFn9Isje18Wzzw" data-layout="default" data-count="default"></div>
                                     </li>
                                 </ul>
                             </div>

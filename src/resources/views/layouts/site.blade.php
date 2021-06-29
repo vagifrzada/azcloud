@@ -144,6 +144,11 @@
         }
     }
     </script>
+    <style>
+        .grecaptcha-badge{
+            z-index: 6;
+        }
+    </style>
     <!-- cookie content -->
 </body>
 </html>

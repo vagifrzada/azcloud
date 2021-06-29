@@ -45,5 +45,5 @@ return array (
   "cookieLinkText" => "Cookie işlətmə siyasəti",
   "cookieAllowCookiesText" => "İcazə vermək",
   "cookieDeclineText" => "İmtina",
-  "cookieLink" => "https://azcloud.az/az/blog/mexfilik-siyaseti"
+  "cookieLink" => "https://docs.azcloud.az/az/Management/Customer_Agreement"
 );

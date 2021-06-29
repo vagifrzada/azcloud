@@ -45,5 +45,5 @@ return array (
   "cookieLinkText" => "Cookie policy",
   "cookieAllowCookiesText" => "Allow cookies",
   "cookieDeclineText" => "Decline",
-  "cookieLink" => "https://azcloud.az/en/blog/privacy"
+  "cookieLink" => "https://docs.azcloud.az/en/Management/Customer_Agreement"
 );

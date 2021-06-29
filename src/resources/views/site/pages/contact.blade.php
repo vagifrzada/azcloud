@@ -47,8 +47,8 @@
                             </div>
 
                             <div class="col-md-3 offset-md-1">
-                                @if (filled($page = PagePlugin::getByIdentity(['identity' => 'contact'])))
-                                    <img src="{{ optional($page->getCover())->getUrl() }}" alt="Company building">
+                                @if (filled($contact = PagePlugin::getByIdentity(['identity' => 'contact'])))
+                                    <img src="{{ optional($contact->getCover())->getUrl() }}" alt="Company building">
                                 @endif
                             </div>
                         </div>
@@ -209,8 +209,8 @@
                             </script>
 
                             <div class="col-lg-5 hidden-991" data-aos="fade-left" data-aos-duration="800">
-                                @if (filled($page = PagePlugin::getByIdentity(['identity' => 'contact-form-image'])))
-                                    <img class="form-image" src="{{ optional($page->getCover())->getUrl() ?? asset('assets/site/images/contact-form-image.jpg') }}" alt="Form image">
+                                @if (filled($formImage = PagePlugin::getByIdentity(['identity' => 'contact-form-image'])))
+                                    <img class="form-image" src="{{ optional($formImage->getCover())->getUrl() }}" alt="Form image">
                                 @endif
                             </div>
                             <!-- Col-->
